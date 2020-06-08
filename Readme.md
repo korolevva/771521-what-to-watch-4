@@ -1,7 +1,7 @@
 # Личный проект «Что посмотреть» [![Build status][travis-image]][travis-url]
 
 * Студент: [Vitaly Korolev](https://up.htmlacademy.ru/react/4/user/771521).
-* Наставник: `Неизвестно`.
+* Наставник: [Михаил Пушков](https://htmlacademy.ru/profile/id638545).
 
 ---
 
