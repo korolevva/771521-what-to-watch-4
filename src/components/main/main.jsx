@@ -98,7 +98,7 @@ const Main = ({genre, year, moviesNames}) => {
           </ul>
 
           <div className="catalog__movies-list">
-            {moviesNames.map((it, i) => <MovieCardPreview key={it + i} name={it} />)}
+            {moviesNames.map((name, i) => <MovieCardPreview key={name + i} name={name} />)}
           </div>
 
           <div className="catalog__more">
