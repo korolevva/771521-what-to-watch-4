@@ -10,6 +10,7 @@ it(`Render App`, () => {
       genre={`Drama`}
       year={2014}
       moviesNames={moviesNames}
+      onMovieCardTitleClick={() => {}}
     />)
     .toJSON();
 
