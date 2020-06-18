@@ -2,7 +2,7 @@ import React from "react";
 import MovieCardPreview from "../movie-card-preview/movie-card-preview.jsx";
 import PropTypes from "prop-types";
 
-const Main = ({genre, year, namesMovies}) => {
+const Main = ({genre, year, moviesNames, onMovieCardTitleClick}) => {
   return (
     <React.Fragment>
       <section className="movie-card">
@@ -98,7 +98,7 @@ const Main = ({genre, year, namesMovies}) => {
           </ul>
 
           <div className="catalog__movies-list">
-            {namesMovies.map((it, i) => <MovieCardPreview key={it + i} name={it} />)}
+            {moviesNames.map((name, i) => <MovieCardPreview key={name + i} name={name} onMovieCardTitleClick={onMovieCardTitleClick}/>)}
           </div>
 
           <div className="catalog__more">
@@ -127,7 +127,8 @@ const Main = ({genre, year, namesMovies}) => {
 Main.propTypes = {
   genre: PropTypes.string.isRequired,
   year: PropTypes.number.isRequired,
-  namesMovies: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
+  moviesNames: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onMovieCardTitleClick: PropTypes.func.isRequired
 };
 
 export default Main;
