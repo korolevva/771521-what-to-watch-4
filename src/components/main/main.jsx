@@ -2,7 +2,7 @@ import React from "react";
 import MovieCardPreview from "../movie-card-preview/movie-card-preview.jsx";
 import PropTypes from "prop-types";
 
-const Main = ({genre, year, moviesNames, onMovieCardTitleClick}) => {
+const Main = ({genre, year, moviesCards, onMovieCardTitleClick}) => {
   return (
     <React.Fragment>
       <section className="movie-card">

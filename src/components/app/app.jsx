@@ -2,7 +2,7 @@ import React from "react";
 import Main from "../main/main.jsx";
 import PropTypes from "prop-types";
 
-const App = ({genre, year, moviesNames}) => {
+const App = ({genre, year, moviesCards}) => {
 
   const movieCardTitleHandler = (event) => {
     event.preventDefault();
@@ -12,7 +12,7 @@ const App = ({genre, year, moviesNames}) => {
     <Main
       genre={genre}
       year={year}
-      moviesNames={moviesNames}
+      moviesNames={moviesCards}
       onMovieCardTitleClick={movieCardTitleHandler}
     />
   );
