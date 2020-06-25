@@ -21,7 +21,10 @@ const App = ({genre, year, moviesCards}) => {
 App.propTypes = {
   genre: PropTypes.string.isRequired,
   year: PropTypes.number.isRequired,
-  moviesNames: PropTypes.arrayOf(PropTypes.string).isRequired
+  moviesCards: PropTypes.arrayOf(PropTypes.shape({
+    src: PropTypes.string,
+    title: PropTypes.string,
+  })).isRequired,
 };
 
 export default App;
