@@ -130,7 +130,10 @@ const Main = ({genre, year, moviesCards, onMovieCardTitleClick}) => {
 Main.propTypes = {
   genre: PropTypes.string.isRequired,
   year: PropTypes.number.isRequired,
-  moviesNames: PropTypes.arrayOf(PropTypes.string).isRequired,
+  moviesCards: PropTypes.arrayOf(PropTypes.shape({
+    src: PropTypes.string,
+    title: PropTypes.string,
+  })).isRequired,
   onMovieCardTitleClick: PropTypes.func.isRequired
 };
 

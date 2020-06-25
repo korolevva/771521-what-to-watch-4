@@ -20,9 +20,11 @@ const MovieList = ({moviesCards, onMovieCardTitleClick}) => {
   );
 };
 
-MovieCardPreview.propTypes = {
-  name: PropTypes.string.isRequired,
-  link: PropTypes.string.isRequired,
+MovieList.propTypes = {
+  moviesCards: PropTypes.arrayOf(PropTypes.shape({
+    src: PropTypes.string,
+    title: PropTypes.string,
+  })).isRequired,
   onMovieCardTitleClick: PropTypes.func.isRequired
 };
 
