@@ -1,14 +1,14 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import MovieCardPreview from "../movie-card-preview/movie-card-preview.jsx";
-// = ({moviesCards, onMovieCardTitleClick}) =>
+
 class MovieList extends PureComponent {
   constructor(props) {
     super(props);
 
-    // this.state = {
-
-    // }
+    this.state = {
+      activeCard: null,
+    };
   }
 
   render() {
@@ -21,7 +21,13 @@ class MovieList extends PureComponent {
             key={`${i}-${card.src}`}
             name={card.title}
             link={card.src}
+            card={card}
             onMovieCardTitleClick={onMovieCardTitleClick}
+            onCardHover={(cardName) => {
+              this.setState({
+                activeCard: cardName,
+              });
+            }}
           />
         ))}
       </React.Fragment>
