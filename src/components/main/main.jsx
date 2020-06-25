@@ -1,5 +1,5 @@
 import React from "react";
-import MovieCardPreview from "../movie-card-preview/movie-card-preview.jsx";
+import MovieList from "../movie-list/movie-list.jsx";
 import PropTypes from "prop-types";
 
 const Main = ({genre, year, moviesCards, onMovieCardTitleClick}) => {
@@ -98,7 +98,10 @@ const Main = ({genre, year, moviesCards, onMovieCardTitleClick}) => {
           </ul>
 
           <div className="catalog__movies-list">
-            {moviesNames.map((name, i) => <MovieCardPreview key={name + i} name={name} onMovieCardTitleClick={onMovieCardTitleClick}/>)}
+            <MovieList
+              moviesCards={moviesCards}
+              onMovieCardTitleClick={onMovieCardTitleClick}
+            />
           </div>
 
           <div className="catalog__more">

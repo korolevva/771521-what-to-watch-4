@@ -12,7 +12,7 @@ const App = ({genre, year, moviesCards}) => {
     <Main
       genre={genre}
       year={year}
-      moviesNames={moviesCards}
+      moviesCards={moviesCards}
       onMovieCardTitleClick={movieCardTitleHandler}
     />
   );
