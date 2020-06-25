@@ -1,24 +1,33 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import MovieCardPreview from "../movie-card-preview/movie-card-preview.jsx";
+// = ({moviesCards, onMovieCardTitleClick}) =>
+class MovieList extends PureComponent {
+  constructor(props) {
+    super(props);
 
-const MovieList = ({moviesCards, onMovieCardTitleClick}) => {
+    // this.state = {
 
-  return (
-    <React.Fragment>
-      {moviesCards.map((card, i) => (
-        <MovieCardPreview
-          key={`${i}-${card.src}`}
-          name={card.title}
-          link={card.src}
-          onMovieCardTitleClick={onMovieCardTitleClick}
-        />
-      ))}
+    // }
+  }
 
-    </React.Fragment>
+  render() {
+    const {moviesCards, onMovieCardTitleClick} = this.props;
 
-  );
-};
+    return (
+      <React.Fragment>
+        {moviesCards.map((card, i) => (
+          <MovieCardPreview
+            key={`${i}-${card.src}`}
+            name={card.title}
+            link={card.src}
+            onMovieCardTitleClick={onMovieCardTitleClick}
+          />
+        ))}
+      </React.Fragment>
+    );
+  }
+}
 
 MovieList.propTypes = {
   moviesCards: PropTypes.arrayOf(PropTypes.shape({
