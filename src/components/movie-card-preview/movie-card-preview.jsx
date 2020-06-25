@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const MovieCardPreview = ({name, link, card, onMovieCardTitleClick, onCardHover}) => {
+const MovieCardPreview = ({name, link, card, onCardTitleClick, onCardHover}) => {
 
   return (
     <article className="small-movie-card catalog__movies-card"
@@ -13,7 +13,7 @@ const MovieCardPreview = ({name, link, card, onMovieCardTitleClick, onCardHover}
         <img src={link} alt={name} width="280" height="175" />
       </div>
       <h3 className="small-movie-card__title">
-        <a className="small-movie-card__link" href="movie-page.html" onClick={onMovieCardTitleClick}>{name}</a>
+        <a className="small-movie-card__link" href="movie-page.html" onClick={onCardTitleClick}>{name}</a>
       </h3>
     </article>
   );
@@ -26,7 +26,7 @@ MovieCardPreview.propTypes = {
     src: PropTypes.string,
     title: PropTypes.string,
   }).isRequired,
-  onMovieCardTitleClick: PropTypes.func.isRequired,
+  onCardTitleClick: PropTypes.func.isRequired,
   onCardHover: PropTypes.func.isRequired,
 };
 

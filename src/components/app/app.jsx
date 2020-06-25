@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 const App = ({genre, year, moviesCards}) => {
 
-  const movieCardTitleHandler = (event) => {
+  const CardTitleHandler = (event) => {
     event.preventDefault();
   };
 
@@ -13,7 +13,7 @@ const App = ({genre, year, moviesCards}) => {
       genre={genre}
       year={year}
       moviesCards={moviesCards}
-      onMovieCardTitleClick={movieCardTitleHandler}
+      onCardTitleClick={CardTitleHandler}
     />
   );
 };
