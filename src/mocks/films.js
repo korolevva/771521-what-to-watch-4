@@ -1,8 +1,4 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import Main from "./main.jsx";
-
-const moviesCards = [
+export default [
   {
     src: `img/bohemian-rhapsody.jpg`,
     title: `Bohemian Rhapsody`,
@@ -29,16 +25,3 @@ const moviesCards = [
     title: `Johnny English`,
   },
 ];
-
-it(`Render Main`, () => {
-  const tree = renderer
-    .create(<Main
-      genre={`Drama`}
-      year={2014}
-      moviesCards={moviesCards}
-      onCardTitleClick={() => {}}
-    />)
-    .toJSON();
-
-  expect(tree).toMatchSnapshot();
-});

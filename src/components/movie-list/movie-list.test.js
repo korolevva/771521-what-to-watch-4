@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Main from "./main.jsx";
+import MovieList from "./movie-list.jsx";
 
 const moviesCards = [
   {
@@ -30,11 +30,9 @@ const moviesCards = [
   },
 ];
 
-it(`Render Main`, () => {
+it(`Render MovieList`, () => {
   const tree = renderer
-    .create(<Main
-      genre={`Drama`}
-      year={2014}
+    .create(<MovieList
       moviesCards={moviesCards}
       onCardTitleClick={() => {}}
     />)

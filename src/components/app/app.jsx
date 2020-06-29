@@ -2,9 +2,9 @@ import React from "react";
 import Main from "../main/main.jsx";
 import PropTypes from "prop-types";
 
-const App = ({genre, year, moviesNames}) => {
+const App = ({genre, year, moviesCards}) => {
 
-  const movieCardTitleHandler = (event) => {
+  const CardTitleHandler = (event) => {
     event.preventDefault();
   };
 
@@ -12,8 +12,8 @@ const App = ({genre, year, moviesNames}) => {
     <Main
       genre={genre}
       year={year}
-      moviesNames={moviesNames}
-      onMovieCardTitleClick={movieCardTitleHandler}
+      moviesCards={moviesCards}
+      onCardTitleClick={CardTitleHandler}
     />
   );
 };
@@ -21,7 +21,10 @@ const App = ({genre, year, moviesNames}) => {
 App.propTypes = {
   genre: PropTypes.string.isRequired,
   year: PropTypes.number.isRequired,
-  moviesNames: PropTypes.arrayOf(PropTypes.string).isRequired
+  moviesCards: PropTypes.arrayOf(PropTypes.shape({
+    src: PropTypes.string,
+    title: PropTypes.string,
+  })).isRequired,
 };
 
 export default App;
