@@ -131,8 +131,11 @@ Main.propTypes = {
   genre: PropTypes.string.isRequired,
   year: PropTypes.number.isRequired,
   moviesCards: PropTypes.arrayOf(PropTypes.shape({
-    src: PropTypes.string,
+    id: PropTypes.number,
+    poster: PropTypes.string,
     title: PropTypes.string,
+    previewMp4: PropTypes.string,
+    previewWebm: PropTypes.string,
   })).isRequired,
   onCardTitleClick: PropTypes.func.isRequired
 };
