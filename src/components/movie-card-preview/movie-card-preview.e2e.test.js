@@ -14,6 +14,8 @@ const card = {
   preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
 };
 
+jest.useFakeTimers();
+
 describe(`MovieCardPreview`, () => {
   it(`Simulate click on the title`, () => {
     const onCardTitleClick = jest.fn();
@@ -33,30 +35,26 @@ describe(`MovieCardPreview`, () => {
     expect(onCardTitleClick).toHaveBeenCalledTimes(1);
   });
 
-  // it(`should start/stop playing video on the card`, () => {
-  //   const onPlay = jest.fn();
-  //   const onPause = jest.fn();
-  //   const onCardTitleClick = jest.fn();
-  //   const main = shallow(
-  //       <MovieCardPreview
-  //         key={card.id}
-  //         card={card}
-  //         onPlay={onPlay}
-  //         onPause={onPause}
-  //         onCardTitleClick={onCardTitleClick}
-  //       />
-  //   );
+  it(`should start/stop playing video on the card`, () => {
+    const onCardTitleClick = jest.fn();
+    const onMouseEnter = jest.fn();
+    const main = shallow(
+        <MovieCardPreview
+          key={card.id}
+          card={card}
+          onMouseEnter={onMouseEnter}
+          onCardTitleClick={onCardTitleClick}
+        />
+    );
 
-  //   const movieCard = main.find(`.small-movie-card`).first();
-  //   expect(movieCard).toHaveLength(1);
-  //   movieCard.simulate(`mouseenter`);
-  //   expect(onPlay).toHaveBeenCalledTimes(1);
-  //   main.update();
-  //   movieCard.simulate(`mouseleave`);
-  //   expect(onPause).toHaveBeenCalledTimes(1);
-  //   main.update();
+    const movieCard = main.find(`.small-movie-card`).first();
+    expect(movieCard).toHaveLength(1);
 
-  //   const movieCardImage = main.find(`.small-movie-card__image`);
-  //   expect(movieCardImage).toHaveLength(1);
-  // });
+    movieCard.simulate(`mouseenter`);
+    jest.advanceTimersByTime(2000);
+    expect(main.state(`isPlaying`)).toEqual(true);
+
+    movieCard.simulate(`mouseleave`);
+    expect(main.state(`isPlaying`)).toEqual(false);
+  });
 });

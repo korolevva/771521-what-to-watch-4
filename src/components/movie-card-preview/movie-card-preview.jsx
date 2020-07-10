@@ -17,7 +17,6 @@ class MovieCardPreview extends PureComponent {
   }
 
   _handleCardMouseEnter() {
-
     this._timerId = setTimeout(() => {
       this.setState({
         isPlaying: true,
