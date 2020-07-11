@@ -16,38 +16,21 @@ const card = {
 
 describe(`VideoPlayer`, () => {
 
-  it(`should have prop isPlaying true`, () => {
+  it(`if isPlaying is true, then paused is false`, () => {
     const isPlaying = true;
+
     const main = mount(
         <VideoPlayer
           card={card}
           isPlaying={isPlaying}
-        />,
-        {
-          createNodeMock: () => {
-            return {};
-          }
-        }
+        />
     );
 
-    expect(main.prop(`isPlaying`)).toBe(true);
-  });
+    const video = main.find(`video`);
 
-  it(`should have prop isPlaying false`, () => {
-    const isPlaying = false;
-    const main = mount(
-        <VideoPlayer
-          card={card}
-          isPlaying={isPlaying}
-        />,
-        {
-          createNodeMock: () => {
-            return {};
-          }
-        }
-    );
+    video.simulate(`play`);
 
-    expect(main.prop(`isPlaying`)).toBe(false);
+    expect(video.getDOMNode().paused).toBe(false);
   });
 
 });
