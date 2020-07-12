@@ -1,33 +1,62 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import VideoPlayer from "../video-player/video-player.jsx";
 
-const MovieCardPreview = ({name, link, card, onCardTitleClick, onCardHover}) => {
+class MovieCardPreview extends PureComponent {
+  constructor(props) {
+    super(props);
 
-  return (
-    <article className="small-movie-card catalog__movies-card"
-      onMouseEnter= {() => {
-        onCardHover(card);
-      }}
-    >
-      <div className="small-movie-card__image">
-        <img src={link} alt={name} width="280" height="175" />
-      </div>
-      <h3 className="small-movie-card__title">
-        <a className="small-movie-card__link" href="movie-page.html" onClick={onCardTitleClick}>{name}</a>
-      </h3>
-    </article>
-  );
-};
+    this.state = {
+      isPlaying: false,
+    };
+
+    this._timerId = null;
+    this._onCardTitleClick = this.props.onCardTitleClick.bind(this);
+    this._handleCardMouseEnter = this._handleCardMouseEnter.bind(this);
+    this._handleCardMouseLeave = this._handleCardMouseLeave.bind(this);
+  }
+
+  _handleCardMouseEnter() {
+    this._timerId = setTimeout(() => {
+      this.setState({
+        isPlaying: true,
+      });
+    }, 1000);
+  }
+
+  _handleCardMouseLeave() {
+    this.setState({
+      isPlaying: false,
+    });
+    clearTimeout(this._timerId);
+  }
+  render() {
+    const {card} = this.props;
+    return (
+      <article className="small-movie-card catalog__movies-card" onMouseEnter={this._handleCardMouseEnter} onMouseLeave={this._handleCardMouseLeave}>
+        <div className="small-movie-card__image">
+          <VideoPlayer
+            card={card}
+            isPlaying={this.state.isPlaying}
+          />
+        </div>
+
+        <h3 className="small-movie-card__title">
+          <a className="small-movie-card__link" href="movie-page.html" onClick={this._onCardTitleClick}>{card.title}</a>
+        </h3>
+      </article>
+    );
+  }
+}
 
 MovieCardPreview.propTypes = {
-  name: PropTypes.string.isRequired,
-  link: PropTypes.string.isRequired,
   card: PropTypes.shape({
-    src: PropTypes.string,
+    id: PropTypes.number,
+    poster: PropTypes.string,
     title: PropTypes.string,
+    preview: PropTypes.string,
   }).isRequired,
   onCardTitleClick: PropTypes.func.isRequired,
-  onCardHover: PropTypes.func.isRequired,
 };
 
 export default MovieCardPreview;

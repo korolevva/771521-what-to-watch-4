@@ -1,10 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import MovieCardPreview from "./movie-card-preview.jsx";
-
-const onCardTitleClick = (event) => {
-  event.preventDefault();
-};
+import VideoPlayer from "./video-player.jsx";
 
 const card = {
   id: 1,
@@ -13,17 +9,18 @@ const card = {
   preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
 };
 
-it(`Render MovieCardPreview`, () => {
+it(`Render VideoPlayer`, () => {
   const tree = renderer
-    .create(<MovieCardPreview
-      card={card}
-      onCardTitleClick={onCardTitleClick}
-    />,
-    {
-      createNodeMock: () => {
-        return {};
-      }
-    }
+    .create(
+        <VideoPlayer
+          card={card}
+          isPlaying={true}
+        />,
+        {
+          createNodeMock: () => {
+            return {};
+          }
+        }
     )
     .toJSON();
 

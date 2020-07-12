@@ -8,30 +8,53 @@ Enzyme.configure({
 });
 
 const card = {
-  src: `img/bohemian-rhapsody.jpg`,
+  id: 1,
+  poster: `img/bohemian-rhapsody.jpg`,
   title: `Bohemian Rhapsody`,
+  preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
 };
 
-it(`Simulate click on the title`, () => {
-  const onCardTitleClick = jest.fn();
-  const onCardHover = jest.fn();
+jest.useFakeTimers();
 
-  const cardPreview = shallow(
-      <MovieCardPreview
-        name={card.title}
-        link={card.src}
-        card={card}
-        onCardTitleClick={onCardTitleClick}
-        onCardHover={onCardHover}
-      />
-  );
+describe(`MovieCardPreview`, () => {
+  it(`Simulate click on the title`, () => {
+    const onCardTitleClick = jest.fn();
 
-  const cardPreviewTitle = cardPreview.find(`.small-movie-card__link`);
-  cardPreviewTitle.simulate(`click`);
+    const cardPreview = shallow(
+        <MovieCardPreview
+          kye={card.id}
+          card={card}
+          onCardTitleClick={onCardTitleClick}
+        />
+    );
 
-  cardPreview.simulate(`mouseenter`);
+    const cardPreviewTitle = cardPreview.find(`.small-movie-card__link`);
+    expect(cardPreviewTitle.exists).toBeTruthy();
 
-  expect(onCardTitleClick).toHaveBeenCalledTimes(1);
-  expect(onCardHover).toHaveBeenCalledTimes(1);
+    cardPreviewTitle.simulate(`click`);
+    expect(onCardTitleClick).toHaveBeenCalledTimes(1);
+  });
+
+  it(`should start/stop playing video on the card`, () => {
+    const onCardTitleClick = jest.fn();
+    const onMouseEnter = jest.fn();
+    const main = shallow(
+        <MovieCardPreview
+          key={card.id}
+          card={card}
+          onMouseEnter={onMouseEnter}
+          onCardTitleClick={onCardTitleClick}
+        />
+    );
+
+    const movieCard = main.find(`.small-movie-card`).first();
+    expect(movieCard).toHaveLength(1);
+
+    movieCard.simulate(`mouseenter`);
+    jest.advanceTimersByTime(2000);
+    expect(main.state(`isPlaying`)).toEqual(true);
+
+    movieCard.simulate(`mouseleave`);
+    expect(main.state(`isPlaying`)).toEqual(false);
+  });
 });
-

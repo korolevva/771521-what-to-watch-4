@@ -16,18 +16,11 @@ class MovieList extends PureComponent {
 
     return (
       <React.Fragment>
-        {moviesCards.map((card, i) => (
+        {moviesCards.map((card) => (
           <MovieCardPreview
-            key={`${i}-${card.src}`}
-            name={card.title}
-            link={card.src}
+            key={`${card.id}`}
             card={card}
             onCardTitleClick={onCardTitleClick}
-            onCardHover={(cardName) => {
-              this.setState({
-                activeCard: cardName,
-              });
-            }}
           />
         ))}
       </React.Fragment>
@@ -37,8 +30,11 @@ class MovieList extends PureComponent {
 
 MovieList.propTypes = {
   moviesCards: PropTypes.arrayOf(PropTypes.shape({
-    src: PropTypes.string,
+    id: PropTypes.number,
+    poster: PropTypes.string,
     title: PropTypes.string,
+    previewMp4: PropTypes.string,
+    previewWebm: PropTypes.string,
   })).isRequired,
   onCardTitleClick: PropTypes.func.isRequired
 };
