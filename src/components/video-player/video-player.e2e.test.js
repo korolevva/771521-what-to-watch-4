@@ -16,8 +16,12 @@ const card = {
 
 describe(`VideoPlayer`, () => {
 
-  it(`if isPlaying is true, then paused is false`, () => {
-    const isPlaying = true;
+  it(`if isPlaying is true, metod play has been called`, () => {
+    const isPlaying = false;
+
+    const playStub = jest
+      .spyOn(window.HTMLMediaElement.prototype, `play`)
+      .mockImplementation(() => {});
 
     const main = mount(
         <VideoPlayer
@@ -26,11 +30,9 @@ describe(`VideoPlayer`, () => {
         />
     );
 
-    const video = main.find(`video`);
+    main.setProps({isPlaying: true});
 
-    video.simulate(`play`);
-
-    expect(video.getDOMNode().paused).toBe(false);
+    expect(playStub).toHaveBeenCalled();
   });
 
 });
