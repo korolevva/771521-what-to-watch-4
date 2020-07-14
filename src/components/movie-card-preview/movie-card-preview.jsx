@@ -12,6 +12,7 @@ class MovieCardPreview extends PureComponent {
 
     this._timerId = null;
     this._onCardTitleClick = this.props.onCardTitleClick.bind(this);
+    this._onCardClick = this.props.onCardClick.bind(this);
     this._handleCardMouseEnter = this._handleCardMouseEnter.bind(this);
     this._handleCardMouseLeave = this._handleCardMouseLeave.bind(this);
   }
@@ -30,10 +31,15 @@ class MovieCardPreview extends PureComponent {
     });
     clearTimeout(this._timerId);
   }
+
+  componentWillUnmount() {
+    clearTimeout(this._timerId);
+  }
+
   render() {
     const {card} = this.props;
     return (
-      <article className="small-movie-card catalog__movies-card" onMouseEnter={this._handleCardMouseEnter} onMouseLeave={this._handleCardMouseLeave}>
+      <article onMouseEnter={this._handleCardMouseEnter} onMouseLeave={this._handleCardMouseLeave} onClick={this._onCardClick} className="small-movie-card catalog__movies-card">
         <div className="small-movie-card__image">
           <VideoPlayer
             card={card}
@@ -57,6 +63,7 @@ MovieCardPreview.propTypes = {
     preview: PropTypes.string,
   }).isRequired,
   onCardTitleClick: PropTypes.func.isRequired,
+  onCardClick: PropTypes.func.isRequired,
 };
 
 export default MovieCardPreview;

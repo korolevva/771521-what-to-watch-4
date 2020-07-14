@@ -2,7 +2,7 @@ import React from "react";
 import MovieList from "../movie-list/movie-list.jsx";
 import PropTypes from "prop-types";
 
-const Main = ({genre, year, moviesCards, onCardTitleClick}) => {
+const Main = ({genre, year, moviesCards, onCardTitleClick, onCardClick}) => {
   return (
     <React.Fragment>
       <section className="movie-card">
@@ -101,6 +101,7 @@ const Main = ({genre, year, moviesCards, onCardTitleClick}) => {
             <MovieList
               moviesCards={moviesCards}
               onCardTitleClick={onCardTitleClick}
+              onCardClick={onCardClick}
             />
           </div>
 
@@ -137,7 +138,8 @@ Main.propTypes = {
     previewMp4: PropTypes.string,
     previewWebm: PropTypes.string,
   })).isRequired,
-  onCardTitleClick: PropTypes.func.isRequired
+  onCardTitleClick: PropTypes.func.isRequired,
+  onCardClick: PropTypes.func.isRequired,
 };
 
 export default Main;
