@@ -10,12 +10,12 @@ export default class VideoPlayer extends PureComponent {
 
   render() {
     const {card} = this.props;
-    const {poster, preview} = card;
+    const {imagePreview, preview} = card;
     return (
       <video
         width="280"
         height="175"
-        poster={poster}
+        poster={imagePreview}
         muted={true}
         ref={this._videoRef}
         controls={false}
@@ -39,7 +39,7 @@ export default class VideoPlayer extends PureComponent {
 VideoPlayer.propTypes = {
   card: PropTypes.shape({
     id: PropTypes.number,
-    poster: PropTypes.string,
+    imagePreview: PropTypes.string,
     preview: PropTypes.string,
     title: PropTypes.string,
   }).isRequired,

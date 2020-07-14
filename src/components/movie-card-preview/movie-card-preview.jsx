@@ -12,7 +12,6 @@ class MovieCardPreview extends PureComponent {
 
     this._timerId = null;
     this._onCardTitleClick = this.props.onCardTitleClick.bind(this);
-    this._onCardClick = this.props.onCardClick.bind(this);
     this._handleCardMouseEnter = this._handleCardMouseEnter.bind(this);
     this._handleCardMouseLeave = this._handleCardMouseLeave.bind(this);
   }
@@ -39,7 +38,12 @@ class MovieCardPreview extends PureComponent {
   render() {
     const {card} = this.props;
     return (
-      <article onMouseEnter={this._handleCardMouseEnter} onMouseLeave={this._handleCardMouseLeave} onClick={this._onCardClick} className="small-movie-card catalog__movies-card">
+      <article
+        onMouseEnter={this._handleCardMouseEnter}
+        onMouseLeave={this._handleCardMouseLeave}
+        onClick={() => this.props.onCardClick(card)}
+        className="small-movie-card catalog__movies-card">
+
         <div className="small-movie-card__image">
           <VideoPlayer
             card={card}

@@ -40,24 +40,31 @@ class App extends PureComponent {
   }
 
   _renderMovieCard() {
+    const movie = this.state.selectedMovie;
+
     return (
-      <MovieCard />
+      <MovieCard movie={movie}/>
     );
   }
 
-  _cardTitleHandler(evt, movie) {
+  _cardTitleHandler(evt, card) {
     evt.preventDefault();
     this.setState({
-      selectedMovie: movie,
+      selectedMovie: card,
     });
   }
 
-  _cardHandler(movie) {
+  _cardHandler(card) {
     this.setState({
-      selectedMovie: movie
+      selectedMovie: card
     });
   }
-
+  // componentDidMount() {
+  //   console.log(this.state.selectedMovie);
+  // }
+  // componentDidUpdate() {
+  //   console.log(this.state.selectedMovie);
+  // }
   render() {
     return (
       <BrowserRouter>
@@ -82,6 +89,5 @@ App.propTypes = {
     title: PropTypes.string,
   })).isRequired,
 };
-
 
 export default App;
