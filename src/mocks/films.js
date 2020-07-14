@@ -11,7 +11,7 @@ export default [
     rating: `8.0`,
     ratingCount: `305`,
     director: `Bryan Singer`,
-    stars: `Rami Malek, Lucy Boynton, Gwilym Lee`,
+    stars: [`Rami Malek`, `Lucy Boynton`, `Gwilym Lee`],
     preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
@@ -26,7 +26,7 @@ export default [
     rating: `6.6`,
     ratingCount: `423`,
     director: `David Yates`,
-    stars: `Eddie Redmayne, Katherine Waterston, Dan Fogler`,
+    stars: [`Eddie Redmayne`, `Katherine Waterston`, `Dan Fogler`],
     preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
@@ -41,7 +41,7 @@ export default [
     rating: `6.6`,
     ratingCount: `201`,
     director: `Justin Kurzel`,
-    stars: `Michael Fassbender, Marion Cotillard, Jack Madigan`,
+    stars: [`Michael Fassbender`, `Marion Cotillard`, `Jack Madigan`],
     preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
@@ -56,7 +56,7 @@ export default [
     rating: `7.5`,
     ratingCount: `595`,
     director: `Martin Scorsese`,
-    stars: `Leonardo DiCaprio, Cate Blanchett, Kate Beckinsale`,
+    stars: [`Leonardo DiCaprio`, `Cate Blanchett`, `Kate Beckinsale`],
     preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
@@ -71,7 +71,7 @@ export default [
     rating: `7.5`,
     ratingCount: `700`,
     director: `Lynne Ramsay`,
-    stars: `Tilda Swinton, John C. Reilly, Ezra Miller`,
+    stars: [`Tilda Swinton`, `John C. Reilly`, `Ezra Miller`],
     preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
@@ -86,7 +86,7 @@ export default [
     rating: `8.5`,
     ratingCount: `850`,
     director: `Jemaine Clement`,
-    stars: `Kayvan Novak, Matt Berry, Natasia Demetriou`,
+    stars: [`Kayvan Novak`, `Matt Berry`, `Natasia Demetriou`],
     preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
@@ -101,7 +101,7 @@ export default [
     rating: `8.0`,
     ratingCount: `730`,
     director: `Alejandro G.`,
-    stars: ` Leonardo DiCaprio, Tom Hardy, Will Poulter`,
+    stars: [`Leonardo DiCaprio`, `Tom Hardy`, `Will Poulter`],
     preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
@@ -116,7 +116,7 @@ export default [
     rating: `6.2`,
     ratingCount: `370`,
     director: `David Kerr`,
-    stars: `Rowan Atkinson, Ben Miller, Olga Kurylenko`,
+    stars: [`Rowan Atkinson`, `Ben Miller`, `Olga Kurylenko`],
     preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
 ];

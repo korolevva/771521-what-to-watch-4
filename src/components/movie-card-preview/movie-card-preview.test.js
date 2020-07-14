@@ -5,6 +5,7 @@ import MovieCardPreview from "./movie-card-preview.jsx";
 const onCardTitleClick = (event) => {
   event.preventDefault();
 };
+const onCardClick = jest.fn();
 
 const card = {
   id: 1,
@@ -18,6 +19,7 @@ it(`Render MovieCardPreview`, () => {
     .create(<MovieCardPreview
       card={card}
       onCardTitleClick={onCardTitleClick}
+      onCardClick={onCardClick}
     />,
     {
       createNodeMock: () => {

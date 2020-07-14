@@ -105,7 +105,7 @@ const MovieCard = ({movie}) => {
 
                 <p className="movie-card__director"><strong>Director: {director}</strong></p>
 
-                <p className="movie-card__starring"><strong>Starring: {stars}</strong></p>
+                <p className="movie-card__starring"><strong>Starring: {stars.join(`, `)}</strong></p>
               </div>
             </div>
           </div>
@@ -182,7 +182,7 @@ MovieCard.propTypes = {
     date: PropTypes.string,
     description: PropTypes.string,
     director: PropTypes.string,
-    stars: PropTypes.string,
+    stars: PropTypes.array,
     rating: PropTypes.string,
     ratingCount: PropTypes.string,
   }),
