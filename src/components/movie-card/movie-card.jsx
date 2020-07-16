@@ -185,7 +185,7 @@ MovieCard.propTypes = {
     stars: PropTypes.array,
     rating: PropTypes.string,
     ratingCount: PropTypes.string,
-  }),
+  }).isRequired,
 };
 
 export default MovieCard;
