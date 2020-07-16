@@ -16,15 +16,17 @@ const card = {
 
 jest.useFakeTimers();
 
-describe(`MovieCardPreview`, () => {
-  it(`Simulate click on the title`, () => {
-    const onCardTitleClick = jest.fn();
 
+describe(`MovieCardPreview`, () => {
+  const onCardTitleClick = jest.fn();
+  const onCardClick = jest.fn();
+  it(`Simulate click on a title`, () => {
     const cardPreview = shallow(
         <MovieCardPreview
           kye={card.id}
           card={card}
           onCardTitleClick={onCardTitleClick}
+          onCardClick={onCardClick}
         />
     );
 
@@ -35,8 +37,23 @@ describe(`MovieCardPreview`, () => {
     expect(onCardTitleClick).toHaveBeenCalledTimes(1);
   });
 
+  it(`Simulate click on a card`, () => {
+    const cardPreview = shallow(
+        <MovieCardPreview
+          kye={card.id}
+          card={card}
+          onCardTitleClick={onCardTitleClick}
+          onCardClick={onCardClick}
+        />
+    );
+
+    expect(cardPreview.exists).toBeTruthy();
+
+    cardPreview.simulate(`click`);
+    expect(onCardClick).toHaveBeenCalledTimes(1);
+  });
+
   it(`should start/stop playing video on the card`, () => {
-    const onCardTitleClick = jest.fn();
     const onMouseEnter = jest.fn();
     const main = shallow(
         <MovieCardPreview
@@ -44,6 +61,7 @@ describe(`MovieCardPreview`, () => {
           card={card}
           onMouseEnter={onMouseEnter}
           onCardTitleClick={onCardTitleClick}
+          onCardClick={onCardClick}
         />
     );
 

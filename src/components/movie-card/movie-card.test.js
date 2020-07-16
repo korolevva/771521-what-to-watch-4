@@ -1,8 +1,8 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import VideoPlayer from "./video-player.jsx";
+import React from 'react';
+import renderer from 'react-test-renderer';
+import MovieCard from "./movie-card.jsx";
 
-const card = {
+const movie = {
   id: 1,
   background: `img/bg-the-grand-budapest-hotel.jpg`,
   imagePreview: `img/bohemian-rhapsody.jpg`,
@@ -18,20 +18,14 @@ const card = {
   preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
 };
 
-it(`Render VideoPlayer`, () => {
-  const tree = renderer
-    .create(
-        <VideoPlayer
-          card={card}
-          isPlaying={true}
-        />,
-        {
-          createNodeMock: () => {
-            return {};
-          }
-        }
-    )
-    .toJSON();
+
+it(`Render MovieCard`, () => {
+  const tree = renderer.create(
+      <MovieCard
+        movie={movie}
+      />
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
+
