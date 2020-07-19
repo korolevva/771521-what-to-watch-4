@@ -1,5 +1,5 @@
-import React, { PureComponent } from 'react';
-import { Switch, Route, BrowserRouter } from "react-router-dom";
+import React, {PureComponent} from 'react';
+import {Switch, Route, BrowserRouter} from "react-router-dom";
 import Main from "../main/main.jsx";
 import MovieCard from "../movie-card/movie-card.jsx";
 import PropTypes from "prop-types";
@@ -16,14 +16,14 @@ class App extends PureComponent {
     this._cardHandler = this._cardHandler.bind(this);
   }
 
-  _cardTitleHandler (evt, card) {
+  _cardTitleHandler(evt, card) {
     evt.preventDefault();
     this.setState({
       selectedMovie: card,
     });
   }
 
-  _cardHandler (card) {
+  _cardHandler(card) {
     this.setState({
       selectedMovie: card
     });
@@ -37,7 +37,7 @@ class App extends PureComponent {
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
-            {selectedMovie ? <MovieCard movie={selectedMovie} />
+            {selectedMovie ? <MovieCard card={selectedMovie} />
               : <Main
                 genre={genre}
                 year={year}
@@ -47,9 +47,9 @@ class App extends PureComponent {
               />
             }
           </Route>
-        <Route exact path="/card">
-          <MovieCard movie={selectedMovie} />
-        </Route>
+          <Route exact path="/card">
+            <MovieCard card={moviesCards[0]} />
+          </Route>
         </Switch>
       </BrowserRouter >
     );

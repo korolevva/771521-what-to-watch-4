@@ -1,22 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {numericScoreToTextScore} from "./utils.js";
 
-const MovieCard = ({movie}) => {
-  const {background, title, poster, genre, date, description, director, stars, rating, ratingCount} = movie;
-
-  const getRatingLevel = (ratingMovie) => {
-    if (ratingMovie < 3) {
-      return `Bad`;
-    } else if (ratingMovie < 5) {
-      return `Normal`;
-    } else if (ratingMovie < 8) {
-      return `Good`;
-    } else if (ratingMovie < 10) {
-      return `Very good`;
-    } else {
-      return `Awesome`;
-    }
-  };
+const MovieCard = ({card}) => {
+  const {background, title, poster, genre, date, description, director, stars, rating, ratingCount} = card;
 
   return (
     <React.Fragment>
@@ -95,7 +82,7 @@ const MovieCard = ({movie}) => {
               <div className="movie-rating">
                 <div className="movie-rating__score">{rating}</div>
                 <p className="movie-rating__meta">
-                  <span className="movie-rating__level">{getRatingLevel(rating)}</span>
+                  <span className="movie-rating__level">{numericScoreToTextScore(rating)}</span>
                   <span className="movie-rating__count">{ratingCount} ratings</span>
                 </p>
               </div>
@@ -174,7 +161,7 @@ const MovieCard = ({movie}) => {
 };
 
 MovieCard.propTypes = {
-  movie: PropTypes.shape({
+  card: PropTypes.shape({
     background: PropTypes.string,
     title: PropTypes.string,
     poster: PropTypes.string,
