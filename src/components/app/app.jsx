@@ -30,14 +30,14 @@ class App extends PureComponent {
   }
 
   render() {
-    const {genre, year, moviesCards} = this.props;
+    const {genre, year, moviesCards, reviews} = this.props;
     const {selectedMovie} = this.state;
 
     return (
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
-            {selectedMovie ? <MovieCard card={selectedMovie} />
+            {selectedMovie ? <MovieCard card={selectedMovie} reviews={reviews}/>
               : <Main
                 genre={genre}
                 year={year}
@@ -48,7 +48,7 @@ class App extends PureComponent {
             }
           </Route>
           <Route exact path="/card">
-            <MovieCard card={moviesCards[0]} />
+            <MovieCard card={moviesCards[0]} reviews={reviews} />
           </Route>
         </Switch>
       </BrowserRouter >
@@ -59,10 +59,8 @@ class App extends PureComponent {
 App.propTypes = {
   genre: PropTypes.string.isRequired,
   year: PropTypes.number.isRequired,
-  moviesCards: PropTypes.arrayOf(PropTypes.shape({
-    src: PropTypes.string,
-    title: PropTypes.string,
-  })).isRequired,
+  moviesCards: PropTypes.array.isRequired,
+  reviews: PropTypes.array.isRequired,
 };
 
 export default App;
