@@ -37,7 +37,7 @@ class App extends PureComponent {
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
-            {selectedMovie ? <MovieCard card={selectedMovie} reviews={reviews}/>
+            {selectedMovie ? <MovieCard card={selectedMovie} moviesCards={moviesCards} reviews={reviews} onCardTitleClick={this._cardTitleHandler} onCardClick={this._cardHandler}/>
               : <Main
                 genre={genre}
                 year={year}
@@ -48,7 +48,7 @@ class App extends PureComponent {
             }
           </Route>
           <Route exact path="/card">
-            <MovieCard card={moviesCards[0]} reviews={reviews} />
+            <MovieCard card={moviesCards[0]} moviesCards={moviesCards} reviews={reviews} onCardTitleClick={this._cardTitleHandler} onCardClick={this._cardHandler} />
           </Route>
         </Switch>
       </BrowserRouter >

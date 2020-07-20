@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const TabOverview = ({card}) => {
-  const {director, stars, duration, genres, date} = card;
+  const {director, stars, duration, genre, date} = card;
   return (
     <div className="movie-card__text movie-card__row">
       <div className="movie-card__text-col">
@@ -31,7 +31,7 @@ const TabOverview = ({card}) => {
         </p>
         <p className="movie-card__details-item">
           <strong className="movie-card__details-name">Genre</strong>
-          <span className="movie-card__details-value">{genres.join(`, `)}</span>
+          <span className="movie-card__details-value">{genre}</span>
         </p>
         <p className="movie-card__details-item">
           <strong className="movie-card__details-name">Released</strong>
@@ -47,7 +47,7 @@ TabOverview.propTypes = {
     director: PropTypes.string,
     stars: PropTypes.array,
     duration: PropTypes.string,
-    genres: PropTypes.array,
+    genre: PropTypes.string,
     date: PropTypes.string,
   }).isRequired,
 };

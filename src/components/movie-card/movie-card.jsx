@@ -5,7 +5,9 @@ import TabOverview from "../tab-overview/tab-overview.jsx";
 import TabDetails from "../tab-details/tab-details.jsx";
 import TabReviews from "../tab-reviews/tab-reviews.jsx";
 import {Tab} from "../../const.js";
+import SimilarMovies from "../similar-movies/similar-movies.jsx";
 
+const MAX_MOVIES_COUNT = 4;
 const tabs = Object.values(Tab);
 
 class MovieCard extends PureComponent {
@@ -41,10 +43,20 @@ class MovieCard extends PureComponent {
     }
   }
 
+  _filterMoviesByGenre(movies, currentMovie) {
+    const filteredMovies = movies.filter((movie) => {
+      return movie.genre === currentMovie.genre;
+    });
+
+    return filteredMovies;
+  }
+
   render() {
-    const {card} = this.props;
-    const {background, title, poster, genres, date} = card;
+    const {card, moviesCards, onCardClick, onCardTitleClick} = this.props;
+    const {background, title, poster, genre, date} = card;
     const {activeTab} = this.state;
+    const filteredMovies = this._filterMoviesByGenre(moviesCards, card).slice(0, MAX_MOVIES_COUNT);
+
     return (
       <React.Fragment>
         <section className="movie-card movie-card--full">
@@ -75,7 +87,7 @@ class MovieCard extends PureComponent {
               <div className="movie-card__desc">
                 <h2 className="movie-card__title">{title}</h2>
                 <p className="movie-card__meta">
-                  <span className="movie-card__genre">{genres.join(`, `)}</span>
+                  <span className="movie-card__genre">{genre}</span>
                   <span className="movie-card__year">{date}</span>
                 </p>
 
@@ -113,47 +125,11 @@ class MovieCard extends PureComponent {
         </section>
 
         <div className="page-content">
-          <section className="catalog catalog--like-this">
-            <h2 className="catalog__title">More like this</h2>
-
-            <div className="catalog__movies-list">
-              <article className="small-movie-card catalog__movies-card">
-                <div className="small-movie-card__image">
-                  <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175" />
-                </div>
-                <h3 className="small-movie-card__title">
-                  <a className="small-movie-card__link" href="movie-page.html">Fantastic Beasts: The Crimes of Grindelwald</a>
-                </h3>
-              </article>
-
-              <article className="small-movie-card catalog__movies-card">
-                <div className="small-movie-card__image">
-                  <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175" />
-                </div>
-                <h3 className="small-movie-card__title">
-                  <a className="small-movie-card__link" href="movie-page.html">Bohemian Rhapsody</a>
-                </h3>
-              </article>
-
-              <article className="small-movie-card catalog__movies-card">
-                <div className="small-movie-card__image">
-                  <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175" />
-                </div>
-                <h3 className="small-movie-card__title">
-                  <a className="small-movie-card__link" href="movie-page.html">Macbeth</a>
-                </h3>
-              </article>
-
-              <article className="small-movie-card catalog__movies-card">
-                <div className="small-movie-card__image">
-                  <img src="img/aviator.jpg" alt="Aviator" width="280" height="175" />
-                </div>
-                <h3 className="small-movie-card__title">
-                  <a className="small-movie-card__link" href="movie-page.html">Aviator</a>
-                </h3>
-              </article>
-            </div>
-          </section>
+          <SimilarMovies
+            moviesCards={filteredMovies}
+            onCardClick={onCardClick}
+            onCardTitleClick={onCardTitleClick}
+          />
 
           <footer className="page-footer">
             <div className="logo">
@@ -179,7 +155,7 @@ MovieCard.propTypes = {
     background: PropTypes.string,
     title: PropTypes.string,
     poster: PropTypes.string,
-    genres: PropTypes.array,
+    genre: PropTypes.string,
     date: PropTypes.string,
     description: PropTypes.string,
     director: PropTypes.string,
@@ -187,6 +163,8 @@ MovieCard.propTypes = {
     rating: PropTypes.string,
     ratingCount: PropTypes.string,
   }).isRequired,
+
+  moviesCards: PropTypes.array.isRequired,
 
   reviews: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
@@ -196,7 +174,8 @@ MovieCard.propTypes = {
     text: PropTypes.string,
   })).isRequired,
 
-  activeTab: PropTypes.string,
+  onCardClick: PropTypes.func.isRequired,
+  onCardTitleClick: PropTypes.func.isRequired,
 };
 
 export default MovieCard;
