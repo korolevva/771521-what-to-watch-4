@@ -14,6 +14,7 @@ class MovieCardPreview extends PureComponent {
     this._onCardTitleClick = this.props.onCardTitleClick.bind(this);
     this._handleCardMouseEnter = this._handleCardMouseEnter.bind(this);
     this._handleCardMouseLeave = this._handleCardMouseLeave.bind(this);
+
   }
 
   _handleCardMouseEnter() {
@@ -66,6 +67,7 @@ MovieCardPreview.propTypes = {
     title: PropTypes.string,
     preview: PropTypes.string,
   }).isRequired,
+
   onCardTitleClick: PropTypes.func.isRequired,
   onCardClick: PropTypes.func.isRequired,
 };

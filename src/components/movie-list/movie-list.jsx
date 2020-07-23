@@ -20,6 +20,7 @@ class MovieList extends PureComponent {
           <MovieCardPreview
             key={`${card.id}`}
             card={card}
+            moviesCards={moviesCards}
             onCardTitleClick={onCardTitleClick}
             onCardClick={onCardClick}
           />

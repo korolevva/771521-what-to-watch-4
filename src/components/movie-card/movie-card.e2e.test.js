@@ -1,16 +1,26 @@
 import React from "react";
-import renderer from "react-test-renderer";
-import MovieCardPreview from "./movie-card-preview.jsx";
+import Enzyme, {mount} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import MovieCard from "./movie-card.jsx";
 
-const onCardTitleClick = (event) => {
-  event.preventDefault();
-};
-const onCardClick = jest.fn();
+Enzyme.configure({
+  adapter: new Adapter(),
+});
 
 const card = {
   id: 1,
-  poster: `img/bohemian-rhapsody.jpg`,
+  background: `img/bg-the-grand-budapest-hotel.jpg`,
+  imagePreview: `img/bohemian-rhapsody.jpg`,
+  poster: `https://placeimg.com/270/410/arch/grayscale`,
   title: `Bohemian Rhapsody`,
+  genre: `Biography`,
+  date: `2018`,
+  description: `The story of the legendary British rock band Queen and lead singer Freddie Mercury`,
+  rating: `8.0`,
+  ratingCount: `305`,
+  director: `Bryan Singer`,
+  stars: [`Rami Malek`, `Lucy Boynton`, `Gwilym Lee`],
+  duration: `1h 39m`,
   preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
 };
 
@@ -145,21 +155,113 @@ const moviesCards = [
   },
 ];
 
-it(`Render MovieCardPreview`, () => {
-  const tree = renderer
-    .create(<MovieCardPreview
-      card={card}
-      moviesCards={moviesCards}
-      onCardTitleClick={onCardTitleClick}
-      onCardClick={onCardClick}
-    />,
-    {
-      createNodeMock: () => {
-        return {};
-      }
-    }
-    )
-    .toJSON();
+const reviews = [
+  {
+    id: 1,
+    author: `Kate Muir`,
+    date: `December 24, 2016`,
+    rating: `8.9`,
+    text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years`,
+  },
+  {
+    id: 3,
+    author: `Bill Goodykoontz`,
+    date: `November 18, 2015`,
+    rating: `8.0`,
+    text: `Anderson's films are too precious for some, but for those of us willing to lose ourselves in them, they're a delight. "The Grand Budapest Hotel" is no different, except that he has added a hint of gravitas to the mix, improving the recipe.`,
+  },
+  {
+    id: 4,
+    author: `Amanda Greever`,
+    date: `November 18, 2015`,
+    rating: `8.0`,
+    text: `I didn't find it amusing, and while I can appreciate the creativity, it's an hour and 40 minutes I wish I could take back.`,
+  },
+  {
+    id: 4,
+    author: `Matthew Lickona`,
+    date: `December 20, 2016`,
+    rating: `7.2`,
+    text: `The mannered, madcap proceedings are often delightful, occasionally silly, and here and there, gruesome and/or heartbreaking.`,
+  },
+  {
+    id: 5,
+    author: `Paula Fleri-Soler`,
+    date: `December 20, 2016`,
+    rating: `7.6`,
+    text: `It is certainly a magical and childlike way of storytelling, even if the content is a little more adult`,
+  },
+  {
+    id: 6,
+    author: `Paula Fleri-Soler`,
+    date: `December 20, 2016`,
+    rating: `7.0`,
+    text: `It is certainly a magical and childlike way of storytelling, even if the content is a little more adult`,
+  },
+];
 
-  expect(tree).toMatchSnapshot();
+
+const state = {
+  selectedMovie: card,
+};
+
+
+describe(`MovieCard`, () => {
+  const onCardTitleClick = jest.fn();
+  const onCardClick = jest.fn();
+  it(`if you click on the tab Overview, activeTab will be Overview`, () => {
+    const movieCard = mount(
+        <MovieCard
+          card={state.selectedMovie}
+          moviesCards={moviesCards}
+          reviews={reviews}
+          onCardTitleClick={onCardTitleClick}
+          onCardClick={onCardClick}
+        />
+    );
+
+    movieCard.setState({activeTab: `Details`});
+
+    const tabOverview = movieCard.find(`.movie-nav__item`).at(0);
+    const tabOverviewLink = tabOverview.find(`.movie-nav__link`);
+
+    tabOverviewLink.simulate(`click`, {preventDefault: () => {}});
+    expect(movieCard.state()).toEqual({activeTab: `Overview`});
+  });
+
+  it(`if you click on the tab Details, activeTab will be Details`, () => {
+    const movieCard = mount(
+        <MovieCard
+          card={state.selectedMovie}
+          moviesCards={moviesCards}
+          reviews={reviews}
+          onCardTitleClick={onCardTitleClick}
+          onCardClick={onCardClick}
+        />
+    );
+
+    const tabDetails = movieCard.find(`.movie-nav__item`).at(1);
+    const tabDetailsLink = tabDetails.find(`.movie-nav__link`);
+
+    tabDetailsLink.simulate(`click`, {preventDefault: () => {}});
+    expect(movieCard.state()).toEqual({activeTab: `Details`});
+  });
+
+  it(`if you click on the tab Reviews, activeTab will be Reviews`, () => {
+    const movieCard = mount(
+        <MovieCard
+          card={state.selectedMovie}
+          moviesCards={moviesCards}
+          reviews={reviews}
+          onCardTitleClick={onCardTitleClick}
+          onCardClick={onCardClick}
+        />
+    );
+
+    const tabReviews = movieCard.find(`.movie-nav__item`).at(2);
+    const tabReviewsLink = tabReviews.find(`.movie-nav__link`);
+
+    tabReviewsLink.simulate(`click`, {preventDefault: () => {}});
+    expect(movieCard.state()).toEqual({activeTab: `Reviews`});
+  });
 });
