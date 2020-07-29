@@ -36,7 +36,11 @@ describe(`MovieCardPreview`, () => {
     const cardPreviewTitle = cardPreview.find(`.small-movie-card__link`);
     expect(cardPreviewTitle.exists).toBeTruthy();
 
-    cardPreviewTitle.simulate(`click`);
+    cardPreviewTitle.simulate(`click`, {
+      preventDefault: () => {
+      }
+    });
+
     expect(onCardTitleClick).toHaveBeenCalledTimes(1);
   });
 

@@ -11,7 +11,6 @@ class MovieCardPreview extends PureComponent {
     };
 
     this._timerId = null;
-    this._onCardTitleClick = this.props.onCardTitleClick.bind(this);
     this._handleCardMouseEnter = this._handleCardMouseEnter.bind(this);
     this._handleCardMouseLeave = this._handleCardMouseLeave.bind(this);
 
@@ -53,7 +52,14 @@ class MovieCardPreview extends PureComponent {
         </div>
 
         <h3 className="small-movie-card__title">
-          <a className="small-movie-card__link" href="movie-page.html" onClick={this._onCardTitleClick}>{card.title}</a>
+          <a
+            className="small-movie-card__link"
+            href="movie-page.html"
+            onClick={(evt) => {
+              evt.preventDefault();
+              this.props.onCardTitleClick(card);
+            }}
+          >{card.title}</a>
         </h3>
       </article>
     );

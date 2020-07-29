@@ -1,13 +1,15 @@
 import React from "react";
 import MovieList from "../movie-list/movie-list.jsx";
 import PropTypes from "prop-types";
+import GenreList from "../genre-list/genre-list.jsx";
 
-const Main = ({genre, year, moviesCards, onCardTitleClick, onCardClick}) => {
+const Main = ({promoMovie, onCardTitleClick, onCardClick}) => {
+  const {background, poster, title, genre, date} = promoMovie;
   return (
     <React.Fragment>
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={background} alt="The Grand Budapest Hotel" />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -31,14 +33,14 @@ const Main = ({genre, year, moviesCards, onCardTitleClick, onCardClick}) => {
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={poster} alt="The Grand Budapest Hotel poster" width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="movie-card__title">{title}</h2>
               <p className="movie-card__meta">
                 <span className="movie-card__genre">{genre}</span>
-                <span className="movie-card__year">{year}</span>
+                <span className="movie-card__year">{date}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -63,43 +65,10 @@ const Main = ({genre, year, moviesCards, onCardTitleClick, onCardClick}) => {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-
-          <ul className="catalog__genres-list">
-            <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#" className="catalog__genres-link">All genres</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Comedies</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Crime</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Documentary</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Dramas</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Horror</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Kids & Family</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Romance</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Sci-Fi</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Thrillers</a>
-            </li>
-          </ul>
+          <GenreList />
 
           <div className="catalog__movies-list">
             <MovieList
-              moviesCards={moviesCards}
               onCardTitleClick={onCardTitleClick}
               onCardClick={onCardClick}
             />
@@ -129,18 +98,15 @@ const Main = ({genre, year, moviesCards, onCardTitleClick, onCardClick}) => {
 };
 
 Main.propTypes = {
-  genre: PropTypes.string.isRequired,
-  year: PropTypes.number.isRequired,
-  moviesCards: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
+  promoMovie: PropTypes.shape({
+    background: PropTypes.string,
     poster: PropTypes.string,
     title: PropTypes.string,
-    previewMp4: PropTypes.string,
-    previewWebm: PropTypes.string,
-  })).isRequired,
+    genre: PropTypes.string,
+    date: PropTypes.string,
+  }),
   onCardTitleClick: PropTypes.func.isRequired,
   onCardClick: PropTypes.func.isRequired,
 };
 
 export default Main;
-
