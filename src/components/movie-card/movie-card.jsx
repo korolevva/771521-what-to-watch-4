@@ -4,10 +4,16 @@ import Tabs from "../tabs/tabs.jsx";
 import TabOverview from "../tab-overview/tab-overview.jsx";
 import TabDetails from "../tab-details/tab-details.jsx";
 import TabReviews from "../tab-reviews/tab-reviews.jsx";
-import {Tab} from "../../const.js";
 import SimilarMovies from "../similar-movies/similar-movies.jsx";
 
 const MAX_MOVIES_COUNT = 4;
+
+export const Tab = {
+  OVERVIEW: `Overview`,
+  DETAILS: `Details`,
+  REVIEWS: `Reviews`,
+};
+
 const tabs = Object.values(Tab);
 
 class MovieCard extends PureComponent {
@@ -19,6 +25,7 @@ class MovieCard extends PureComponent {
     };
 
     this._tabHandler = this._tabHandler.bind(this);
+    this._filteredMovies = this._filterByGenre(this.props.moviesCards, this.props.card).slice(0, MAX_MOVIES_COUNT);
   }
 
   _tabHandler(tab) {
@@ -43,7 +50,7 @@ class MovieCard extends PureComponent {
     }
   }
 
-  _filterMoviesByGenre(movies, currentMovie) {
+  _filterByGenre(movies, currentMovie) {
     const filteredMovies = movies.filter((movie) => {
       return movie.genre === currentMovie.genre;
     });
@@ -52,10 +59,9 @@ class MovieCard extends PureComponent {
   }
 
   render() {
-    const {card, moviesCards, onCardClick, onCardTitleClick} = this.props;
+    const {card, onCardClick, onCardTitleClick} = this.props;
     const {background, title, poster, genre, date} = card;
     const {activeTab} = this.state;
-    const filteredMovies = this._filterMoviesByGenre(moviesCards, card).slice(0, MAX_MOVIES_COUNT);
 
     return (
       <React.Fragment>
@@ -126,7 +132,7 @@ class MovieCard extends PureComponent {
 
         <div className="page-content">
           <SimilarMovies
-            moviesCards={filteredMovies}
+            moviesCards={this._filteredMovies}
             onCardClick={onCardClick}
             onCardTitleClick={onCardTitleClick}
           />

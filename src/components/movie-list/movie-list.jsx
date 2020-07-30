@@ -1,4 +1,5 @@
 import React, {PureComponent} from "react";
+import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import MovieCardPreview from "../movie-card-preview/movie-card-preview.jsx";
 
@@ -30,16 +31,14 @@ class MovieList extends PureComponent {
   }
 }
 
+const mapStateToProps = (store) => ({
+  moviesCards: store.genre.moviesByGenre,
+});
+
 MovieList.propTypes = {
-  moviesCards: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-    poster: PropTypes.string,
-    title: PropTypes.string,
-    previewMp4: PropTypes.string,
-    previewWebm: PropTypes.string,
-  })).isRequired,
+  moviesCards: PropTypes.array.isRequired,
   onCardTitleClick: PropTypes.func.isRequired,
   onCardClick: PropTypes.func.isRequired
 };
 
-export default MovieList;
+export default connect(mapStateToProps)(MovieList);

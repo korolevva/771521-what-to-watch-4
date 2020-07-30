@@ -1,8 +1,28 @@
 import React, {PureComponent} from 'react';
+import {connect} from "react-redux";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import Main from "../main/main.jsx";
 import MovieCard from "../movie-card/movie-card.jsx";
 import PropTypes from "prop-types";
+import reviews from "../../mocks/reviews.js";
+import {promoMovie} from "../../mocks/promoMovie.js";
+
+// const testMovieCard = {
+//   id: 1,
+//   background: `img/bg-the-grand-budapest-hotel.jpg`,
+//   imagePreview: `img/bohemian-rhapsody.jpg`,
+//   poster: `https://placeimg.com/270/410/arch/grayscale`,
+//   title: `Bohemian Rhapsody`,
+//   genre: `Biography`,
+//   date: `2018`,
+//   description: `The story of the legendary British rock band Queen and lead singer Freddie Mercury`,
+//   rating: `8.0`,
+//   ratingCount: `305`,
+//   director: `Bryan Singer`,
+//   stars: [`Rami Malek`, `Lucy Boynton`, `Gwilym Lee`],
+//   duration: `1h 39m`,
+//   preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+// };
 
 class App extends PureComponent {
   constructor(props) {
@@ -16,21 +36,21 @@ class App extends PureComponent {
     this._cardHandler = this._cardHandler.bind(this);
   }
 
-  _cardTitleHandler(evt, card) {
-    evt.preventDefault();
-    this.setState({
-      selectedMovie: card,
+  _cardTitleHandler(card) {
+
+    this.setState(() => {
+      return {selectedMovie: card};
     });
   }
 
   _cardHandler(card) {
-    this.setState({
-      selectedMovie: card
+    this.setState(() => {
+      return {selectedMovie: card};
     });
   }
 
   render() {
-    const {genre, year, moviesCards, reviews} = this.props;
+    const {moviesCards} = this.props;
     const {selectedMovie} = this.state;
 
     return (
@@ -45,8 +65,7 @@ class App extends PureComponent {
                 onCardTitleClick={this._cardTitleHandler}
                 onCardClick={this._cardHandler}/>
               : <Main
-                genre={genre}
-                year={year}
+                promoMovie={promoMovie}
                 moviesCards={moviesCards}
                 onCardTitleClick={this._cardTitleHandler}
                 onCardClick={this._cardHandler}
@@ -62,11 +81,12 @@ class App extends PureComponent {
   }
 }
 
+const mapStateToProps = (store) => ({
+  moviesCards: store.genre.movies,
+});
+
 App.propTypes = {
-  genre: PropTypes.string.isRequired,
-  year: PropTypes.number.isRequired,
   moviesCards: PropTypes.array.isRequired,
-  reviews: PropTypes.array.isRequired,
 };
 
-export default App;
+export default connect(mapStateToProps)(App);

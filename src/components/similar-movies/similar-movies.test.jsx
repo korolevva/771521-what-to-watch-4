@@ -1,14 +1,14 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import TabOverview from "./tab-overview.jsx";
+import SimilarMovies from "./similar-movies.jsx";
 import {moviesCards} from "../../mocks/testMoviesCards.js";
 
-const card = moviesCards[0];
-
-it(`Render TabOverview`, () => {
+it(`Render SimilarMovies`, () => {
   const tree = renderer
-    .create(<TabOverview
-      card={card}
+    .create(<SimilarMovies
+      moviesCards={moviesCards}
+      onCardClick={() => {}}
+      onCardTitleClick={() => {}}
     />,
     {
       createNodeMock: () => {
