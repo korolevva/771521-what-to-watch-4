@@ -8,9 +8,11 @@ import {Provider} from "react-redux";
 const mockStore = configureStore([]);
 const store = mockStore({
   genre: {
+    currentGenre: `All genres`,
     moviesByGenre: moviesCards,
     movies: moviesCards,
   },
+  movieCard: {displayedMoviesCards: 8}
 });
 
 

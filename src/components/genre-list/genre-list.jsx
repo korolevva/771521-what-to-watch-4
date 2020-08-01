@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {setCurrentGenre, setFiltredByGenre} from "../../actions/genreActions";
+import {resetDisplayedMoviesCount} from "../../actions/movieCardAction.js";
 import {ALL_GENRES} from "../../const";
 
 const generateGenres = (movies) => {
@@ -55,6 +56,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(setCurrentGenre(genre));
     const filteredMovies = filterByGenre(genre, movies);
     dispatch(setFiltredByGenre(filteredMovies));
+    dispatch(resetDisplayedMoviesCount());
   },
 });
 
