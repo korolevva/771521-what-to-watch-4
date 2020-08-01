@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import {setCurrentGenre, setFiltredByGenre} from "../../actions/genreActions";
 import {ALL_GENRES} from "../../const";
 
-const generateGenreList = (movies) => {
+const generateGenres = (movies) => {
   const genres = new Set(movies.map((movie) => movie.genre));
   return [ALL_GENRES, ...genres];
 };
@@ -18,7 +18,7 @@ const filterByGenre = (currentGenre, movies) => {
 
 const GenreList = ({currentGenre, movies, onGenreClick}) => {
 
-  const genres = generateGenreList(movies);
+  const genres = generateGenres(movies);
   return (
     <React.Fragment>
       <ul className="catalog__genres-list">
