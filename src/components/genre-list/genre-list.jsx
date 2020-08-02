@@ -2,9 +2,10 @@ import React from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {setCurrentGenre, setFiltredByGenre} from "../../actions/genreActions";
+import {resetDisplayedMoviesCount} from "../../actions/movieCardAction.js";
 import {ALL_GENRES} from "../../const";
 
-const generateGenreList = (movies) => {
+const generateGenres = (movies) => {
   const genres = new Set(movies.map((movie) => movie.genre));
   return [ALL_GENRES, ...genres];
 };
@@ -18,7 +19,7 @@ const filterByGenre = (currentGenre, movies) => {
 
 const GenreList = ({currentGenre, movies, onGenreClick}) => {
 
-  const genres = generateGenreList(movies);
+  const genres = generateGenres(movies);
   return (
     <React.Fragment>
       <ul className="catalog__genres-list">
@@ -55,6 +56,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(setCurrentGenre(genre));
     const filteredMovies = filterByGenre(genre, movies);
     dispatch(setFiltredByGenre(filteredMovies));
+    dispatch(resetDisplayedMoviesCount());
   },
 });
 

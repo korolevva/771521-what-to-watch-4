@@ -67,16 +67,11 @@ const Main = ({promoMovie, onCardTitleClick, onCardClick}) => {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <GenreList />
 
-          <div className="catalog__movies-list">
-            <MovieList
-              onCardTitleClick={onCardTitleClick}
-              onCardClick={onCardClick}
-            />
-          </div>
+          <MovieList
+            onCardTitleClick={onCardTitleClick}
+            onCardClick={onCardClick}
+          />
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
         </section>
 
         <footer className="page-footer">

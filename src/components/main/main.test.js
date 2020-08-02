@@ -24,9 +24,11 @@ export const promoMovie = {
 const mockStore = configureStore([]);
 const store = mockStore({
   genre: {
+    currentGenre: `All genres`,
     moviesByGenre: moviesCards,
     movies: moviesCards,
   },
+  movieCard: {displayedMoviesCards: 8}
 });
 
 it(`Render Main`, () => {
