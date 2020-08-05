@@ -1,42 +1,37 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import MovieCardPreview from "../movie-card-preview/movie-card-preview.jsx";
 import ShowMore from "../show-more/show-more.jsx";
 import {increaseDisplayedMoviesCount} from "../../actions/movieCardAction.js";
 
-class MovieList extends PureComponent {
-  constructor(props) {
-    super(props);
+import withPlayer from "../../hocs/with-player/with-player.js";
 
-    this.state = {
-      activeCard: null,
-    };
-  }
+const MovieCardPreviewWithPlayer = withPlayer(MovieCardPreview);
 
-  render() {
-    const {moviesCards, displayedMoviesCards, onShowMoreButtonClick, onCardTitleClick, onCardClick} = this.props;
-    const moviesCardsList = moviesCards.slice(0, displayedMoviesCards)
-    .map((card) => (
-      <MovieCardPreview
-        key={`${card.id}`}
-        card={card}
-        moviesCards={moviesCards}
-        onCardTitleClick={onCardTitleClick}
-        onCardClick={onCardClick}
-      />
-    ));
-    return (
-      <React.Fragment>
-        <div className="catalog__movies-list">
-          {moviesCardsList}
-        </div>
+const MovieList = ({moviesCards, displayedMoviesCards, onShowMoreButtonClick, onCardTitleClick, onCardClick}) => {
+  const moviesCardsList = moviesCards
+  .slice(0, displayedMoviesCards)
+  .map((card) => (
+    <MovieCardPreviewWithPlayer
+      key={`${card.id}`}
+      card={card}
+      moviesCards={moviesCards}
+      onCardTitleClick={onCardTitleClick}
+      onCardClick={onCardClick}
+    />
+  ));
+  return (
+    <React.Fragment>
+      <div className="catalog__movies-list">
+        {moviesCardsList}
+      </div>
 
-        {moviesCards.length > displayedMoviesCards ? <ShowMore onShowMoreButtonClick={onShowMoreButtonClick} /> : ``}
-      </React.Fragment>
-    );
-  }
-}
+      {moviesCards.length > displayedMoviesCards ? <ShowMore onShowMoreButtonClick={onShowMoreButtonClick} /> : ``}
+    </React.Fragment>
+  );
+};
+
 
 const mapStateToProps = (store) => ({
   moviesCards: store.genre.moviesByGenre,

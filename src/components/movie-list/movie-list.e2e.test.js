@@ -5,6 +5,17 @@ import MovieList from "./movie-list.jsx";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 
+const renderIgnoringUnstableFlushDiscreteUpdates = (component) => {
+  /* eslint-disable no-console */
+  const originalError = console.error;
+  const error = jest.fn();
+  console.error = error;
+  const result = mount(component);
+  console.error = originalError;
+  /* eslint-enable no-console */
+  return result;
+};
+
 Enzyme.configure({
   adapter: new Adapter(),
 });
@@ -172,7 +183,7 @@ describe(`MovieList`, () => {
       },
     });
 
-    const component = mount(
+    const component = renderIgnoringUnstableFlushDiscreteUpdates(
         <Provider store={store}>
           <MovieList
             moviesCards={moviesCards}
@@ -313,7 +324,7 @@ describe(`MovieList`, () => {
       },
     });
 
-    const component = mount(
+    const component = renderIgnoringUnstableFlushDiscreteUpdates(
         <Provider store={store}>
           <MovieList
             moviesCards={moviesCards}

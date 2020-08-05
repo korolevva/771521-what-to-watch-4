@@ -22,6 +22,9 @@ it(`Render MovieCardPreview`, () => {
       moviesCards={moviesCards}
       onCardTitleClick={onCardTitleClick}
       onCardClick={onCardClick}
+      isPlaying={false}
+      onMouseEnter={() => {}}
+      onMouseLeave={() => {}}
     />,
     {
       createNodeMock: () => {
