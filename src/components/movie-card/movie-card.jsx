@@ -20,25 +20,13 @@ class MovieCard extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      activeTab: Tab.OVERVIEW,
-    };
-
-    this._tabHandler = this._tabHandler.bind(this);
     this._filteredMovies = this._filterByGenre(this.props.moviesCards, this.props.card).slice(0, MAX_MOVIES_COUNT);
   }
 
-  _tabHandler(tab) {
-    this.setState({
-      activeTab: tab,
-    });
-  }
-
   _renderActiveTab() {
-    const {card, reviews} = this.props;
-    const {activeTab} = this.state;
+    const {card, reviews, activeItem} = this.props;
 
-    switch (activeTab) {
+    switch (activeItem) {
       case Tab.OVERVIEW:
         return (<TabOverview card={card} />);
       case Tab.DETAILS:
@@ -59,9 +47,8 @@ class MovieCard extends PureComponent {
   }
 
   render() {
-    const {card, onCardClick, onCardTitleClick} = this.props;
+    const {card, onCardClick, onCardTitleClick, activeItem, onItemClick} = this.props;
     const {background, title, poster, genre, date} = card;
-    const {activeTab} = this.state;
 
     return (
       <React.Fragment>
@@ -123,7 +110,7 @@ class MovieCard extends PureComponent {
               </div>
 
               <div className="movie-card__desc">
-                <Tabs tabs={tabs} activeTab={activeTab} onTabClick={this._tabHandler}/>
+                <Tabs tabs={tabs} activeTab={activeItem} onTabClick={onItemClick}/>
                 {this._renderActiveTab()}
               </div>
             </div>
@@ -182,6 +169,8 @@ MovieCard.propTypes = {
 
   onCardClick: PropTypes.func.isRequired,
   onCardTitleClick: PropTypes.func.isRequired,
+  activeItem: PropTypes.string.isRequired,
+  onItemClick: PropTypes.func.isRequired,
 };
 
 export default MovieCard;

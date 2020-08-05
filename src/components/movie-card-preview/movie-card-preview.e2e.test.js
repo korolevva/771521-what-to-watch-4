@@ -21,6 +21,8 @@ jest.useFakeTimers();
 describe(`MovieCardPreview`, () => {
   const onCardTitleClick = jest.fn();
   const onCardClick = jest.fn();
+  const onMouseEnter = jest.fn();
+  const onMouseLeave = jest.fn();
 
   it(`Simulate click on a title`, () => {
     const cardPreview = shallow(
@@ -30,6 +32,9 @@ describe(`MovieCardPreview`, () => {
           moviesCards={moviesCards}
           onCardTitleClick={onCardTitleClick}
           onCardClick={onCardClick}
+          isPlaying={false}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
         />
     );
 
@@ -52,6 +57,9 @@ describe(`MovieCardPreview`, () => {
           moviesCards={moviesCards}
           onCardTitleClick={onCardTitleClick}
           onCardClick={onCardClick}
+          isPlaying={false}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
         />
     );
 
@@ -62,15 +70,17 @@ describe(`MovieCardPreview`, () => {
   });
 
   it(`should start/stop playing video on the card`, () => {
-    const onMouseEnter = jest.fn();
+
     const main = shallow(
         <MovieCardPreview
           key={card.id}
           card={card}
           moviesCards={moviesCards}
-          onMouseEnter={onMouseEnter}
           onCardTitleClick={onCardTitleClick}
           onCardClick={onCardClick}
+          isPlaying={false}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
         />
     );
 
@@ -79,9 +89,9 @@ describe(`MovieCardPreview`, () => {
 
     movieCard.simulate(`mouseenter`);
     jest.advanceTimersByTime(2000);
-    expect(main.state(`isPlaying`)).toEqual(true);
+    expect(onMouseEnter).toHaveBeenCalledTimes(1);
 
     movieCard.simulate(`mouseleave`);
-    expect(main.state(`isPlaying`)).toEqual(false);
+    expect(onMouseLeave).toHaveBeenCalledTimes(1);
   });
 });

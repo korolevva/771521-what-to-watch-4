@@ -6,6 +6,10 @@ import MovieCard from "../movie-card/movie-card.jsx";
 import PropTypes from "prop-types";
 import reviews from "../../mocks/reviews.js";
 import {promoMovie} from "../../mocks/promoMovie.js";
+import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
+import {Tab} from "../movie-card/movie-card.jsx";
+
+const MovieCardWithActiveItem = withActiveItem(MovieCard);
 
 class App extends PureComponent {
   constructor(props) {
@@ -41,7 +45,8 @@ class App extends PureComponent {
         <Switch>
           <Route exact path="/">
             {selectedMovie
-              ? <MovieCard
+              ? <MovieCardWithActiveItem
+                activeItem={Tab.OVERVIEW}
                 card={selectedMovie}
                 moviesCards={movies}
                 reviews={reviews}
@@ -56,7 +61,14 @@ class App extends PureComponent {
             }
           </Route>
           <Route exact path="/card">
-            <MovieCard card={movies[0]} moviesCards={movies} reviews={reviews} onCardTitleClick={this._cardTitleHandler} onCardClick={this._cardHandler} />
+            <MovieCardWithActiveItem
+              activeItem={Tab.OVERVIEW}
+              card={movies[0]}
+              moviesCards={movies}
+              reviews={reviews}
+              onCardTitleClick={this._cardTitleHandler}
+              onCardClick={this._cardHandler}
+            />
           </Route>
         </Switch>
       </BrowserRouter >

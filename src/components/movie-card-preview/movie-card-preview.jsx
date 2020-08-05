@@ -1,70 +1,35 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import VideoPlayer from "../video-player/video-player.jsx";
 
-class MovieCardPreview extends PureComponent {
-  constructor(props) {
-    super(props);
+const MovieCardPreview = ({card, isPlaying, onMouseEnter, onMouseLeave, onCardClick, onCardTitleClick}) => {
+  return (
+    <article
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onClick={() => onCardClick(card)}
+      className="small-movie-card catalog__movies-card">
 
-    this.state = {
-      isPlaying: false,
-    };
+      <div className="small-movie-card__image">
+        <VideoPlayer
+          card={card}
+          isPlaying={isPlaying}
+        />
+      </div>
 
-    this._timerId = null;
-    this._handleCardMouseEnter = this._handleCardMouseEnter.bind(this);
-    this._handleCardMouseLeave = this._handleCardMouseLeave.bind(this);
-
-  }
-
-  _handleCardMouseEnter() {
-    this._timerId = setTimeout(() => {
-      this.setState({
-        isPlaying: true,
-      });
-    }, 1000);
-  }
-
-  _handleCardMouseLeave() {
-    this.setState({
-      isPlaying: false,
-    });
-    clearTimeout(this._timerId);
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this._timerId);
-  }
-
-  render() {
-    const {card} = this.props;
-    return (
-      <article
-        onMouseEnter={this._handleCardMouseEnter}
-        onMouseLeave={this._handleCardMouseLeave}
-        onClick={() => this.props.onCardClick(card)}
-        className="small-movie-card catalog__movies-card">
-
-        <div className="small-movie-card__image">
-          <VideoPlayer
-            card={card}
-            isPlaying={this.state.isPlaying}
-          />
-        </div>
-
-        <h3 className="small-movie-card__title">
-          <a
-            className="small-movie-card__link"
-            href="movie-page.html"
-            onClick={(evt) => {
-              evt.preventDefault();
-              this.props.onCardTitleClick(card);
-            }}
-          >{card.title}</a>
-        </h3>
-      </article>
-    );
-  }
-}
+      <h3 className="small-movie-card__title">
+        <a
+          className="small-movie-card__link"
+          href="movie-page.html"
+          onClick={(evt) => {
+            evt.preventDefault();
+            onCardTitleClick(card);
+          }}
+        >{card.title}</a>
+      </h3>
+    </article>
+  );
+};
 
 MovieCardPreview.propTypes = {
   card: PropTypes.shape({
@@ -73,9 +38,11 @@ MovieCardPreview.propTypes = {
     title: PropTypes.string,
     preview: PropTypes.string,
   }).isRequired,
-
-  onCardTitleClick: PropTypes.func.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
+  onMouseEnter: PropTypes.func.isRequired,
+  onMouseLeave: PropTypes.func.isRequired,
   onCardClick: PropTypes.func.isRequired,
+  onCardTitleClick: PropTypes.func.isRequired,
 };
 
 export default MovieCardPreview;

@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import MovieCardPreview from "../movie-card-preview/movie-card-preview.jsx";
+import withPlayer from "../../hocs/with-player/with-player.js";
+const MovieCardPreviewWithPlayer = withPlayer(MovieCardPreview);
 
 const SimilarMovies = ({moviesCards, onCardClick, onCardTitleClick}) => {
   return (
@@ -8,7 +10,7 @@ const SimilarMovies = ({moviesCards, onCardClick, onCardTitleClick}) => {
       <h2 className="catalog__title">More like this</h2>
       <div className="catalog__movies-list">
         {moviesCards.map((card) => (
-          <MovieCardPreview
+          <MovieCardPreviewWithPlayer
             key={`${card.id}`}
             card={card}
             moviesCards={moviesCards}
