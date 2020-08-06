@@ -11,11 +11,11 @@ const withPlayer = (Component) => {
       };
 
       this._timerId = null;
-      this._handleCardMouseEnter = this._handleCardMouseEnter.bind(this);
-      this._handleCardMouseLeave = this._handleCardMouseLeave.bind(this);
+      this.handleCardMouseEnter = this.handleCardMouseEnter.bind(this);
+      this.handleCardMouseLeave = this.handleCardMouseLeave.bind(this);
     }
 
-    _handleCardMouseEnter() {
+    handleCardMouseEnter() {
       this._timerId = setTimeout(() => {
         this.setState({
           isPlaying: true,
@@ -23,7 +23,7 @@ const withPlayer = (Component) => {
       }, 1000);
     }
 
-    _handleCardMouseLeave() {
+    handleCardMouseLeave() {
       this.setState({
         isPlaying: false,
       });
@@ -39,8 +39,8 @@ const withPlayer = (Component) => {
         <Component
           {...this.props}
           isPlaying={this.state.isPlaying}
-          onMouseEnter={this._handleCardMouseEnter}
-          onMouseLeave={this._handleCardMouseLeave}
+          onMouseEnter={this.handleCardMouseEnter}
+          onMouseLeave={this.handleCardMouseLeave}
         />
       );
     }
