@@ -1,47 +1,51 @@
-import React, {PureComponent, createRef} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
-
-export default class VideoPlayer extends PureComponent {
-  constructor(props) {
-    super(props);
-    this._videoRef = createRef();
-  }
-
-  render() {
-    const {card} = this.props;
-    const {imagePreview, preview} = card;
-    return (
-      <video
-        width="280"
-        height="175"
-        poster={imagePreview}
-        muted={true}
-        ref={this._videoRef}
-        controls={false}
-        autoPlay={false}
-      >
-        <source src={preview} type="video/mp4" />
-      </video>
-    );
-  }
-
-  componentDidUpdate() {
-    const video = this._videoRef.current;
-    if (this.props.isPlaying) {
-      video.play();
-    } else {
-      video.load();
-    }
-  }
-}
+const VideoPlayer = React.forwardRef((props, ref) => {
+  const {card, width, height, poster, muted, controls, autoPlay, className} = props;
+  const {preview} = card;
+  return (
+    <video
+      width={width}
+      height={height}
+      poster={poster}
+      muted={muted}
+      controls={controls}
+      autoPlay={autoPlay}
+      className={className}
+      ref={ref}
+    >
+      <source src={preview} type="video/mp4" />
+    </video>
+  );
+});
 
 VideoPlayer.propTypes = {
   card: PropTypes.shape({
+    background: PropTypes.string,
+    date: PropTypes.string,
+    description: PropTypes.string,
+    director: PropTypes.string,
+    duration: PropTypes.string,
+    genre: PropTypes.string,
     id: PropTypes.number,
     imagePreview: PropTypes.string,
+    poster: PropTypes.string,
     preview: PropTypes.string,
+    rating: PropTypes.string,
+    ratingCount: PropTypes.string,
+    stars: PropTypes.array,
     title: PropTypes.string,
   }).isRequired,
-  isPlaying: PropTypes.bool.isRequired,
+  width: PropTypes.string,
+  height: PropTypes.string,
+  poster: PropTypes.string,
+  muted: PropTypes.bool.isRequired,
+  controls: PropTypes.bool.isRequired,
+  autoPlay: PropTypes.bool.isRequired,
+  className: PropTypes.string,
 };
+
+VideoPlayer.displayName = `VideoPlayer`;
+
+export default VideoPlayer;

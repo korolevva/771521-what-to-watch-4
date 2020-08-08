@@ -14,3 +14,24 @@ export const resetDisplayedMoviesCount = () => {
     payload: DISPLAYED_MOVIES_CARDS,
   };
 };
+
+export const chooseMovie = (movieCard) => {
+  return {
+    type: ActionType.CHOOSE_MOVIE,
+    payload: movieCard,
+  };
+};
+
+export const playMovie = (movieCard) => {
+  return {
+    type: ActionType.PLAY_MOVIE,
+    payload: movieCard,
+  };
+};
+
+export const closeMovie = () => {
+  return {
+    type: ActionType.PLAY_MOVIE,
+    payload: null,
+  };
+};

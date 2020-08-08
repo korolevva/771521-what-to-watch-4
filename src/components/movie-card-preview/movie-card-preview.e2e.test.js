@@ -35,7 +35,9 @@ describe(`MovieCardPreview`, () => {
           isPlaying={false}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
-        />
+        >
+          <video />
+        </MovieCardPreview>
     );
 
     const cardPreviewTitle = cardPreview.find(`.small-movie-card__link`);
@@ -60,7 +62,9 @@ describe(`MovieCardPreview`, () => {
           isPlaying={false}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
-        />
+        >
+          <video />
+        </MovieCardPreview>
     );
 
     expect(cardPreview.exists).toBeTruthy();
@@ -81,7 +85,9 @@ describe(`MovieCardPreview`, () => {
           isPlaying={false}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
-        />
+        >
+          <video />
+        </MovieCardPreview>
     );
 
     const movieCard = main.find(`.small-movie-card`).first();

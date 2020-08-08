@@ -10,7 +10,17 @@ it(`Render VideoPlayer`, () => {
     .create(
         <VideoPlayer
           card={card}
-          isPlaying={true}
+          moviesCards={moviesCards}
+          onCardTitleClick={() => {}}
+          onCardClick={() => {}}
+          resetTimeStamp={true}
+          muted={true}
+          width="280"
+          height="175"
+          isPlaying={false}
+          controls={false}
+          poster={card.imagePreview}
+          autoPlay={false}
         />,
         {
           createNodeMock: () => {
