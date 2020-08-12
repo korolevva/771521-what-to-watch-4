@@ -47,7 +47,7 @@ class MovieCard extends PureComponent {
   }
 
   render() {
-    const {card, onCardClick, onCardTitleClick, activeItem, onItemClick} = this.props;
+    const {card, activeItem, onCardClick, onCardTitleClick, onItemClick, onPlayButtonClick} = this.props;
     const {background, title, poster, genre, date} = card;
 
     return (
@@ -85,7 +85,9 @@ class MovieCard extends PureComponent {
                 </p>
 
                 <div className="movie-card__buttons">
-                  <button className="btn btn--play movie-card__button" type="button">
+                  <button className="btn btn--play movie-card__button" type="button"
+                    onClick={() => onPlayButtonClick(card)}
+                  >
                     <svg viewBox="0 0 19 19" width="19" height="19">
                       <use xlinkHref="#play-s"></use>
                     </svg>
@@ -157,6 +159,11 @@ MovieCard.propTypes = {
     ratingCount: PropTypes.string,
   }).isRequired,
 
+  activeItem: PropTypes.string.isRequired,
+  onCardClick: PropTypes.func.isRequired,
+  onCardTitleClick: PropTypes.func.isRequired,
+  onItemClick: PropTypes.func.isRequired,
+  onPlayButtonClick: PropTypes.func.isRequired,
   moviesCards: PropTypes.array.isRequired,
 
   reviews: PropTypes.arrayOf(PropTypes.shape({
@@ -166,11 +173,6 @@ MovieCard.propTypes = {
     rating: PropTypes.string,
     text: PropTypes.string,
   })).isRequired,
-
-  onCardClick: PropTypes.func.isRequired,
-  onCardTitleClick: PropTypes.func.isRequired,
-  activeItem: PropTypes.string.isRequired,
-  onItemClick: PropTypes.func.isRequired,
 };
 
 export default MovieCard;

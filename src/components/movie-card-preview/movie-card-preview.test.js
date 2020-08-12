@@ -3,29 +3,30 @@ import renderer from "react-test-renderer";
 import MovieCardPreview from "./movie-card-preview.jsx";
 import {moviesCards} from "../../mocks/testMoviesCards.js";
 
-const onCardTitleClick = (event) => {
-  event.preventDefault();
-};
-const onCardClick = jest.fn();
-
-const card = {
-  id: 1,
-  poster: `img/bohemian-rhapsody.jpg`,
-  title: `Bohemian Rhapsody`,
-  preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-};
+const card = moviesCards[0];
 
 it(`Render MovieCardPreview`, () => {
   const tree = renderer
     .create(<MovieCardPreview
+      key={`${card.id}`}
       card={card}
       moviesCards={moviesCards}
-      onCardTitleClick={onCardTitleClick}
-      onCardClick={onCardClick}
-      isPlaying={false}
+      onCardTitleClick={() => {}}
+      onCardClick={() => {}}
       onMouseEnter={() => {}}
       onMouseLeave={() => {}}
-    />,
+      resetTimeStamp={true}
+      muted={true}
+      width="280"
+      height="175"
+      isPlaying={false}
+      controls={false}
+      poster={card.imagePreview}
+      autoPlay={false}
+    >
+      <video />
+    </MovieCardPreview>
+    ,
     {
       createNodeMock: () => {
         return {};

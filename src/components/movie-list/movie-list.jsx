@@ -19,6 +19,14 @@ const MovieList = ({moviesCards, displayedMoviesCards, onShowMoreButtonClick, on
       moviesCards={moviesCards}
       onCardTitleClick={onCardTitleClick}
       onCardClick={onCardClick}
+      resetTimeStamp={true}
+      muted={true}
+      width="280"
+      height="175"
+      isPlaying={false}
+      controls={false}
+      poster={card.imagePreview}
+      autoPlay={false}
     />
   ));
   return (

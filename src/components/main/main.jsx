@@ -3,7 +3,7 @@ import MovieList from "../movie-list/movie-list.jsx";
 import PropTypes from "prop-types";
 import GenreList from "../genre-list/genre-list.jsx";
 
-const Main = ({promoMovie, onCardTitleClick, onCardClick}) => {
+const Main = ({promoMovie, onCardTitleClick, onCardClick, onPlayButtonClick}) => {
   const {background, poster, title, genre, date} = promoMovie;
   return (
     <React.Fragment>
@@ -44,7 +44,9 @@ const Main = ({promoMovie, onCardTitleClick, onCardClick}) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <button className="btn btn--play movie-card__button" type="button"
+                  onClick={() => onPlayButtonClick(promoMovie)}
+                >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -102,6 +104,7 @@ Main.propTypes = {
   }),
   onCardTitleClick: PropTypes.func.isRequired,
   onCardClick: PropTypes.func.isRequired,
+  onPlayButtonClick: PropTypes.func.isRequired,
 };
 
 export default Main;

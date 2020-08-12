@@ -39,6 +39,7 @@ it(`Render Main`, () => {
         moviesCards={moviesCards}
         onCardTitleClick={() => {}}
         onCardClick={() => {}}
+        onPlayButtonClick={() => {}}
       />
     </Provider>,
     {
