@@ -6,10 +6,13 @@ import ShowMore from "../show-more/show-more.jsx";
 import {increaseDisplayedMoviesCount} from "../../actions/movieCardAction.js";
 
 import withPlayer from "../../hocs/with-player/with-player.js";
+import {getMoviesCardsByGenre} from "../../reducers/genre/selectors.js";
+import {getDisplayedMoviesCards} from "../../reducers/movie-card/selectors.js";
 
 const MovieCardPreviewWithPlayer = withPlayer(MovieCardPreview);
 
 const MovieList = ({moviesCards, displayedMoviesCards, onShowMoreButtonClick, onCardTitleClick, onCardClick}) => {
+
   const moviesCardsList = moviesCards
   .slice(0, displayedMoviesCards)
   .map((card) => (
@@ -29,6 +32,7 @@ const MovieList = ({moviesCards, displayedMoviesCards, onShowMoreButtonClick, on
       autoPlay={false}
     />
   ));
+
   return (
     <React.Fragment>
       <div className="catalog__movies-list">
@@ -42,8 +46,8 @@ const MovieList = ({moviesCards, displayedMoviesCards, onShowMoreButtonClick, on
 
 
 const mapStateToProps = (store) => ({
-  moviesCards: store.genre.moviesByGenre,
-  displayedMoviesCards: store.movieCard.displayedMoviesCards,
+  moviesCards: getMoviesCardsByGenre(store),
+  displayedMoviesCards: getDisplayedMoviesCards(store),
 });
 
 

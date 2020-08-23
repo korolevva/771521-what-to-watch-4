@@ -5,18 +5,28 @@ import Main from "../main/main.jsx";
 import MovieCard from "../movie-card/movie-card.jsx";
 import PropTypes from "prop-types";
 import reviews from "../../mocks/reviews.js";
-import {promoMovie} from "../../mocks/promoMovie.js";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
 import withPlayer from "../../hocs/with-player/with-player.js";
 import {Tab} from "../movie-card/movie-card.jsx";
 import FullScreenMovie from "../full-screen-movie/full-screen-movie.jsx";
 import {chooseMovie, playMovie, closeMovie} from '../../actions/movieCardAction.js';
+import {getSelectedMovieCard, getPlayingMovieCard} from '../../reducers/movie-card/selectors.js';
+import {getMoviesCards, getMovieCard} from '../../reducers/data/selectors.js';
 
 const MovieCardWithActiveItem = withActiveItem(MovieCard);
 const FullScreenMovieWithPlayer = withPlayer(FullScreenMovie);
 
 const App = (props) => {
-  const {movies, selectedMovieCard, playingMovieCard, cardHandler, cardTitleHandler, playButtonClickHandler, exitButtonClickHandler} = props;
+  const {
+    moviesCards,
+    promoMovie,
+    selectedMovieCard,
+    playingMovieCard,
+    cardHandler,
+    cardTitleHandler,
+    playButtonClickHandler,
+    exitButtonClickHandler
+  } = props;
 
   let component;
   if (playingMovieCard) {
@@ -36,7 +46,7 @@ const App = (props) => {
     component = <MovieCardWithActiveItem
       activeItem={Tab.OVERVIEW}
       card={selectedMovieCard}
-      moviesCards={movies}
+      moviesCards={moviesCards}
       reviews={reviews}
       onCardTitleClick={cardTitleHandler}
       onCardClick={cardHandler}
@@ -45,7 +55,6 @@ const App = (props) => {
   } else {
     component = <Main
       promoMovie={promoMovie}
-      moviesCards={movies}
       onCardTitleClick={cardTitleHandler}
       onCardClick={cardHandler}
       onPlayButtonClick={playButtonClickHandler}
@@ -59,18 +68,15 @@ const App = (props) => {
           {component}
         </Route>
         <Route exact path="/card">
-          <FullScreenMovieWithPlayer
-            card={movies[0]}
-            className={`player__video`}
-            width={`280`}
-            height={`175`}
-            poster={movies[0].imagePreview}
-            muted={false}
-            controls={false}
-            autoPlay={false}
-            isPlaying={true}
-            onExitButtonClick={exitButtonClickHandler}
-          />
+          {/* <MovieCardWithActiveItem
+            activeItem={Tab.OVERVIEW}
+            card={promoMovie}
+            moviesCards={moviesCards}
+            reviews={reviews}
+            onCardTitleClick={cardTitleHandler}
+            onCardClick={cardHandler}
+            onPlayButtonClick={playButtonClickHandler}
+          /> */}
         </Route>
       </Switch>
     </BrowserRouter >
@@ -78,11 +84,14 @@ const App = (props) => {
 };
 
 
-const mapStateToProps = (store) => ({
-  movies: store.genre.movies,
-  selectedMovieCard: store.movieCard.selectedMovieCard,
-  playingMovieCard: store.movieCard.playingMovieCard,
-});
+function mapStateToProps(store) {
+  return {
+    promoMovie: getMovieCard(store),
+    moviesCards: getMoviesCards(store),
+    selectedMovieCard: getSelectedMovieCard(store),
+    playingMovieCard: getPlayingMovieCard(store),
+  };
+}
 
 const mapDispatchToProps = (dispatch) => ({
   cardHandler(movieCard) {
@@ -104,36 +113,52 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 App.propTypes = {
-  movies: PropTypes.array.isRequired,
-  selectedMovieCard: PropTypes.shape({
+  moviesCards: PropTypes.array.isRequired,
+  promoMovie: PropTypes.shape({
     background: PropTypes.string,
-    date: PropTypes.string,
+    date: PropTypes.number,
     description: PropTypes.string,
     director: PropTypes.string,
-    duration: PropTypes.string,
+    duration: PropTypes.number,
     genre: PropTypes.string,
     id: PropTypes.number,
     imagePreview: PropTypes.string,
     poster: PropTypes.string,
     preview: PropTypes.string,
-    rating: PropTypes.string,
-    ratingCount: PropTypes.string,
+    rating: PropTypes.number,
+    ratingCount: PropTypes.number,
+    stars: PropTypes.array,
+    title: PropTypes.string,
+  }),
+  selectedMovieCard: PropTypes.shape({
+    background: PropTypes.string,
+    date: PropTypes.number,
+    description: PropTypes.string,
+    director: PropTypes.string,
+    duration: PropTypes.number,
+    genre: PropTypes.string,
+    id: PropTypes.number,
+    imagePreview: PropTypes.string,
+    poster: PropTypes.string,
+    preview: PropTypes.string,
+    rating: PropTypes.number,
+    ratingCount: PropTypes.number,
     stars: PropTypes.array,
     title: PropTypes.string,
   }),
   playingMovieCard: PropTypes.shape({
     background: PropTypes.string,
-    date: PropTypes.string,
+    date: PropTypes.number,
     description: PropTypes.string,
     director: PropTypes.string,
-    duration: PropTypes.string,
+    duration: PropTypes.number,
     genre: PropTypes.string,
     id: PropTypes.number,
     imagePreview: PropTypes.string,
     poster: PropTypes.string,
     preview: PropTypes.string,
-    rating: PropTypes.string,
-    ratingCount: PropTypes.string,
+    rating: PropTypes.number,
+    ratingCount: PropTypes.number,
     stars: PropTypes.array,
     title: PropTypes.string,
   }),

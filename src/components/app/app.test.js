@@ -4,15 +4,19 @@ import App from "./app.jsx";
 import {moviesCards} from "../../mocks/testMoviesCards.js";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
+import NameSpace from "../../reducers/name-space.js";
 
 const mockStore = configureStore([]);
 const store = mockStore({
-  genre: {
-    currentGenre: `All genres`,
-    moviesByGenre: moviesCards,
-    movies: moviesCards,
+  [NameSpace.MOVIE_CARD]: {
+    displayedMoviesCards: 8,
+    selectedMovieCard: moviesCards[0],
+    playingMovieCard: moviesCards[0],
   },
-  movieCard: {displayedMoviesCards: 8}
+  [NameSpace.DATA]: {
+    promoMovie: moviesCards[0],
+    moviesCards,
+  },
 });
 
 

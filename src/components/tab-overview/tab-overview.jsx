@@ -30,8 +30,8 @@ TabOverview.propTypes = {
     description: PropTypes.string,
     director: PropTypes.string,
     stars: PropTypes.array,
-    rating: PropTypes.string,
-    ratingCount: PropTypes.string,
+    rating: PropTypes.number,
+    ratingCount: PropTypes.number,
   }).isRequired,
 };
 

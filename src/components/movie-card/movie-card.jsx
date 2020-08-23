@@ -40,7 +40,7 @@ class MovieCard extends PureComponent {
 
   _filterByGenre(movies, currentMovie) {
     const filteredMovies = movies.filter((movie) => {
-      return movie.genre === currentMovie.genre;
+      return (movie.genre === currentMovie.genre) && (movie !== currentMovie);
     });
 
     return filteredMovies;
@@ -151,12 +151,12 @@ MovieCard.propTypes = {
     title: PropTypes.string,
     poster: PropTypes.string,
     genre: PropTypes.string,
-    date: PropTypes.string,
+    date: PropTypes.number,
     description: PropTypes.string,
     director: PropTypes.string,
     stars: PropTypes.array,
-    rating: PropTypes.string,
-    ratingCount: PropTypes.string,
+    rating: PropTypes.number,
+    ratingCount: PropTypes.number,
   }).isRequired,
 
   activeItem: PropTypes.string.isRequired,

@@ -9,7 +9,7 @@ Array [
       className="movie-card__bg"
     >
       <img
-        alt="The Grand Budapest Hotel"
+        alt="Bohemian Rhapsody"
         src="img/bg-the-grand-budapest-hotel.jpg"
       />
     </div>
@@ -69,7 +69,7 @@ Array [
           className="movie-card__poster"
         >
           <img
-            alt="The Grand Budapest Hotel poster"
+            alt="Bohemian Rhapsody"
             height="327"
             src="https://placeimg.com/270/410/arch/grayscale"
             width="218"

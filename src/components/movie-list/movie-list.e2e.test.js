@@ -4,6 +4,7 @@ import Adapter from "enzyme-adapter-react-16";
 import MovieList from "./movie-list.jsx";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
+import NameSpace from "../../reducers/name-space.js";
 
 const renderIgnoringUnstableFlushDiscreteUpdates = (component) => {
   /* eslint-disable no-console */
@@ -175,11 +176,14 @@ describe(`MovieList`, () => {
     ];
 
     const store = mockStore({
-      genre: {
-        moviesByGenre: moviesCards
-      },
-      movieCard: {
+      [NameSpace.MOVIE_CARD]: {
         displayedMoviesCards: 8,
+      },
+      [NameSpace.GENRE]: {
+        currentGenre: `All genres`,
+      },
+      [NameSpace.DATA]: {
+        moviesCards,
       },
     });
 
@@ -316,12 +320,15 @@ describe(`MovieList`, () => {
     ];
 
     const store = mockStore({
-      genre: {
-        moviesByGenre: moviesCards
-      },
-      movieCard: {
+      [NameSpace.MOVIE_CARD]: {
         displayedMoviesCards: 8,
       },
+      [NameSpace.GENRE]: {
+        currentGenre: `All genres`,
+      },
+      [NameSpace.DATA]: {
+        moviesCards,
+      }
     });
 
     const component = renderIgnoringUnstableFlushDiscreteUpdates(

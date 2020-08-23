@@ -6,6 +6,8 @@ export const ActionType = {
   CHOOSE_MOVIE: `CHOOSE_MOVIE`,
   PLAY_MOVIE: `PLAY_MOVIE`,
   CLOSE_MOVIE: `CLOSE_MOVIE`,
+  LOAD_MOVIE: `LOAD_MOVIE`,
+  LOAD_MOVIES: `LOAD_MOVIES`,
 };
 
 export const ALL_GENRES = `All genres`;

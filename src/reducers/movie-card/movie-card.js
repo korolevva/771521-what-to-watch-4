@@ -1,4 +1,4 @@
-import {ActionType, DISPLAYED_MOVIES_CARDS} from "../const.js";
+import {ActionType, DISPLAYED_MOVIES_CARDS} from "../../const.js";
 
 const initialState = {
   displayedMoviesCards: DISPLAYED_MOVIES_CARDS,
