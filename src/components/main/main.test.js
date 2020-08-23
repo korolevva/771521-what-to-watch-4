@@ -4,6 +4,7 @@ import Main from "./main.jsx";
 import {moviesCards} from "../../mocks/testMoviesCards.js";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
+import NameSpace from "../../reducers/name-space.js";
 
 export const promoMovie = {
   background: `img/bg-the-grand-budapest-hotel.jpg`,
@@ -11,24 +12,28 @@ export const promoMovie = {
   poster: `https://placeimg.com/270/410/arch/grayscale`,
   title: `Bohemian Rhapsody`,
   genre: `Biography`,
-  date: `2018`,
+  date: 2018,
   description: `The story of the legendary British rock band Queen and lead singer Freddie Mercury`,
-  rating: `8.0`,
-  ratingCount: `305`,
+  rating: 8.0,
+  ratingCount: 305,
   director: `Bryan Singer`,
   stars: [`Rami Malek`, `Lucy Boynton`, `Gwilym Lee`],
-  duration: `1h 39m`,
+  duration: 85,
   preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
 };
 
 const mockStore = configureStore([]);
 const store = mockStore({
-  genre: {
+  [NameSpace.GENRE]: {
     currentGenre: `All genres`,
     moviesByGenre: moviesCards,
     movies: moviesCards,
   },
-  movieCard: {displayedMoviesCards: 8}
+  [NameSpace.MOVIE_CARD]: {displayedMoviesCards: 8},
+  [NameSpace.DATA]: {
+    movieCard: moviesCards[0],
+    moviesCards,
+  },
 });
 
 it(`Render Main`, () => {

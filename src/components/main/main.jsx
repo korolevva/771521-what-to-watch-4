@@ -9,7 +9,7 @@ const Main = ({promoMovie, onCardTitleClick, onCardClick, onPlayButtonClick}) =>
     <React.Fragment>
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src={background} alt="The Grand Budapest Hotel" />
+          <img src={background} alt={title} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -33,7 +33,7 @@ const Main = ({promoMovie, onCardTitleClick, onCardClick, onPlayButtonClick}) =>
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img src={poster} alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={poster} alt={title} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
@@ -97,10 +97,21 @@ const Main = ({promoMovie, onCardTitleClick, onCardClick, onPlayButtonClick}) =>
 Main.propTypes = {
   promoMovie: PropTypes.shape({
     background: PropTypes.string,
-    poster: PropTypes.string,
-    title: PropTypes.string,
+    backgroundColor: PropTypes.string,
+    date: PropTypes.number,
+    description: PropTypes.string,
+    director: PropTypes.string,
+    duration: PropTypes.number,
     genre: PropTypes.string,
-    date: PropTypes.string,
+    id: PropTypes.number,
+    imagePreview: PropTypes.string,
+    isFavorite: PropTypes.bool,
+    poster: PropTypes.string,
+    preview: PropTypes.string,
+    rating: PropTypes.number,
+    ratingCount: PropTypes.number,
+    stars: PropTypes.array,
+    title: PropTypes.string,
   }),
   onCardTitleClick: PropTypes.func.isRequired,
   onCardClick: PropTypes.func.isRequired,

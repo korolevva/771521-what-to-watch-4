@@ -1,10 +1,7 @@
-import movies from "../mocks/films.js";
-import {ActionType, ALL_GENRES} from "../const.js";
+import {ActionType, ALL_GENRES} from "../../const.js";
 
 const initialState = {
   currentGenre: ALL_GENRES,
-  moviesByGenre: movies,
-  movies,
 };
 
 export const genreReducer = (state = initialState, action) => {
@@ -12,11 +9,6 @@ export const genreReducer = (state = initialState, action) => {
     case ActionType.SET_GENRE:
       return Object.assign({}, state, {
         currentGenre: action.payload,
-      });
-
-    case ActionType.SET_FILTRING_MOVIES_BY_GENRE:
-      return Object.assign({}, state, {
-        moviesByGenre: action.payload,
       });
 
     default:

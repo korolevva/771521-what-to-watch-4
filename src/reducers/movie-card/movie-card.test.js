@@ -1,5 +1,5 @@
-import {movieCardReducer} from "./movieCard";
-import {ActionType} from "../const.js";
+import {movieCardReducer} from "./movie-card";
+import {ActionType} from "../../const.js";
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(movieCardReducer(void 0, {})).toEqual({

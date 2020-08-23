@@ -5,6 +5,7 @@ import GenreList from "./genre-list.jsx";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import {moviesCards} from "../../mocks/testMoviesCards.js";
+import NameSpace from "../../reducers/name-space.js";
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -19,9 +20,11 @@ describe(`GenreList`, () => {
 
   beforeEach(() => {
     store = mockStore({
-      genre: {
+      [NameSpace.GENRE]: {
         currentGenre: `All Genres`,
-        movies: moviesCards,
+      },
+      [NameSpace.DATA]: {
+        moviesCards,
       }
     });
 

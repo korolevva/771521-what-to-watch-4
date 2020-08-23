@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {formatDuration} from "./utils.js";
 
 const TabOverview = ({card}) => {
   const {director, stars, duration, genre, date} = card;
@@ -27,7 +28,7 @@ const TabOverview = ({card}) => {
       <div className="movie-card__text-col">
         <p className="movie-card__details-item">
           <strong className="movie-card__details-name">Run Time</strong>
-          <span className="movie-card__details-value">{duration}</span>
+          <span className="movie-card__details-value">{formatDuration(duration)}</span>
         </p>
         <p className="movie-card__details-item">
           <strong className="movie-card__details-name">Genre</strong>
@@ -46,9 +47,9 @@ TabOverview.propTypes = {
   card: PropTypes.shape({
     director: PropTypes.string,
     stars: PropTypes.array,
-    duration: PropTypes.string,
+    duration: PropTypes.number,
     genre: PropTypes.string,
-    date: PropTypes.string,
+    date: PropTypes.number,
   }).isRequired,
 };
 
