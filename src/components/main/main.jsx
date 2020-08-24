@@ -2,8 +2,9 @@ import React from "react";
 import MovieList from "../movie-list/movie-list.jsx";
 import PropTypes from "prop-types";
 import GenreList from "../genre-list/genre-list.jsx";
+import {AuthorizationStatus} from "../../reducers/user/user.js";
 
-const Main = ({promoMovie, onCardTitleClick, onCardClick, onPlayButtonClick}) => {
+const Main = ({authorizationStatus, promoMovie, onCardTitleClick, onCardClick, onPlayButtonClick, onSignInClick}) => {
   const {background, poster, title, genre, date} = promoMovie;
   return (
     <React.Fragment>
@@ -23,11 +24,24 @@ const Main = ({promoMovie, onCardTitleClick, onCardClick, onPlayButtonClick}) =>
             </a>
           </div>
 
-          <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+          {authorizationStatus === AuthorizationStatus.AUTH
+            ?
+            <div className="user-block">
+              <div className="user-block__avatar">
+                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+              </div>
             </div>
-          </div>
+            :
+            <div className="user-block">
+              <a href="sign-in.html" className="user-block__link"
+                onClick={(evt) => {
+                  evt.preventDefault();
+                  onSignInClick();
+                }}
+              >Sign in</a>
+            </div>
+          }
+
         </header>
 
         <div className="movie-card__wrap">
@@ -95,6 +109,7 @@ const Main = ({promoMovie, onCardTitleClick, onCardClick, onPlayButtonClick}) =>
 };
 
 Main.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
   promoMovie: PropTypes.shape({
     background: PropTypes.string,
     backgroundColor: PropTypes.string,
@@ -116,6 +131,7 @@ Main.propTypes = {
   onCardTitleClick: PropTypes.func.isRequired,
   onCardClick: PropTypes.func.isRequired,
   onPlayButtonClick: PropTypes.func.isRequired,
+  onSignInClick: PropTypes.func.isRequired,
 };
 
 export default Main;
