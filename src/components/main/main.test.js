@@ -45,6 +45,8 @@ it(`Render Main`, () => {
         onCardTitleClick={() => {}}
         onCardClick={() => {}}
         onPlayButtonClick={() => {}}
+        authorizationStatus={`NO_AUTH`}
+        onSignInClick={() => {}}
       />
     </Provider>,
     {
