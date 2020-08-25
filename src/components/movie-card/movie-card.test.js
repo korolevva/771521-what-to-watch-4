@@ -17,6 +17,8 @@ it(`Render MovieCard`, () => {
         onCardClick={() => {}}
         onPlayButtonClick={() => {}}
         onItemClick={() => {}}
+        onSignInClick={() => {}}
+        authorizationStatus={`NO_AUTH`}
       />,
       {
         createNodeMock: () => {

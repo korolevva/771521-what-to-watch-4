@@ -1,5 +1,5 @@
 import MockAdapter from "axios-mock-adapter";
-import movies from "../../mocks/films.js";
+import reviews from "../../mocks/reviews";
 import {promoMovie} from "../../mocks/promoMovie.js";
 import {dataReducer} from "./data.js";
 import {ActionType} from "../../const.js";
@@ -13,6 +13,9 @@ it(`Reducer without additional parameters should return initial state`, () => {
   expect(dataReducer(void 0, {})).toEqual({
     movieCard: {},
     moviesCards: [],
+    reviews: [],
+    isDataSending: false,
+    isErrorLoading: false,
   });
 });
 
@@ -27,14 +30,36 @@ it(`Reducer should update movieCard`, () => {
   });
 });
 
-it(`Reducer should update moviesCards`, () => {
+it(`Reducer should update reviews`, () => {
   expect(dataReducer({
-    moviesCards: [],
+    reviews: [],
   }, {
-    type: ActionType.LOAD_MOVIES,
-    payload: movies,
+    type: ActionType.LOAD_REVIEWS,
+    payload: reviews,
   })).toEqual({
-    moviesCards: movies,
+    reviews,
+  });
+});
+
+it(`Reducer should update isDataSending`, () => {
+  expect(dataReducer({
+    isDataSending: false,
+  }, {
+    type: ActionType.CHECK_IS_DATA_SENDING,
+    payload: true,
+  })).toEqual({
+    isDataSending: true,
+  });
+});
+
+it(`Reducer should update isErrorLoading`, () => {
+  expect(dataReducer({
+    isErrorLoading: false,
+  }, {
+    type: ActionType.CHECK_IS_ERROR_LOADING,
+    payload: true,
+  })).toEqual({
+    isErrorLoading: true,
   });
 });
 
