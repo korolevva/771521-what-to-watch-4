@@ -5,6 +5,8 @@ import TabOverview from "../tab-overview/tab-overview.jsx";
 import TabDetails from "../tab-details/tab-details.jsx";
 import TabReviews from "../tab-reviews/tab-reviews.jsx";
 import SimilarMovies from "../similar-movies/similar-movies.jsx";
+import {AuthorizationStatus} from "../../reducers/user/user.js";
+import Header from "../header/header.jsx";
 
 const MAX_MOVIES_COUNT = 4;
 
@@ -47,9 +49,8 @@ class MovieCard extends PureComponent {
   }
 
   render() {
-    const {card, activeItem, onCardClick, onCardTitleClick, onItemClick, onPlayButtonClick} = this.props;
+    const {card, activeItem, onCardClick, onCardTitleClick, onItemClick, onPlayButtonClick, authorizationStatus, onSignInClick} = this.props;
     const {background, title, poster, genre, date} = card;
-
     return (
       <React.Fragment>
         <section className="movie-card movie-card--full">
@@ -59,22 +60,10 @@ class MovieCard extends PureComponent {
             </div>
 
             <h1 className="visually-hidden">WTW</h1>
-
-            <header className="page-header movie-card__head">
-              <div className="logo">
-                <a href="main.html" className="logo__link">
-                  <span className="logo__letter logo__letter--1">W</span>
-                  <span className="logo__letter logo__letter--2">T</span>
-                  <span className="logo__letter logo__letter--3">W</span>
-                </a>
-              </div>
-
-              <div className="user-block">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-                </div>
-              </div>
-            </header>
+            <Header
+              authorizationStatus={authorizationStatus}
+              onSignInClick={onSignInClick}
+            />
 
             <div className="movie-card__wrap">
               <div className="movie-card__desc">
@@ -99,7 +88,10 @@ class MovieCard extends PureComponent {
                     </svg>
                     <span>My list</span>
                   </button>
-                  <a href="add-review.html" className="btn movie-card__button">Add review</a>
+                  {authorizationStatus === AuthorizationStatus.AUTH
+                    ? <a href="add-review.html" className="btn movie-card__button">Add review</a>
+                    : ``
+                  }
                 </div>
               </div>
             </div>
@@ -173,6 +165,9 @@ MovieCard.propTypes = {
     rating: PropTypes.string,
     text: PropTypes.string,
   })).isRequired,
+
+  authorizationStatus: PropTypes.string.isRequired,
+  onSignInClick: PropTypes.func.isRequired,
 };
 
 export default MovieCard;

@@ -102,6 +102,8 @@ describe(`Render App`, () => {
       [NameSpace.DATA]: {
         promoMovie,
         moviesCards,
+        isDataSending: false,
+        isErrorLoading: false,
       },
       [NameSpace.USER]: {
         authorizationStatus: `NO_AUTH`,
