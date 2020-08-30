@@ -5,6 +5,8 @@ import {moviesCards} from "../../mocks/testMoviesCards.js";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import NameSpace from "../../reducers/name-space.js";
+import {Router} from "react-router-dom";
+import history from "../../history.js";
 
 export const promoMovie = {
   background: `img/bg-the-grand-budapest-hotel.jpg`,
@@ -39,15 +41,20 @@ const store = mockStore({
 it(`Render Main`, () => {
   const tree = renderer
     .create(<Provider store={store}>
-      <Main
-        promoMovie={promoMovie}
-        moviesCards={moviesCards}
-        onCardTitleClick={() => {}}
-        onCardClick={() => {}}
-        onPlayButtonClick={() => {}}
-        authorizationStatus={`NO_AUTH`}
-        onSignInClick={() => {}}
-      />
+      <Router
+        history={history}
+      >
+        <Main
+          promoMovie={promoMovie}
+          moviesCards={moviesCards}
+          onCardTitleClick={() => {}}
+          onCardClick={() => {}}
+          onPlayButtonClick={() => {}}
+          authorizationStatus={`NO_AUTH`}
+          onSignInClick={() => {}}
+        />
+      </Router>
+
     </Provider>,
     {
       createNodeMock: () => {

@@ -1,13 +1,8 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {Switch, Route, Router} from "react-router-dom";
 import Main from "../main/main.jsx";
-import MovieCard from "../movie-card/movie-card.jsx";
 import PropTypes from "prop-types";
-import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
-import withPlayer from "../../hocs/with-player/with-player.js";
-import {Tab} from "../movie-card/movie-card.jsx";
-import FullScreenMovie from "../full-screen-movie/full-screen-movie.jsx";
 import {chooseMovie, playMovie, closeMovie} from '../../actions/movieCardAction.js';
 import {getSelectedMovieCard, getPlayingMovieCard} from '../../reducers/movie-card/selectors.js';
 import {getMoviesCards, getMovieCard, getReviews, getIsDataSending, getIsErrorLoading} from '../../reducers/data/selectors.js';
@@ -15,94 +10,60 @@ import {getAuthorizationStatus, getIsSingInSelected, getIsErrorAuth} from '../..
 import SignIn from "../sign-in/sign-in.jsx";
 import {Operation as UserOperation, renderSingInPage} from "../../actions/userActions.js";
 import {Operation as DataOperation} from "../../actions/dataActions.js";
-import AddReview from "../add-review/add-review.jsx";
-
-
-const MovieCardWithActiveItem = withActiveItem(MovieCard);
-const FullScreenMovieWithPlayer = withPlayer(FullScreenMovie);
+import history from "../../history.js";
+import {AppRoute} from '../../const.js';
+import MyList from "../my-list/my-list.jsx";
 
 const App = (props) => {
   const {
     authorizationStatus,
-    isSingInSelected,
     isErrorAuth,
     login,
     signInClickHandler,
-    moviesCards,
     promoMovie,
-    selectedMovieCard,
-    playingMovieCard,
     cardHandler,
     cardTitleHandler,
     playButtonClickHandler,
-    exitButtonClickHandler,
-    reviews,
     reviewSubmitHandler,
-    isDataSending,
-    isErrorLoading,
   } = props;
 
-  let component;
-  if (isSingInSelected) {
-    component = <SignIn
-      onSubmit={login}
-      isErrorAuth={isErrorAuth}
-    />;
-  } else {
-    if (playingMovieCard) {
-      component = <FullScreenMovieWithPlayer
-        card={playingMovieCard}
-        className={`player__video`}
-        width={`280`}
-        height={`175`}
-        poster={playingMovieCard.poster}
-        muted={false}
-        controls={false}
-        autoPlay={false}
-        isPlaying={true}
-        onExitButtonClick={exitButtonClickHandler}
-      />;
-    } else if (selectedMovieCard) {
-      component = <MovieCardWithActiveItem
-        activeItem={Tab.OVERVIEW}
-        card={selectedMovieCard}
-        moviesCards={moviesCards}
-        reviews={reviews}
-        onCardTitleClick={cardTitleHandler}
-        onCardClick={cardHandler}
-        onPlayButtonClick={playButtonClickHandler}
-        authorizationStatus={authorizationStatus}
-        onSignInClick={signInClickHandler}
-      />;
-    } else {
-      component = <Main
-        authorizationStatus={authorizationStatus}
-        promoMovie={promoMovie}
-        onCardTitleClick={cardTitleHandler}
-        onCardClick={cardHandler}
-        onPlayButtonClick={playButtonClickHandler}
-        onSignInClick={signInClickHandler}
-        onReviewSubmit={reviewSubmitHandler}
-      />;
-    }
-  }
-
   return (
-    <BrowserRouter>
+    <Router
+      history={history}
+    >
       <Switch>
-        <Route exact path="/">
-          {component}
-        </Route>
-        <Route exact path="/dev-review">
-          <AddReview
-            movieCard={moviesCards[0]}
-            onReviewSubmit={reviewSubmitHandler}
-            isDataSending={isDataSending}
-            isErrorLoading={isErrorLoading}
-          />
-        </Route>
+        <Route exact path={AppRoute.ROOT}
+          render={() => {
+            return <Main
+              authorizationStatus={authorizationStatus}
+              promoMovie={promoMovie}
+              onCardTitleClick={cardTitleHandler}
+              onCardClick={cardHandler}
+              onPlayButtonClick={playButtonClickHandler}
+              onSignInClick={signInClickHandler}
+              onReviewSubmit={reviewSubmitHandler}
+            />;
+          }}
+        />
+
+        <Route exact path={AppRoute.LOGIN}
+
+          render={() => {
+            return <SignIn
+              onSubmit={login}
+              isErrorAuth={isErrorAuth}
+            />;
+          }}
+        />
+
+        <Route exact path={AppRoute.MY_LIST}
+
+          render={() => {
+            return <MyList />;
+          }}
+        />
       </Switch>
-    </BrowserRouter >
+    </Router>
   );
 };
 

@@ -27,3 +27,10 @@ export const ReviewLength = {
 
 export const RATING_COUNT = 5;
 export const RATING_DEFAULT = 0;
+
+export const AppRoute = {
+  LOGIN: `/login`,
+  MY_LIST: `/my-list`,
+  ROOT: `/`,
+};
+

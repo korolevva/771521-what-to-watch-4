@@ -1,18 +1,15 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import SignIn from "./sign-in.jsx";
+import MyList from "./my-list.jsx";
 import {Router} from "react-router-dom";
 import history from "../../history.js";
 
-it(`SignIn component render correctly`, () => {
+it(`MyList component render correctly`, () => {
   const tree = renderer.create(
       <Router
         history={history}
       >
-        <SignIn
-          onSubmit={() => {}}
-          isErrorAuth={false}
-        />
+        <MyList />
       </Router>
   ).toJSON();
 

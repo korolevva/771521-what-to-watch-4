@@ -9,7 +9,8 @@ exports[`Render Header Render MovieCard with avatar 1`] = `
   >
     <a
       className="logo__link"
-      href="main.html"
+      href="/"
+      onClick={[Function]}
     >
       <span
         className="logo__letter logo__letter--1"
@@ -31,58 +32,67 @@ exports[`Render Header Render MovieCard with avatar 1`] = `
   <div
     className="user-block"
   >
-    <div
-      className="user-block__avatar"
+    <a
+      href="/my-list"
+      onClick={[Function]}
     >
-      <img
-        alt="User avatar"
-        height="63"
-        src="img/avatar.jpg"
-        width="63"
-      />
-    </div>
+      <div
+        className="user-block__avatar"
+      >
+        <img
+          alt="User avatar"
+          height="63"
+          src="img/avatar.jpg"
+          width="63"
+        />
+      </div>
+    </a>
   </div>
 </header>
 `;
 
 exports[`Render Header Render MovieCard without avatar 1`] = `
-<header
-  className="page-header movie-card__head"
->
-  <div
-    className="logo"
+Array [
+  <header
+    className="page-header movie-card__head"
   >
-    <a
-      className="logo__link"
-      href="main.html"
+    <div
+      className="logo"
     >
-      <span
-        className="logo__letter logo__letter--1"
+      <a
+        className="logo__link"
+        href="/"
+        onClick={[Function]}
       >
-        W
-      </span>
-      <span
-        className="logo__letter logo__letter--2"
-      >
-        T
-      </span>
-      <span
-        className="logo__letter logo__letter--3"
-      >
-        W
-      </span>
-    </a>
-  </div>
-  <div
-    className="user-block"
-  >
-    <a
-      className="user-block__link"
-      href="sign-in.html"
-      onClick={[Function]}
+        <span
+          className="logo__letter logo__letter--1"
+        >
+          W
+        </span>
+        <span
+          className="logo__letter logo__letter--2"
+        >
+          T
+        </span>
+        <span
+          className="logo__letter logo__letter--3"
+        >
+          W
+        </span>
+      </a>
+    </div>
+    <div
+      className="user-block"
     >
-      Sign in
-    </a>
-  </div>
-</header>
+      <a
+        className="user-block__link"
+        href="/login"
+        onClick={[Function]}
+      >
+        Sign in
+      </a>
+    </div>
+  </header>,
+  ",",
+]
 `;
