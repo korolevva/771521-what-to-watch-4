@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import GenreList from "../genre-list/genre-list.jsx";
 import Header from "../header/header.jsx";
 
-const Main = ({authorizationStatus, promoMovie, onCardTitleClick, onCardClick, onPlayButtonClick, onSignInClick}) => {
-  const {background, poster, title, genre, date} = promoMovie;
+const Main = ({authorizationStatus, promoMovie, onCardTitleClick, onCardClick, onPlayButtonClick}) => {
+  const {background, poster, title, genre, date, isFavorite} = promoMovie;
   return (
     <React.Fragment>
       <section className="movie-card">
@@ -17,7 +17,6 @@ const Main = ({authorizationStatus, promoMovie, onCardTitleClick, onCardClick, o
 
         <Header
           authorizationStatus={authorizationStatus}
-          onSignInClick={onSignInClick}
         />
         <div className="movie-card__wrap">
           <div className="movie-card__info">
@@ -42,9 +41,16 @@ const Main = ({authorizationStatus, promoMovie, onCardTitleClick, onCardClick, o
                   <span>Play</span>
                 </button>
                 <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
+                  {(isFavorite)
+                    ?
+                    <svg viewBox="0 0 18 14" width="18" height="14">
+                      <use xlinkHref="#in-list"></use>
+                    </svg>
+                    :
+                    <svg viewBox="0 0 19 20" width="19" height="20">
+                      <use xlinkHref="#add"></use>
+                    </svg>
+                  }
                   <span>My list</span>
                 </button>
               </div>

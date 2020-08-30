@@ -1,5 +1,6 @@
 import {ActionType} from "../const";
 import {AuthorizationStatus} from "../reducers/user/user";
+import history from "../history.js";
 
 export const requireAuthorization = (status) => {
   return {
@@ -49,6 +50,7 @@ export const Operation = {
       .then(() => {
         dispatch(requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(renderMainPage());
+        history.goBack();
       })
       .catch((err) => {
         dispatch(checkErrorAuthorization(true));

@@ -1,8 +1,6 @@
 import React, {PureComponent, Fragment} from "react";
 import PropTypes from "prop-types";
 import {ReviewLength, RATING_DEFAULT, RATING_COUNT} from "../../const.js";
-
-import {promoMovie} from "../../mocks/promoMovie.js";
 class AddReview extends PureComponent {
   constructor(props) {
     super(props);
@@ -95,7 +93,7 @@ class AddReview extends PureComponent {
             <nav className="breadcrumbs">
               <ul className="breadcrumbs__list">
                 <li className="breadcrumbs__item">
-                  <a href="movie-page.html" className="breadcrumbs__link">{promoMovie.title}</a>
+                  <a href="movie-page.html" className="breadcrumbs__link">{this.props.movieCard.title}</a>
                 </li>
                 <li className="breadcrumbs__item">
                   <a className="breadcrumbs__link">Add review</a>
