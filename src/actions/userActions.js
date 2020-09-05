@@ -1,25 +1,13 @@
 import {ActionType} from "../const";
 import {AuthorizationStatus} from "../reducers/user/user";
 import history from "../history.js";
+import {createUser} from "../adapter/adapter.js";
+import {Operation as DataOperation} from "../actions/dataActions.js";
 
 export const requireAuthorization = (status) => {
   return {
     type: ActionType.REQUIRED_AUTHORIZATION,
     payload: status,
-  };
-};
-
-export const renderSingInPage = () => {
-  return {
-    type: ActionType.RENDER_SIGN_IN_PAGE,
-    payload: true,
-  };
-};
-
-export const renderMainPage = () => {
-  return {
-    type: ActionType.RENDER_MAIN_PAGE,
-    payload: false,
   };
 };
 
@@ -30,12 +18,21 @@ export const checkErrorAuthorization = (value) => {
   };
 };
 
+export const getUserInfo = (userInfo) => {
+  return {
+    type: ActionType.GET_USER_INFO,
+    payload: userInfo,
+  };
+};
+
 export const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
     return api.get(`/login`)
-      .then(() => {
+      .then((response) => {
         dispatch(requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(checkErrorAuthorization(false));
+        dispatch(getUserInfo(createUser(response.data)));
+        dispatch(DataOperation.loadFavoriteMovies());
       })
       .catch((err) => {
         throw err;
@@ -47,9 +44,9 @@ export const Operation = {
       email: authData.login,
       password: authData.password,
     })
-      .then(() => {
+      .then((response) => {
         dispatch(requireAuthorization(AuthorizationStatus.AUTH));
-        dispatch(renderMainPage());
+        dispatch(getUserInfo(createUser(response.data)));
         history.goBack();
       })
       .catch((err) => {

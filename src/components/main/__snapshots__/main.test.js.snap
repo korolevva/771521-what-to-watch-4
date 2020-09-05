@@ -99,8 +99,9 @@ Array [
           <div
             className="movie-card__buttons"
           >
-            <button
+            <a
               className="btn btn--play movie-card__button"
+              href="/films/1/player"
               onClick={[Function]}
               type="button"
             >
@@ -116,9 +117,10 @@ Array [
               <span>
                 Play
               </span>
-            </button>
+            </a>
             <button
               className="btn btn--list movie-card__button"
+              onClick={[Function]}
               type="button"
             >
               <svg
@@ -192,33 +194,37 @@ Array [
       >
         <article
           className="small-movie-card catalog__movies-card"
-          onClick={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         >
-          <div
-            className="small-movie-card__image"
+          <a
+            href="/film/1"
+            onClick={[Function]}
           >
-            <video
-              autoPlay={false}
-              controls={false}
-              height="175"
-              muted={true}
-              poster="img/bohemian-rhapsody.jpg"
-              width="280"
+            <div
+              className="small-movie-card__image"
             >
-              <source
-                src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
-                type="video/mp4"
-              />
-            </video>
-          </div>
+              <video
+                autoPlay={false}
+                controls={false}
+                height="175"
+                muted={true}
+                poster="img/bohemian-rhapsody.jpg"
+                width="280"
+              >
+                <source
+                  src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
+                  type="video/mp4"
+                />
+              </video>
+            </div>
+          </a>
           <h3
             className="small-movie-card__title"
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/film/1"
               onClick={[Function]}
             >
               Bohemian Rhapsody
@@ -227,33 +233,37 @@ Array [
         </article>
         <article
           className="small-movie-card catalog__movies-card"
-          onClick={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         >
-          <div
-            className="small-movie-card__image"
+          <a
+            href="/film/2"
+            onClick={[Function]}
           >
-            <video
-              autoPlay={false}
-              controls={false}
-              height="175"
-              muted={true}
-              poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-              width="280"
+            <div
+              className="small-movie-card__image"
             >
-              <source
-                src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
-                type="video/mp4"
-              />
-            </video>
-          </div>
+              <video
+                autoPlay={false}
+                controls={false}
+                height="175"
+                muted={true}
+                poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+                width="280"
+              >
+                <source
+                  src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
+                  type="video/mp4"
+                />
+              </video>
+            </div>
+          </a>
           <h3
             className="small-movie-card__title"
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/film/2"
               onClick={[Function]}
             >
               Fantastic Beasts: The Crimes of Grindelwald

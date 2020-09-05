@@ -42,7 +42,7 @@ exports[`Render Header Render MovieCard with avatar 1`] = `
         <img
           alt="User avatar"
           height="63"
-          src="img/avatar.jpg"
+          src="mock/user"
           width="63"
         />
       </div>

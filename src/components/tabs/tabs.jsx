@@ -23,9 +23,7 @@ const Tabs = ({tabs, activeTab, onTabClick}) => {
       </ul>
     </nav>
   );
-
 };
-
 
 Tabs.propTypes = {
   tabs: PropTypes.array,

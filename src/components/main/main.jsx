@@ -3,9 +3,12 @@ import MovieList from "../movie-list/movie-list.jsx";
 import PropTypes from "prop-types";
 import GenreList from "../genre-list/genre-list.jsx";
 import Header from "../header/header.jsx";
+import {Link} from "react-router-dom";
+import {AppRoute} from "../../const.js";
+import AddMyListButton from "../add-my-list-button/add-my-list-button.jsx";
 
-const Main = ({authorizationStatus, promoMovie, onCardTitleClick, onCardClick, onPlayButtonClick}) => {
-  const {background, poster, title, genre, date, isFavorite} = promoMovie;
+const Main = ({authorizationStatus, promoMovie, user, moviesCardsByGenre, displayedMoviesCards}) => {
+  const {id = 1, background, poster, title, genre, date, isFavorite = false} = promoMovie;
   return (
     <React.Fragment>
       <section className="movie-card">
@@ -16,6 +19,7 @@ const Main = ({authorizationStatus, promoMovie, onCardTitleClick, onCardClick, o
         <h1 className="visually-hidden">WTW</h1>
 
         <Header
+          user={user}
           authorizationStatus={authorizationStatus}
         />
         <div className="movie-card__wrap">
@@ -32,27 +36,19 @@ const Main = ({authorizationStatus, promoMovie, onCardTitleClick, onCardClick, o
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button"
-                  onClick={() => onPlayButtonClick(promoMovie)}
+                <Link className="btn btn--play movie-card__button" type="button"
+                  to={`/films/${id}${AppRoute.PLAYER}`}
                 >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
-                </button>
-                <button className="btn btn--list movie-card__button" type="button">
-                  {(isFavorite)
-                    ?
-                    <svg viewBox="0 0 18 14" width="18" height="14">
-                      <use xlinkHref="#in-list"></use>
-                    </svg>
-                    :
-                    <svg viewBox="0 0 19 20" width="19" height="20">
-                      <use xlinkHref="#add"></use>
-                    </svg>
-                  }
-                  <span>My list</span>
-                </button>
+                </Link>
+                <AddMyListButton
+                  isFavorite={isFavorite}
+                  id={id}
+                  authorizationStatus={authorizationStatus}
+                />
               </div>
             </div>
           </div>
@@ -65,8 +61,8 @@ const Main = ({authorizationStatus, promoMovie, onCardTitleClick, onCardClick, o
           <GenreList />
 
           <MovieList
-            onCardTitleClick={onCardTitleClick}
-            onCardClick={onCardClick}
+            moviesCards={moviesCardsByGenre}
+            displayedMoviesCards={displayedMoviesCards}
           />
 
         </section>
@@ -109,10 +105,30 @@ Main.propTypes = {
     stars: PropTypes.array,
     title: PropTypes.string,
   }),
-  onCardTitleClick: PropTypes.func.isRequired,
-  onCardClick: PropTypes.func.isRequired,
-  onPlayButtonClick: PropTypes.func.isRequired,
-  onSignInClick: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    avatarUrl: PropTypes.string,
+    email: PropTypes.string,
+    id: PropTypes.number,
+    name: PropTypes.string,
+  }).isRequired,
+  moviesCardsByGenre: PropTypes.arrayOf(PropTypes.shape({
+    background: PropTypes.string,
+    date: PropTypes.number,
+    description: PropTypes.string,
+    director: PropTypes.string,
+    duration: PropTypes.number,
+    genre: PropTypes.string,
+    id: PropTypes.number,
+    imagePreview: PropTypes.string,
+    isFavorite: PropTypes.bool,
+    poster: PropTypes.string,
+    preview: PropTypes.string,
+    rating: PropTypes.number,
+    ratingCount: PropTypes.number,
+    stars: PropTypes.array,
+    title: PropTypes.string,
+  })).isRequired,
+  displayedMoviesCards: PropTypes.number.isRequired,
 };
 
 export default Main;

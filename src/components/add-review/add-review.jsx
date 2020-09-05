@@ -1,6 +1,9 @@
 import React, {PureComponent, Fragment} from "react";
 import PropTypes from "prop-types";
 import {ReviewLength, RATING_DEFAULT, RATING_COUNT} from "../../const.js";
+import {Link} from "react-router-dom";
+import {AppRoute} from "../../const.js";
+
 class AddReview extends PureComponent {
   constructor(props) {
     super(props);
@@ -38,10 +41,9 @@ class AddReview extends PureComponent {
   }
 
   render() {
-    const {isErrorLoading, isDataSending} = this.props;
+    const {movieCard, isErrorLoading, isDataSending, movieCardId, user} = this.props;
     const {comment, rating} = this.state;
-    // console.log(`isErrorLoading `, isErrorLoading)
-    // console.log(`isDataSending `, isDataSending)
+    const {background, title, poster} = movieCard;
 
     const getRatingItem = (item, index) => {
       const key = `star-${index + 1}`;
@@ -76,40 +78,40 @@ class AddReview extends PureComponent {
       <section className="movie-card movie-card--full">
         <div className="movie-card__header">
           <div className="movie-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+            <img src={background} alt={title} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
 
           <header className="page-header">
             <div className="logo">
-              <a href="main.html" className="logo__link">
+              <Link to={AppRoute.ROOT} className="logo__link">
                 <span className="logo__letter logo__letter--1">W</span>
                 <span className="logo__letter logo__letter--2">T</span>
                 <span className="logo__letter logo__letter--3">W</span>
-              </a>
+              </Link>
             </div>
 
             <nav className="breadcrumbs">
               <ul className="breadcrumbs__list">
                 <li className="breadcrumbs__item">
-                  <a href="movie-page.html" className="breadcrumbs__link">{this.props.movieCard.title}</a>
+                  <Link to={`${AppRoute.MOVIE_CARD}/${movieCardId}`} className="breadcrumbs__link">{title}</Link>
                 </li>
                 <li className="breadcrumbs__item">
-                  <a className="breadcrumbs__link">Add review</a>
+                  <Link to={`/films/${movieCardId}${AppRoute.REVIEW}`} className="breadcrumbs__link">Add review</Link>
                 </li>
               </ul>
             </nav>
 
             <div className="user-block">
               <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+                <img src={user.avatarUrl} alt="User avatar" width="63" height="63" />
               </div>
             </div>
           </header>
 
           <div className="movie-card__poster movie-card__poster--small">
-            <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+            <img src={poster} alt={`${title} poster`} width="218" height="327" />
           </div>
         </div>
         <div className="add-review">
@@ -143,6 +145,12 @@ class AddReview extends PureComponent {
 }
 
 AddReview.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    avatarUrl: PropTypes.string.isRequired,
+  }),
   movieCard: PropTypes.shape({
     background: PropTypes.string,
     date: PropTypes.number,
@@ -162,6 +170,7 @@ AddReview.propTypes = {
   onReviewSubmit: PropTypes.func.isRequired,
   isDataSending: PropTypes.bool.isRequired,
   isErrorLoading: PropTypes.bool.isRequired,
+  movieCardId: PropTypes.number.isRequired,
 };
 
 export default AddReview;

@@ -14,6 +14,7 @@ export const moviesCards = [
     stars: [`Rami Malek`, `Lucy Boynton`, `Gwilym Lee`],
     duration: 167,
     preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    isFavorite: false,
   },
   {
     id: 2,
@@ -30,5 +31,6 @@ export const moviesCards = [
     stars: [`Eddie Redmayne`, `Katherine Waterston`, `Dan Fogler`],
     duration: 90,
     preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    isFavorite: false,
   },
 ];

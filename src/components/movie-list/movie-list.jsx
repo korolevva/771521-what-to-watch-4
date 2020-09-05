@@ -4,14 +4,11 @@ import PropTypes from "prop-types";
 import MovieCardPreview from "../movie-card-preview/movie-card-preview.jsx";
 import ShowMore from "../show-more/show-more.jsx";
 import {increaseDisplayedMoviesCount} from "../../actions/movieCardAction.js";
-
 import withPlayer from "../../hocs/with-player/with-player.js";
-import {getMoviesCardsByGenre} from "../../reducers/genre/selectors.js";
-import {getDisplayedMoviesCards} from "../../reducers/movie-card/selectors.js";
 
 const MovieCardPreviewWithPlayer = withPlayer(MovieCardPreview);
 
-const MovieList = ({moviesCards, displayedMoviesCards, onShowMoreButtonClick, onCardTitleClick, onCardClick}) => {
+const MovieList = ({displayedMoviesCards, moviesCards, onShowMoreButtonClick}) => {
 
   const moviesCardsList = moviesCards
   .slice(0, displayedMoviesCards)
@@ -20,8 +17,6 @@ const MovieList = ({moviesCards, displayedMoviesCards, onShowMoreButtonClick, on
       key={`${card.id}`}
       card={card}
       moviesCards={moviesCards}
-      onCardTitleClick={onCardTitleClick}
-      onCardClick={onCardClick}
       resetTimeStamp={true}
       muted={true}
       width="280"
@@ -44,13 +39,6 @@ const MovieList = ({moviesCards, displayedMoviesCards, onShowMoreButtonClick, on
   );
 };
 
-
-const mapStateToProps = (store) => ({
-  moviesCards: getMoviesCardsByGenre(store),
-  displayedMoviesCards: getDisplayedMoviesCards(store),
-});
-
-
 const mapDispatchToProps = (dispatch) => ({
   onShowMoreButtonClick() {
     dispatch(increaseDisplayedMoviesCount());
@@ -61,8 +49,6 @@ MovieList.propTypes = {
   moviesCards: PropTypes.array.isRequired,
   displayedMoviesCards: PropTypes.number.isRequired,
   onShowMoreButtonClick: PropTypes.func.isRequired,
-  onCardTitleClick: PropTypes.func.isRequired,
-  onCardClick: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MovieList);
+export default connect(null, mapDispatchToProps)(MovieList);

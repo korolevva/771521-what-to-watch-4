@@ -7,6 +7,9 @@ import TabReviews from "../tab-reviews/tab-reviews.jsx";
 import SimilarMovies from "../similar-movies/similar-movies.jsx";
 import {AuthorizationStatus} from "../../reducers/user/user.js";
 import Header from "../header/header.jsx";
+import {Link} from "react-router-dom";
+import {AppRoute} from "../../const.js";
+import AddMyListButton from "../add-my-list-button/add-my-list-button.jsx";
 
 const MAX_MOVIES_COUNT = 4;
 
@@ -21,22 +24,24 @@ const tabs = Object.values(Tab);
 class MovieCard extends PureComponent {
   constructor(props) {
     super(props);
+    this._filteredMovies = this._filterByGenre(this.props.moviesCards, this.props.movieCard).slice(0, MAX_MOVIES_COUNT);
 
-    this._filteredMovies = this._filterByGenre(this.props.moviesCards, this.props.card).slice(0, MAX_MOVIES_COUNT);
+    const {getMovieCardReviews, movieCard} = this.props;
+    getMovieCardReviews(movieCard);
   }
 
   _renderActiveTab() {
-    const {card, reviews, activeItem} = this.props;
+    const {reviews, activeItem, movieCard} = this.props;
 
     switch (activeItem) {
       case Tab.OVERVIEW:
-        return (<TabOverview card={card} />);
+        return (<TabOverview card={movieCard} />);
       case Tab.DETAILS:
-        return (<TabDetails card={card} />);
+        return (<TabDetails card={movieCard} />);
       case Tab.REVIEWS:
         return (<TabReviews reviews={reviews} />);
       default:
-        return (<TabOverview card={card} />);
+        return (<TabOverview card={movieCard} />);
     }
   }
 
@@ -48,9 +53,16 @@ class MovieCard extends PureComponent {
     return filteredMovies;
   }
 
+  getMovieCardById(moviesCards, id) {
+    return moviesCards.find((movieCard) => {
+      return movieCard.id === id;
+    });
+  }
+
   render() {
-    const {card, activeItem, onCardClick, onCardTitleClick, onItemClick, onPlayButtonClick, authorizationStatus, onSignInClick} = this.props;
-    const {background, title, poster, genre, date} = card;
+    const {activeItem, onItemClick, authorizationStatus, movieCardId, user, movieCard} = this.props;
+    const {id, background, title, poster, genre, date, isFavorite} = movieCard;
+
     return (
       <React.Fragment>
         <section className="movie-card movie-card--full">
@@ -61,8 +73,8 @@ class MovieCard extends PureComponent {
 
             <h1 className="visually-hidden">WTW</h1>
             <Header
+              user={user}
               authorizationStatus={authorizationStatus}
-              onSignInClick={onSignInClick}
             />
 
             <div className="movie-card__wrap">
@@ -74,22 +86,23 @@ class MovieCard extends PureComponent {
                 </p>
 
                 <div className="movie-card__buttons">
-                  <button className="btn btn--play movie-card__button" type="button"
-                    onClick={() => onPlayButtonClick(card)}
+                  <Link className="btn btn--play movie-card__button" type="button"
+                    to={`/films/${movieCardId}${AppRoute.PLAYER}`}
                   >
                     <svg viewBox="0 0 19 19" width="19" height="19">
                       <use xlinkHref="#play-s"></use>
                     </svg>
                     <span>Play</span>
-                  </button>
-                  <button className="btn btn--list movie-card__button" type="button">
-                    <svg viewBox="0 0 19 20" width="19" height="20">
-                      <use xlinkHref="#add"></use>
-                    </svg>
-                    <span>My list</span>
-                  </button>
+                  </Link>
+
+                  <AddMyListButton
+                    isFavorite={isFavorite}
+                    id={id}
+                    authorizationStatus={authorizationStatus}
+                  />
+
                   {authorizationStatus === AuthorizationStatus.AUTH
-                    ? <a href="add-review.html" className="btn movie-card__button">Add review</a>
+                    ? <Link to={`/films/${movieCardId}${AppRoute.REVIEW}`} className="btn movie-card__button">Add review</Link>
                     : ``
                   }
                 </div>
@@ -114,17 +127,15 @@ class MovieCard extends PureComponent {
         <div className="page-content">
           <SimilarMovies
             moviesCards={this._filteredMovies}
-            onCardClick={onCardClick}
-            onCardTitleClick={onCardTitleClick}
           />
 
           <footer className="page-footer">
             <div className="logo">
-              <a href="main.html" className="logo__link logo__link--light">
+              <Link to={AppRoute.ROOT} className="logo__link logo__link--light">
                 <span className="logo__letter logo__letter--1">W</span>
                 <span className="logo__letter logo__letter--2">T</span>
                 <span className="logo__letter logo__letter--3">W</span>
-              </a>
+              </Link>
             </div>
 
             <div className="copyright">
@@ -138,36 +149,62 @@ class MovieCard extends PureComponent {
 }
 
 MovieCard.propTypes = {
-  card: PropTypes.shape({
+  activeItem: PropTypes.string.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
+  getMovieCardReviews: PropTypes.func.isRequired,
+
+  movieCard: PropTypes.shape({
     background: PropTypes.string,
-    title: PropTypes.string,
-    poster: PropTypes.string,
-    genre: PropTypes.string,
     date: PropTypes.number,
     description: PropTypes.string,
     director: PropTypes.string,
-    stars: PropTypes.array,
+    duration: PropTypes.number,
+    genre: PropTypes.string,
+    id: PropTypes.number,
+    imagePreview: PropTypes.string,
+    isFavorite: PropTypes.bool,
+    poster: PropTypes.string,
+    preview: PropTypes.string,
     rating: PropTypes.number,
     ratingCount: PropTypes.number,
-  }).isRequired,
+    stars: PropTypes.arrayOf(PropTypes.string),
+    title: PropTypes.string,
+  }),
 
-  activeItem: PropTypes.string.isRequired,
-  onCardClick: PropTypes.func.isRequired,
-  onCardTitleClick: PropTypes.func.isRequired,
+  movieCardId: PropTypes.number.isRequired,
+  moviesCards: PropTypes.arrayOf(PropTypes.shape({
+    background: PropTypes.string,
+    date: PropTypes.number,
+    description: PropTypes.string,
+    director: PropTypes.string,
+    duration: PropTypes.number,
+    genre: PropTypes.string,
+    id: PropTypes.number,
+    imagePreview: PropTypes.string,
+    isFavorite: PropTypes.bool,
+    poster: PropTypes.string,
+    preview: PropTypes.string,
+    rating: PropTypes.number,
+    ratingCount: PropTypes.number,
+    stars: PropTypes.arrayOf(PropTypes.string),
+    title: PropTypes.string,
+  })),
+
   onItemClick: PropTypes.func.isRequired,
-  onPlayButtonClick: PropTypes.func.isRequired,
-  moviesCards: PropTypes.array.isRequired,
-
   reviews: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     author: PropTypes.string,
     date: PropTypes.string,
-    rating: PropTypes.string,
+    rating: PropTypes.number,
     text: PropTypes.string,
   })).isRequired,
 
-  authorizationStatus: PropTypes.string.isRequired,
-  onSignInClick: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    avatarUrl: PropTypes.string,
+    email: PropTypes.string,
+    id: PropTypes.number,
+    name: PropTypes.string,
+  }).isRequired,
 };
 
 export default MovieCard;
