@@ -13,6 +13,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
   expect(dataReducer(void 0, {})).toEqual({
     movieCard: {},
     moviesCards: [],
+    favoriteMovieCards: [],
     reviews: [],
     isDataSending: false,
     isErrorLoading: false,
@@ -75,7 +76,7 @@ describe(`Data loading work correctly`, () => {
 
     return movieLoader(dispatch, () => {}, api)
           .then(() => {
-            expect(dispatch).toHaveBeenCalledTimes(1);
+            expect(dispatch).toHaveBeenCalledTimes(2);
             expect(dispatch).toHaveBeenCalledWith({
               type: ActionType.LOAD_MOVIE,
               payload: adapterMovie({fake: true}),
@@ -94,7 +95,7 @@ describe(`Data loading work correctly`, () => {
 
     return moviesLoader(dispatch, () => {}, api)
           .then(() => {
-            expect(dispatch).toHaveBeenCalledTimes(1);
+            expect(dispatch).toHaveBeenCalledTimes(2);
             expect(dispatch).toHaveBeenCalledWith({
               type: ActionType.LOAD_MOVIES,
               payload: [adapterMovie({fake: true})],

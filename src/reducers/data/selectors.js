@@ -5,3 +5,4 @@ export const getMoviesCards = (store) => store[NameSpace.DATA].moviesCards;
 export const getReviews = (store) => store[NameSpace.DATA].reviews;
 export const getIsDataSending = (store) => store[NameSpace.DATA].isDataSending;
 export const getIsErrorLoading = (store) => store[NameSpace.DATA].isErrorLoading;
+export const getFavoriteMoviesCards = (store) => store[NameSpace.DATA].favoriteMovieCards;

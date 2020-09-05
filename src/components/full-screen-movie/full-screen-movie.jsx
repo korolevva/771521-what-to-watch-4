@@ -1,15 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
+import history from "../../history.js";
 
 
 const FullScreenMovie = (props) => {
-  const {isPlaying, onPlayButtonClick, onExitButtonClick, onFullScreenButtonClick, getPlaybackProgress, getRestOfTime, children} = props;
+  const {isPlaying, onPlayButtonClick, onFullScreenButtonClick, getPlaybackProgress, getRestOfTime, children} = props;
   return (
     <div className="player">
       {children}
 
       <button type="button" className="player__exit"
-        onClick={onExitButtonClick}
+        onClick={() => history.goBack()}
       >Exit</button>
 
       <div className="player__controls">
@@ -54,7 +55,6 @@ const FullScreenMovie = (props) => {
 FullScreenMovie.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
   onPlayButtonClick: PropTypes.func.isRequired,
-  onExitButtonClick: PropTypes.func.isRequired,
   onFullScreenButtonClick: PropTypes.func.isRequired,
   getPlaybackProgress: PropTypes.func.isRequired,
   getRestOfTime: PropTypes.func.isRequired,

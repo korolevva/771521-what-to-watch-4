@@ -4,7 +4,7 @@ import MovieCardPreview from "../movie-card-preview/movie-card-preview.jsx";
 import withPlayer from "../../hocs/with-player/with-player.js";
 const MovieCardPreviewWithPlayer = withPlayer(MovieCardPreview);
 
-const SimilarMovies = ({moviesCards, onCardClick, onCardTitleClick}) => {
+const SimilarMovies = ({moviesCards}) => {
   return (
     <section className="catalog catalog--like-this">
       <h2 className="catalog__title">More like this</h2>
@@ -14,8 +14,6 @@ const SimilarMovies = ({moviesCards, onCardClick, onCardTitleClick}) => {
             key={`${card.id}`}
             card={card}
             moviesCards={moviesCards}
-            onCardTitleClick={onCardTitleClick}
-            onCardClick={onCardClick}
             resetTimeStamp={true}
             muted={true}
             width="280"
@@ -29,13 +27,10 @@ const SimilarMovies = ({moviesCards, onCardClick, onCardTitleClick}) => {
       </div>
     </section>
   );
-
 };
 
 SimilarMovies.propTypes = {
   moviesCards: PropTypes.array.isRequired,
-  onCardClick: PropTypes.func.isRequired,
-  onCardTitleClick: PropTypes.func.isRequired,
 };
 
 export default SimilarMovies;

@@ -7,6 +7,7 @@ import {Provider} from "react-redux";
 import NameSpace from "../../reducers/name-space.js";
 import {Router} from "react-router-dom";
 import history from "../../history.js";
+import user from "../../mocks/user.js";
 
 export const promoMovie = {
   background: `img/bg-the-grand-budapest-hotel.jpg`,
@@ -36,6 +37,7 @@ const store = mockStore({
     movieCard: moviesCards[0],
     moviesCards,
   },
+  [NameSpace.USER]: {user},
 });
 
 it(`Render Main`, () => {
@@ -45,16 +47,15 @@ it(`Render Main`, () => {
         history={history}
       >
         <Main
+          user={user}
           promoMovie={promoMovie}
           moviesCards={moviesCards}
-          onCardTitleClick={() => {}}
-          onCardClick={() => {}}
           onPlayButtonClick={() => {}}
           authorizationStatus={`NO_AUTH`}
-          onSignInClick={() => {}}
+          moviesCardsByGenre={moviesCards}
+          displayedMoviesCards={8}
         />
       </Router>
-
     </Provider>,
     {
       createNodeMock: () => {

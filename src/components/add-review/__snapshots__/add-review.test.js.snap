@@ -11,7 +11,7 @@ exports[`Render AddReview 1`] = `
       className="movie-card__bg"
     >
       <img
-        alt="The Grand Budapest Hotel"
+        alt="Bohemian Rhapsody"
         src="img/bg-the-grand-budapest-hotel.jpg"
       />
     </div>
@@ -28,7 +28,8 @@ exports[`Render AddReview 1`] = `
       >
         <a
           className="logo__link"
-          href="main.html"
+          href="/"
+          onClick={[Function]}
         >
           <span
             className="logo__letter logo__letter--1"
@@ -58,7 +59,8 @@ exports[`Render AddReview 1`] = `
           >
             <a
               className="breadcrumbs__link"
-              href="movie-page.html"
+              href="/film/1"
+              onClick={[Function]}
             >
               Bohemian Rhapsody
             </a>
@@ -68,6 +70,8 @@ exports[`Render AddReview 1`] = `
           >
             <a
               className="breadcrumbs__link"
+              href="/films/1/review"
+              onClick={[Function]}
             >
               Add review
             </a>
@@ -83,7 +87,7 @@ exports[`Render AddReview 1`] = `
           <img
             alt="User avatar"
             height="63"
-            src="img/avatar.jpg"
+            src="mock/user"
             width="63"
           />
         </div>
@@ -93,9 +97,9 @@ exports[`Render AddReview 1`] = `
       className="movie-card__poster movie-card__poster--small"
     >
       <img
-        alt="The Grand Budapest Hotel poster"
+        alt="Bohemian Rhapsody poster"
         height="327"
-        src="img/the-grand-budapest-hotel-poster.jpg"
+        src="https://placeimg.com/270/410/arch/grayscale"
         width="218"
       />
     </div>

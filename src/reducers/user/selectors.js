@@ -11,3 +11,7 @@ export const getIsSingInSelected = (store) => {
 export const getIsErrorAuth = (store) => {
   return store[NameSpace.USER].isErrorAuth;
 };
+
+export const getUserInfo = (state) => {
+  return state[NameSpace.USER].userInfo;
+};

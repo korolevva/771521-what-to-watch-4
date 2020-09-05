@@ -49,8 +49,6 @@ const mapStateToProps = (store) => ({
 const mapDispatchToProps = (dispatch) => ({
   onGenreClick(genre) {
     dispatch(setCurrentGenre(genre));
-    // const filteredMovies = filterByGenre(genre, movies);
-    // dispatch(setFiltredByGenre(filteredMovies));
     dispatch(resetDisplayedMoviesCount());
   },
 });

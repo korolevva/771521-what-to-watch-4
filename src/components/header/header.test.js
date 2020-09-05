@@ -3,6 +3,7 @@ import renderer from 'react-test-renderer';
 import Header from './header.jsx';
 import {Router} from "react-router-dom";
 import history from "../../history.js";
+import user from "../../mocks/user.js";
 
 describe(`Render Header`, () => {
   it(`Render MovieCard with avatar`, () => {
@@ -12,7 +13,7 @@ describe(`Render Header`, () => {
         >
           <Header
             authorizationStatus={`AUTH`}
-            onSignInClick={() => { }}
+            user={user}
           />
         </Router>,
         {
@@ -31,7 +32,7 @@ describe(`Render Header`, () => {
         >
           <Header
             authorizationStatus={`NO_AUTH`}
-            onSignInClick={() => { }}
+            user={user}
           />,
         </Router>,
         {

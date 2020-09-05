@@ -14,7 +14,7 @@ const TabReviews = ({reviews}) => {
       return (
         <div key={id} className="review">
           <blockquote className="review__quote">
-            <p className="review__text" >{comment}</p>
+            <p className="review__text" style={{wordBreak: `break-all`}}>{comment}</p>
 
             <footer className="review__details">
               <cite className="review__author">{user.name}</cite>

@@ -4,7 +4,7 @@ import {AuthorizationStatus} from "../../reducers/user/user";
 import {Link} from "react-router-dom";
 import {AppRoute} from '../../const.js';
 
-const Header = ({authorizationStatus}) => {
+const Header = ({authorizationStatus, user}) => {
   return (
     <Fragment>
       <header className="page-header movie-card__head">
@@ -21,7 +21,7 @@ const Header = ({authorizationStatus}) => {
           <div className="user-block">
             <Link to={AppRoute.MY_LIST}>
               <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+                <img src={user.avatarUrl} alt="User avatar" width="63" height="63" />
               </div>
             </Link>
           </div>
@@ -37,6 +37,12 @@ const Header = ({authorizationStatus}) => {
 
 Header.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
+  user: PropTypes.shape({
+    avatarUrl: PropTypes.string,
+    email: PropTypes.string,
+    id: PropTypes.number,
+    name: PropTypes.string,
+  }).isRequired,
 };
 
 export default Header;

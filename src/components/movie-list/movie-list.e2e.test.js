@@ -5,6 +5,8 @@ import MovieList from "./movie-list.jsx";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import NameSpace from "../../reducers/name-space.js";
+import {Router} from "react-router-dom";
+import history from "../../history.js";
 
 const renderIgnoringUnstableFlushDiscreteUpdates = (component) => {
   /* eslint-disable no-console */
@@ -189,13 +191,15 @@ describe(`MovieList`, () => {
 
     const component = renderIgnoringUnstableFlushDiscreteUpdates(
         <Provider store={store}>
-          <MovieList
-            moviesCards={moviesCards}
-            displayedMoviesCards={store.displayedMoviesCards}
-            onShowMoreButtonClick={() => {}}
-            onCardTitleClick={() => {}}
-            onCardClick={() => {}}
-          />
+          <Router
+            history={history}
+          >
+            <MovieList
+              moviesCards={moviesCards}
+              displayedMoviesCards={8}
+              onShowMoreButtonClick={() => {}}
+            />
+          </Router>
         </Provider>
     );
 
@@ -333,13 +337,15 @@ describe(`MovieList`, () => {
 
     const component = renderIgnoringUnstableFlushDiscreteUpdates(
         <Provider store={store}>
-          <MovieList
-            moviesCards={moviesCards}
-            displayedMoviesCards={store.displayedMoviesCards}
-            onShowMoreButtonClick={() => {}}
-            onCardTitleClick={() => {}}
-            onCardClick={() => {}}
-          />
+          <Router
+            history={history}
+          >
+            <MovieList
+              moviesCards={moviesCards}
+              displayedMoviesCards={8}
+              onShowMoreButtonClick={() => {}}
+            />
+          </Router>
         </Provider>
     );
 

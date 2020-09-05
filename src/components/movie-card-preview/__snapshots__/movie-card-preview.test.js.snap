@@ -3,21 +3,25 @@
 exports[`Render MovieCardPreview 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
-  onClick={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
 >
-  <div
-    className="small-movie-card__image"
+  <a
+    href="/film/1"
+    onClick={[Function]}
   >
-    <video />
-  </div>
+    <div
+      className="small-movie-card__image"
+    >
+      <video />
+    </div>
+  </a>
   <h3
     className="small-movie-card__title"
   >
     <a
       className="small-movie-card__link"
-      href="movie-page.html"
+      href="/film/1"
       onClick={[Function]}
     >
       Bohemian Rhapsody

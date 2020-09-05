@@ -1,27 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {AppRoute} from '../../const.js';
+import {Link} from "react-router-dom";
 
-const MovieCardPreview = ({card, onMouseEnter, onMouseLeave, onCardClick, onCardTitleClick, children}) => {
+const MovieCardPreview = ({card, onMouseEnter, onMouseLeave, children}) => {
   return (
     <article
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      onClick={() => onCardClick(card)}
       className="small-movie-card catalog__movies-card">
-
-      <div className="small-movie-card__image">
-        {children}
-      </div>
-
+      <Link to={`${AppRoute.MOVIE_CARD}/${card.id}`}>
+        <div className="small-movie-card__image">
+          {children}
+        </div>
+      </Link>
       <h3 className="small-movie-card__title">
-        <a
+        <Link to={`${AppRoute.MOVIE_CARD}/${card.id}`}
           className="small-movie-card__link"
-          href="movie-page.html"
-          onClick={(evt) => {
-            evt.preventDefault();
-            onCardTitleClick(card);
-          }}
-        >{card.title}</a>
+        >
+          {card.title}
+        </Link>
       </h3>
     </article>
   );
@@ -36,8 +34,6 @@ MovieCardPreview.propTypes = {
   }).isRequired,
   onMouseEnter: PropTypes.func.isRequired,
   onMouseLeave: PropTypes.func.isRequired,
-  onCardClick: PropTypes.func.isRequired,
-  onCardTitleClick: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
 };
 

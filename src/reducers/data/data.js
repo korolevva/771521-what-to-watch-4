@@ -3,6 +3,7 @@ import {ActionType} from "../../const.js";
 const initialState = {
   movieCard: {},
   moviesCards: [],
+  favoriteMovieCards: [],
   reviews: [],
   isDataSending: false,
   isErrorLoading: false,
@@ -29,6 +30,10 @@ export const dataReducer = (state = initialState, action) => {
     case ActionType.CHECK_IS_ERROR_LOADING:
       return Object.assign({}, state, {
         isErrorLoading: action.payload,
+      });
+    case ActionType.LOAD_FAVORITE_MOVIES:
+      return Object.assign({}, state, {
+        favoriteMovieCards: action.payload,
       });
     default:
       return state;

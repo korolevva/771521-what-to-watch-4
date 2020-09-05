@@ -15,6 +15,11 @@ exports[`Render TabReviews 1`] = `
       >
         <p
           className="review__text"
+          style={
+            Object {
+              "wordBreak": "break-all",
+            }
+          }
         >
           Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years
         </p>
@@ -52,6 +57,11 @@ exports[`Render TabReviews 1`] = `
       >
         <p
           className="review__text"
+          style={
+            Object {
+              "wordBreak": "break-all",
+            }
+          }
         >
           Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years
         </p>
