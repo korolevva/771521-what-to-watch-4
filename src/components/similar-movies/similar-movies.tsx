@@ -1,7 +1,7 @@
-import React from "react";
+import * as React from "react";
 import PropTypes from "prop-types";
-import MovieCardPreview from "../movie-card-preview/movie-card-preview.jsx";
-import withPlayer from "../../hocs/with-player/with-player.js";
+import MovieCardPreview from "../movie-card-preview/movie-card-preview";
+import withPlayer from "../../hocs/with-player/with-player";
 const MovieCardPreviewWithPlayer = withPlayer(MovieCardPreview);
 
 const SimilarMovies = ({moviesCards}) => {

@@ -1,15 +1,15 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import Tabs from "../tabs/tabs.jsx";
-import TabOverview from "../tab-overview/tab-overview.jsx";
-import TabDetails from "../tab-details/tab-details.jsx";
-import TabReviews from "../tab-reviews/tab-reviews.jsx";
-import SimilarMovies from "../similar-movies/similar-movies.jsx";
-import {AuthorizationStatus} from "../../reducers/user/user.js";
-import Header from "../header/header.jsx";
+import Tabs from "../tabs/tabs";
+import TabOverview from "../tab-overview/tab-overview";
+import TabDetails from "../tab-details/tab-details";
+import TabReviews from "../tab-reviews/tab-reviews";
+import SimilarMovies from "../similar-movies/similar-movies";
+import {AuthorizationStatus} from "../../reducers/user/user";
+import Header from "../header/header";
 import {Link} from "react-router-dom";
-import {AppRoute} from "../../const.js";
-import AddMyListButton from "../add-my-list-button/add-my-list-button.jsx";
+import {AppRoute} from "../../const";
+import AddMyListButton from "../add-my-list-button/add-my-list-button";
 
 const MAX_MOVIES_COUNT = 4;
 

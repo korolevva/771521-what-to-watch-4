@@ -1,6 +1,6 @@
-import React from "react";
+import * as React from "react";
 import PropTypes from "prop-types";
-import history from "../../history.js";
+import history from "../../history";
 
 
 const FullScreenMovie = (props) => {

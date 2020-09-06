@@ -1,4 +1,5 @@
-import React, {PureComponent, createRef} from "react";
+import * as React from "react";
+import {PureComponent, createRef} from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const";

@@ -1,8 +1,9 @@
-import React, {Fragment} from "react";
+import * as React from "react";
+import {Fragment} from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const";
-import MovieList from "../movie-list/movie-list.jsx";
+import MovieList from "../movie-list/movie-list";
 import {connect} from "react-redux";
 import {getFavoriteMoviesCards} from "../../reducers/data/selectors";
 

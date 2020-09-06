@@ -1,6 +1,6 @@
-import React from "react";
+import * as React from "react";
 import PropTypes from "prop-types";
-import {numericScoreToTextScore} from "./utils.js";
+import {numericScoreToTextScore} from "./utils";
 
 const TabOverview = ({card}) => {
   const {rating, ratingCount, description, director, stars} = card;

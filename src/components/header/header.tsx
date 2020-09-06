@@ -1,8 +1,9 @@
-import React, {Fragment} from "react";
+import * as React from "react";
+import {Fragment} from "react";
 import PropTypes from "prop-types";
 import {AuthorizationStatus} from "../../reducers/user/user";
 import {Link} from "react-router-dom";
-import {AppRoute} from '../../const.js';
+import {AppRoute} from '../../const';
 
 const Header = ({authorizationStatus, user}) => {
   return (

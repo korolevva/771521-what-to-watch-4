@@ -1,6 +1,6 @@
-import React from "react";
+import * as React from "react";
 import PropTypes from "prop-types";
-import {formatDuration} from "./utils.js";
+import {formatDuration} from "./utils";
 
 const TabOverview = ({card}) => {
   const {director, stars, duration, genre, date} = card;

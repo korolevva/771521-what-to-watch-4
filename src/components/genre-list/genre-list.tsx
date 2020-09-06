@@ -1,8 +1,8 @@
-import React from "react";
+import * as React from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {setCurrentGenre} from "../../actions/genreActions";
-import {resetDisplayedMoviesCount} from "../../actions/movieCardAction.js";
+import {resetDisplayedMoviesCount} from "../../actions/movieCardAction";
 import {ALL_GENRES} from "../../const";
 import {getCurrentGenre} from "../../reducers/genre/selectors";
 import {getMoviesCards} from "../../reducers/data/selectors";

@@ -1,11 +1,11 @@
-import React from "react";
-import MovieList from "../movie-list/movie-list.jsx";
+import * as React from "react";
+import MovieList from "../movie-list/movie-list";
 import PropTypes from "prop-types";
-import GenreList from "../genre-list/genre-list.jsx";
-import Header from "../header/header.jsx";
+import GenreList from "../genre-list/genre-list";
+import Header from "../header/header";
 import {Link} from "react-router-dom";
-import {AppRoute} from "../../const.js";
-import AddMyListButton from "../add-my-list-button/add-my-list-button.jsx";
+import {AppRoute} from "../../const";
+import AddMyListButton from "../add-my-list-button/add-my-list-button";
 
 const Main = ({authorizationStatus, promoMovie, user, moviesCardsByGenre, displayedMoviesCards}) => {
   const {id = 1, background, poster, title, genre, date, isFavorite = false} = promoMovie;

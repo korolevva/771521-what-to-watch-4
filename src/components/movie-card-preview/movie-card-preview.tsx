@@ -1,6 +1,6 @@
-import React from "react";
+import * as React from "react";
 import PropTypes from "prop-types";
-import {AppRoute} from '../../const.js';
+import {AppRoute} from '../../const';
 import {Link} from "react-router-dom";
 
 const MovieCardPreview = ({card, onMouseEnter, onMouseLeave, children}) => {
