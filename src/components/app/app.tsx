@@ -1,8 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 import {connect} from "react-redux";
 import {Switch, Route, Router, Redirect} from "react-router-dom";
 import Main from "../main/main.jsx";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import {getMoviesCards, getMovieCard, getReviews, getIsDataSending, getIsErrorLoading} from '../../reducers/data/selectors.js';
 import {getAuthorizationStatus, getIsErrorAuth, getUserInfo} from '../../reducers/user/selectors.js';
 import SignIn from "../sign-in/sign-in.jsx";
@@ -149,83 +149,83 @@ const App = (props) => {
   );
 };
 
-App.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  isErrorAuth: PropTypes.bool.isRequired,
-  login: PropTypes.func.isRequired,
-  moviesCards: PropTypes.arrayOf(PropTypes.shape({
-    background: PropTypes.string,
-    date: PropTypes.number,
-    description: PropTypes.string,
-    director: PropTypes.string,
-    duration: PropTypes.number,
-    genre: PropTypes.string,
-    id: PropTypes.number,
-    imagePreview: PropTypes.string,
-    isFavorite: PropTypes.bool,
-    poster: PropTypes.string,
-    preview: PropTypes.string,
-    rating: PropTypes.number,
-    ratingCount: PropTypes.number,
-    stars: PropTypes.arrayOf(PropTypes.string),
-    title: PropTypes.string,
-  })),
-  promoMovie: PropTypes.shape({
-    background: PropTypes.string,
-    date: PropTypes.number,
-    description: PropTypes.string,
-    director: PropTypes.string,
-    duration: PropTypes.number,
-    genre: PropTypes.string,
-    id: PropTypes.number,
-    imagePreview: PropTypes.string,
-    isFavorite: PropTypes.bool,
-    poster: PropTypes.string,
-    preview: PropTypes.string,
-    rating: PropTypes.number,
-    ratingCount: PropTypes.number,
-    stars: PropTypes.arrayOf(PropTypes.string),
-    title: PropTypes.string,
-  }),
-  isDataSending: PropTypes.bool.isRequired,
-  isErrorLoading: PropTypes.bool.isRequired,
-  reviewSubmitHandler: PropTypes.func.isRequired,
-  reviews: PropTypes.arrayOf(PropTypes.shape({
-    comment: PropTypes.string,
-    date: PropTypes.string,
-    id: PropTypes.number,
-    rating: PropTypes.number,
-    user: PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-    })
-  })),
-  getMovieCardReviews: PropTypes.func.isRequired,
-  user: PropTypes.shape({
-    avatarUrl: PropTypes.string,
-    email: PropTypes.string,
-    id: PropTypes.number,
-    name: PropTypes.string,
-  }).isRequired,
-  moviesCardsByGenre: PropTypes.arrayOf(PropTypes.shape({
-    background: PropTypes.string,
-    date: PropTypes.number,
-    description: PropTypes.string,
-    director: PropTypes.string,
-    duration: PropTypes.number,
-    genre: PropTypes.string,
-    id: PropTypes.number,
-    imagePreview: PropTypes.string,
-    isFavorite: PropTypes.bool,
-    poster: PropTypes.string,
-    preview: PropTypes.string,
-    rating: PropTypes.number,
-    ratingCount: PropTypes.number,
-    stars: PropTypes.arrayOf(PropTypes.string),
-    title: PropTypes.string,
-  })).isRequired,
-  displayedMoviesCards: PropTypes.number.isRequired,
-};
+// App.propTypes = {
+//   authorizationStatus: PropTypes.string.isRequired,
+//   isErrorAuth: PropTypes.bool.isRequired,
+//   login: PropTypes.func.isRequired,
+//   moviesCards: PropTypes.arrayOf(PropTypes.shape({
+//     background: PropTypes.string,
+//     date: PropTypes.number,
+//     description: PropTypes.string,
+//     director: PropTypes.string,
+//     duration: PropTypes.number,
+//     genre: PropTypes.string,
+//     id: PropTypes.number,
+//     imagePreview: PropTypes.string,
+//     isFavorite: PropTypes.bool,
+//     poster: PropTypes.string,
+//     preview: PropTypes.string,
+//     rating: PropTypes.number,
+//     ratingCount: PropTypes.number,
+//     stars: PropTypes.arrayOf(PropTypes.string),
+//     title: PropTypes.string,
+//   })),
+//   promoMovie: PropTypes.shape({
+//     background: PropTypes.string,
+//     date: PropTypes.number,
+//     description: PropTypes.string,
+//     director: PropTypes.string,
+//     duration: PropTypes.number,
+//     genre: PropTypes.string,
+//     id: PropTypes.number,
+//     imagePreview: PropTypes.string,
+//     isFavorite: PropTypes.bool,
+//     poster: PropTypes.string,
+//     preview: PropTypes.string,
+//     rating: PropTypes.number,
+//     ratingCount: PropTypes.number,
+//     stars: PropTypes.arrayOf(PropTypes.string),
+//     title: PropTypes.string,
+//   }),
+//   isDataSending: PropTypes.bool.isRequired,
+//   isErrorLoading: PropTypes.bool.isRequired,
+//   reviewSubmitHandler: PropTypes.func.isRequired,
+//   reviews: PropTypes.arrayOf(PropTypes.shape({
+//     comment: PropTypes.string,
+//     date: PropTypes.string,
+//     id: PropTypes.number,
+//     rating: PropTypes.number,
+//     user: PropTypes.shape({
+//       id: PropTypes.number,
+//       name: PropTypes.string,
+//     })
+//   })),
+//   getMovieCardReviews: PropTypes.func.isRequired,
+//   user: PropTypes.shape({
+//     avatarUrl: PropTypes.string,
+//     email: PropTypes.string,
+//     id: PropTypes.number,
+//     name: PropTypes.string,
+//   }).isRequired,
+//   moviesCardsByGenre: PropTypes.arrayOf(PropTypes.shape({
+//     background: PropTypes.string,
+//     date: PropTypes.number,
+//     description: PropTypes.string,
+//     director: PropTypes.string,
+//     duration: PropTypes.number,
+//     genre: PropTypes.string,
+//     id: PropTypes.number,
+//     imagePreview: PropTypes.string,
+//     isFavorite: PropTypes.bool,
+//     poster: PropTypes.string,
+//     preview: PropTypes.string,
+//     rating: PropTypes.number,
+//     ratingCount: PropTypes.number,
+//     stars: PropTypes.arrayOf(PropTypes.string),
+//     title: PropTypes.string,
+//   })).isRequired,
+//   displayedMoviesCards: PropTypes.number.isRequired,
+// };
 
 
 function mapStateToProps(store) {
