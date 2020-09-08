@@ -13,7 +13,7 @@ interface Props {
   favoriteMovieCards: Array<Movie>,
 }
 
-const MyList: React.FunctionComponent<Props> = ({user, displayedMoviesCards, favoriteMovieCards}) => {
+const MyList: React.FunctionComponent<Props> = ({user, displayedMoviesCards, favoriteMovieCards}:Props) => {
   return (
     <Fragment>
       <div className="user-page">

@@ -4,7 +4,7 @@ interface Props {
   onShowMoreButtonClick: () => void,
 }
 
-const ShowMore: React.FunctionComponent<Props> = ({onShowMoreButtonClick}) => {
+const ShowMore: React.FunctionComponent<Props> = ({onShowMoreButtonClick}:Props) => {
   return (
     <div className="catalog__more">
       <button className="catalog__button" type="button"

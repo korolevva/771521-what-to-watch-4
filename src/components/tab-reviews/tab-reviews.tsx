@@ -6,8 +6,7 @@ interface Props {
   reviews: Array<Review>,
 }
 
-
-const TabReviews = ({reviews}) => {
+const TabReviews: React.FunctionComponent<Props> = ({reviews}:Props) => {
   const separatingIndex = Math.ceil(reviews.length / 2);
   const leftColumnReviews = reviews.slice(0, separatingIndex);
   const rightColumnReviews = reviews.slice(separatingIndex, reviews.length);

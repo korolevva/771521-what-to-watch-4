@@ -14,7 +14,7 @@ interface Props {
   onShowMoreButtonClick: () => void,
 }
 
-const MovieList: React.FunctionComponent<Props> = ({displayedMoviesCards, moviesCards, onShowMoreButtonClick}) => {
+const MovieList: React.FunctionComponent<Props> = ({displayedMoviesCards, moviesCards, onShowMoreButtonClick}:Props) => {
 
   const moviesCardsList = moviesCards
   .slice(0, displayedMoviesCards)

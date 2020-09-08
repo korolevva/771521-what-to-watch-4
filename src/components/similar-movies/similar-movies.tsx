@@ -9,7 +9,7 @@ interface Props {
   moviesCards: Array<Movie>,
 }
 
-const SimilarMovies: React.FunctionComponent<Props> = ({moviesCards}) => {
+const SimilarMovies: React.FunctionComponent<Props> = ({moviesCards}:Props) => {
   return (
     <section className="catalog catalog--like-this">
       <h2 className="catalog__title">More like this</h2>

@@ -6,7 +6,7 @@
   "scripts": {
     "eslint": "npm run eslint.js & npm run eslint.ts",
     "eslint.js": "eslint --ext .jsx --ext .js src/",
-    "eslint.ts": "eslint --ext .tsx src/ --config .eslintrc-ts.yml",
+    "eslint.ts": "eslint --config .eslintrc-ts.yml --ext .tsx src/",
     "test": "npm run eslint && npm run test.jest",
     "test.jest": "jest",
     "build": "webpack --mode production",
@@ -47,7 +47,6 @@
     "axios": "0.19.2",
     "history": "^4.10.1",
     "moment": "2.27.0",
-    "prop-types": "15.7.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-redux": "7.2.1",

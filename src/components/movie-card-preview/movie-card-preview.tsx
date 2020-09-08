@@ -10,7 +10,7 @@ interface Props {
   children: React.ReactNode,
 }
 
-const MovieCardPreview: React.FunctionComponent<Props> = ({card, onMouseEnter, onMouseLeave, children}) => {
+const MovieCardPreview: React.FunctionComponent<Props> = ({card, onMouseEnter, onMouseLeave, children}:Props) => {
   return (
     <article
       onMouseEnter={onMouseEnter}

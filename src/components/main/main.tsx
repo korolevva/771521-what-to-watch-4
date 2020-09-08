@@ -15,7 +15,7 @@ interface Props {
   displayedMoviesCards: number,
 }
 
-const Main: React.FunctionComponent<Props> = ({authorizationStatus, promoMovie, user, moviesCardsByGenre, displayedMoviesCards}) => {
+const Main: React.FunctionComponent<Props> = ({authorizationStatus, promoMovie, user, moviesCardsByGenre, displayedMoviesCards}:Props) => {
   const {id = 1, background, poster, title, genre, date, isFavorite = false} = promoMovie;
   return (
     <React.Fragment>

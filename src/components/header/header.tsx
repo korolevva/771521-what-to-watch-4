@@ -10,7 +10,7 @@ interface Props {
   user: User;
 }
 
-const Header: React.FunctionComponent<Props> = ({authorizationStatus, user}) => {
+const Header: React.FunctionComponent<Props> = ({authorizationStatus, user}:Props) => {
   return (
     <Fragment>
       <header className="page-header movie-card__head">

@@ -6,7 +6,7 @@ interface Props {
   card: Movie,
 }
 
-const TabOverview: React.FunctionComponent<Props> = ({card}) => {
+const TabOverview: React.FunctionComponent<Props> = ({card}:Props) => {
   const {director, stars, duration, genre, date} = card;
   return (
     <div className="movie-card__text movie-card__row">

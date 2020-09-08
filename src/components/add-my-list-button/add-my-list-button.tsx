@@ -12,7 +12,7 @@ interface Props {
   onFavoriteButtonClick: (id: number, isFavorite: boolean) => void,
 }
 
-const AddMyListButton: React.FunctionComponent<Props> = ({id, isFavorite, authorizationStatus, onFavoriteButtonClick}) => {
+const AddMyListButton: React.FunctionComponent<Props> = ({id, isFavorite, authorizationStatus, onFavoriteButtonClick}:Props) => {
   const handleFavoriteButtonClick = () => {
     return authorizationStatus === AuthorizationStatus.AUTH
       ? onFavoriteButtonClick(id, isFavorite)

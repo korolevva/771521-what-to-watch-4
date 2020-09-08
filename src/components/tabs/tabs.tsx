@@ -6,7 +6,7 @@ interface Props {
   onTabClick: (tab: string) => void,
 }
 
-const Tabs = ({tabs, activeTab, onTabClick}) => {
+const Tabs: React.FunctionComponent<Props> = ({tabs, activeTab, onTabClick}:Props) => {
   return (
     <nav className="movie-nav movie-card__nav">
       <ul className="movie-nav__list">

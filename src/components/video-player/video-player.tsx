@@ -12,7 +12,7 @@ interface Props {
   className: string,
 }
 
-type Ref = HTMLVideoElement
+// type Ref = HTMLVideoElement
 
 const VideoPlayer = React.forwardRef((props: Props, ref: React.RefObject<HTMLVideoElement>) => {
   const {card, width, height, poster, muted, controls, autoPlay, className} = props;

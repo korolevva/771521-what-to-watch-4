@@ -1,5 +1,4 @@
 import * as React from "react";
-import {PureComponent} from "react";
 import {Subtract} from "utility-types";
 
 interface State {

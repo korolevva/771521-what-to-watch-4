@@ -18,7 +18,7 @@ const generateGenres = (movies: Array<Movie>): Array<string> => {
   return [ALL_GENRES, ...genres];
 };
 
-const GenreList: React.FunctionComponent<Props> = ({currentGenre, moviesCards, onGenreClick}) => {
+const GenreList: React.FunctionComponent<Props> = ({currentGenre, moviesCards, onGenreClick}:Props) => {
   const genres = generateGenres(moviesCards);
 
   return (
