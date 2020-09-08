@@ -1,18 +1,24 @@
 import * as React from "react";
 import {connect} from "react-redux";
-import PropTypes from "prop-types";
 import {setCurrentGenre} from "../../actions/genreActions";
 import {resetDisplayedMoviesCount} from "../../actions/movieCardAction";
 import {ALL_GENRES} from "../../const";
 import {getCurrentGenre} from "../../reducers/genre/selectors";
 import {getMoviesCards} from "../../reducers/data/selectors";
+import {Movie} from "../../types";
 
-const generateGenres = (movies) => {
+interface Props {
+  currentGenre: string,
+  moviesCards: Array<Movie>,
+  onGenreClick: (genre: string) => void,
+}
+
+const generateGenres = (movies: Array<Movie>): Array<string> => {
   const genres = new Set(movies.map((movie) => movie.genre));
   return [ALL_GENRES, ...genres];
 };
 
-const GenreList = ({currentGenre, moviesCards, onGenreClick}) => {
+const GenreList: React.FunctionComponent<Props> = ({currentGenre, moviesCards, onGenreClick}) => {
   const genres = generateGenres(moviesCards);
 
   return (
@@ -27,7 +33,7 @@ const GenreList = ({currentGenre, moviesCards, onGenreClick}) => {
                   className="catalog__genres-link"
                   onClick={(evt) => {
                     evt.preventDefault();
-                    onGenreClick(movieGenre, moviesCards);
+                    onGenreClick(movieGenre);
                   }}
                 >
                   {movieGenre}
@@ -52,12 +58,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(resetDisplayedMoviesCount());
   },
 });
-
-GenreList.propTypes = {
-  currentGenre: PropTypes.string.isRequired,
-  moviesCards: PropTypes.array.isRequired,
-  onGenreClick: PropTypes.func.isRequired,
-};
 
 export {GenreList};
 export default connect(mapStateToProps, mapDispatchToProps)(GenreList);

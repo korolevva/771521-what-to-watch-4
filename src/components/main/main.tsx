@@ -1,13 +1,21 @@
 import * as React from "react";
 import MovieList from "../movie-list/movie-list";
-import PropTypes from "prop-types";
 import GenreList from "../genre-list/genre-list";
 import Header from "../header/header";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const";
 import AddMyListButton from "../add-my-list-button/add-my-list-button";
+import {Movie, User} from "../../types";
 
-const Main = ({authorizationStatus, promoMovie, user, moviesCardsByGenre, displayedMoviesCards}) => {
+interface Props {
+  authorizationStatus: string,
+  promoMovie: Movie,
+  user: User,
+  moviesCardsByGenre: Array<Movie>,
+  displayedMoviesCards: number,
+}
+
+const Main: React.FunctionComponent<Props> = ({authorizationStatus, promoMovie, user, moviesCardsByGenre, displayedMoviesCards}) => {
   const {id = 1, background, poster, title, genre, date, isFavorite = false} = promoMovie;
   return (
     <React.Fragment>
@@ -83,52 +91,6 @@ const Main = ({authorizationStatus, promoMovie, user, moviesCardsByGenre, displa
       </div>
     </React.Fragment >
   );
-};
-
-Main.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  promoMovie: PropTypes.shape({
-    background: PropTypes.string,
-    backgroundColor: PropTypes.string,
-    date: PropTypes.number,
-    description: PropTypes.string,
-    director: PropTypes.string,
-    duration: PropTypes.number,
-    genre: PropTypes.string,
-    id: PropTypes.number,
-    imagePreview: PropTypes.string,
-    isFavorite: PropTypes.bool,
-    poster: PropTypes.string,
-    preview: PropTypes.string,
-    rating: PropTypes.number,
-    ratingCount: PropTypes.number,
-    stars: PropTypes.array,
-    title: PropTypes.string,
-  }),
-  user: PropTypes.shape({
-    avatarUrl: PropTypes.string,
-    email: PropTypes.string,
-    id: PropTypes.number,
-    name: PropTypes.string,
-  }).isRequired,
-  moviesCardsByGenre: PropTypes.arrayOf(PropTypes.shape({
-    background: PropTypes.string,
-    date: PropTypes.number,
-    description: PropTypes.string,
-    director: PropTypes.string,
-    duration: PropTypes.number,
-    genre: PropTypes.string,
-    id: PropTypes.number,
-    imagePreview: PropTypes.string,
-    isFavorite: PropTypes.bool,
-    poster: PropTypes.string,
-    preview: PropTypes.string,
-    rating: PropTypes.number,
-    ratingCount: PropTypes.number,
-    stars: PropTypes.array,
-    title: PropTypes.string,
-  })).isRequired,
-  displayedMoviesCards: PropTypes.number.isRequired,
 };
 
 export default Main;

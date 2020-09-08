@@ -1,6 +1,11 @@
 import * as React from "react";
-import PropTypes from "prop-types";
-import moment from "moment";
+import * as moment from "moment";
+import {Review} from "../../types";
+
+interface Props {
+  reviews: Array<Review>,
+}
+
 
 const TabReviews = ({reviews}) => {
   const separatingIndex = Math.ceil(reviews.length / 2);
@@ -38,16 +43,6 @@ const TabReviews = ({reviews}) => {
       </div>
     </div>
   );
-};
-
-TabReviews.propTypes = {
-  reviews: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-    author: PropTypes.string,
-    date: PropTypes.string,
-    rating: PropTypes.string,
-    text: PropTypes.string,
-  })).isRequired,
 };
 
 export default TabReviews;

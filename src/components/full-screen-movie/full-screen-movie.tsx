@@ -1,9 +1,17 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import history from "../../history";
 
+interface Props {
+  isPlaying: boolean,
+  onPlayButtonClick: () => void,
+  onFullScreenButtonClick: () => void,
+  getPlaybackProgress: () => string,
+  getRestOfTime: () => string,
+  children: React.ReactNode,
+}
 
-const FullScreenMovie = (props) => {
+
+const FullScreenMovie: React.FunctionComponent<Props> = (props: Props) => {
   const {isPlaying, onPlayButtonClick, onFullScreenButtonClick, getPlaybackProgress, getRestOfTime, children} = props;
   return (
     <div className="player">
@@ -50,15 +58,6 @@ const FullScreenMovie = (props) => {
       </div>
     </div>
   );
-};
-
-FullScreenMovie.propTypes = {
-  isPlaying: PropTypes.bool.isRequired,
-  onPlayButtonClick: PropTypes.func.isRequired,
-  onFullScreenButtonClick: PropTypes.func.isRequired,
-  getPlaybackProgress: PropTypes.func.isRequired,
-  getRestOfTime: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired,
 };
 
 export default FullScreenMovie;

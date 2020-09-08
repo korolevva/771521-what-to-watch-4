@@ -1,5 +1,10 @@
 import * as React from "react";
-import PropTypes from "prop-types";
+
+interface Props {
+  tabs: Array<string>,
+  activeTab: string,
+  onTabClick: (tab: string) => void,
+}
 
 const Tabs = ({tabs, activeTab, onTabClick}) => {
   return (
@@ -23,12 +28,6 @@ const Tabs = ({tabs, activeTab, onTabClick}) => {
       </ul>
     </nav>
   );
-};
-
-Tabs.propTypes = {
-  tabs: PropTypes.array,
-  activeTab: PropTypes.string,
-  onTabClick: PropTypes.func,
 };
 
 export default Tabs;

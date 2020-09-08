@@ -1,11 +1,16 @@
 import * as React from "react";
 import {Fragment} from "react";
-import PropTypes from "prop-types";
 import {AuthorizationStatus} from "../../reducers/user/user";
 import {Link} from "react-router-dom";
 import {AppRoute} from '../../const';
+import {User} from "../../types";
 
-const Header = ({authorizationStatus, user}) => {
+interface Props {
+  authorizationStatus: string,
+  user: User;
+}
+
+const Header: React.FunctionComponent<Props> = ({authorizationStatus, user}) => {
   return (
     <Fragment>
       <header className="page-header movie-card__head">
@@ -34,16 +39,6 @@ const Header = ({authorizationStatus, user}) => {
       </header>
     </Fragment>
   );
-};
-
-Header.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  user: PropTypes.shape({
-    avatarUrl: PropTypes.string,
-    email: PropTypes.string,
-    id: PropTypes.number,
-    name: PropTypes.string,
-  }).isRequired,
 };
 
 export default Header;

@@ -1,8 +1,12 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import {numericScoreToTextScore} from "./utils";
+import {Movie} from "../../types";
 
-const TabOverview = ({card}) => {
+interface Props {
+  card: Movie,
+}
+
+const TabOverview: React.FunctionComponent<Props> = ({card}) => {
   const {rating, ratingCount, description, director, stars} = card;
   return (
     <React.Fragment>
@@ -23,16 +27,6 @@ const TabOverview = ({card}) => {
       </div>
     </React.Fragment>
   );
-};
-
-TabOverview.propTypes = {
-  card: PropTypes.shape({
-    description: PropTypes.string,
-    director: PropTypes.string,
-    stars: PropTypes.array,
-    rating: PropTypes.number,
-    ratingCount: PropTypes.number,
-  }).isRequired,
 };
 
 export default TabOverview;

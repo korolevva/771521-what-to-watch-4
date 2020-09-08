@@ -1,7 +1,10 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 
-const ShowMore = ({onShowMoreButtonClick}) => {
+interface Props {
+  onShowMoreButtonClick: () => void,
+}
+
+const ShowMore: React.FunctionComponent<Props> = ({onShowMoreButtonClick}) => {
   return (
     <div className="catalog__more">
       <button className="catalog__button" type="button"
@@ -12,10 +15,6 @@ const ShowMore = ({onShowMoreButtonClick}) => {
       >Show more</button>
     </div>
   );
-};
-
-ShowMore.propTypes = {
-  onShowMoreButtonClick: PropTypes.func.isRequired,
 };
 
 export default ShowMore;

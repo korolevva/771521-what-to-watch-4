@@ -1,14 +1,20 @@
 import * as React from "react";
 import {connect} from "react-redux";
-import PropTypes from "prop-types";
 import MovieCardPreview from "../movie-card-preview/movie-card-preview";
 import ShowMore from "../show-more/show-more";
 import {increaseDisplayedMoviesCount} from "../../actions/movieCardAction";
 import withPlayer from "../../hocs/with-player/with-player";
+import {Movie} from "../../types";
 
 const MovieCardPreviewWithPlayer = withPlayer(MovieCardPreview);
 
-const MovieList = ({displayedMoviesCards, moviesCards, onShowMoreButtonClick}) => {
+interface Props {
+  moviesCards: Array<Movie>,
+  displayedMoviesCards: number,
+  onShowMoreButtonClick: () => void,
+}
+
+const MovieList: React.FunctionComponent<Props> = ({displayedMoviesCards, moviesCards, onShowMoreButtonClick}) => {
 
   const moviesCardsList = moviesCards
   .slice(0, displayedMoviesCards)
@@ -44,11 +50,5 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(increaseDisplayedMoviesCount());
   }
 });
-
-MovieList.propTypes = {
-  moviesCards: PropTypes.array.isRequired,
-  displayedMoviesCards: PropTypes.number.isRequired,
-  onShowMoreButtonClick: PropTypes.func.isRequired,
-};
 
 export default connect(null, mapDispatchToProps)(MovieList);

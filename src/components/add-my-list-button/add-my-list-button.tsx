@@ -1,12 +1,18 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {AppRoute} from "../../const";
 import {AuthorizationStatus} from "../../reducers/user/user";
 import {Operation as DataOperation} from "../../actions/dataActions";
 import history from "../../history";
 
-const AddMyListButton = ({id, isFavorite, authorizationStatus, onFavoriteButtonClick}) => {
+interface Props {
+  id: number,
+  isFavorite: boolean,
+  authorizationStatus: string,
+  onFavoriteButtonClick: (id: number, isFavorite: boolean) => void,
+}
+
+const AddMyListButton: React.FunctionComponent<Props> = ({id, isFavorite, authorizationStatus, onFavoriteButtonClick}) => {
   const handleFavoriteButtonClick = () => {
     return authorizationStatus === AuthorizationStatus.AUTH
       ? onFavoriteButtonClick(id, isFavorite)
@@ -28,13 +34,6 @@ const AddMyListButton = ({id, isFavorite, authorizationStatus, onFavoriteButtonC
       <span>My list</span>
     </button>
   );
-};
-
-AddMyListButton.propTypes = {
-  id: PropTypes.number.isRequired,
-  isFavorite: PropTypes.bool.isRequired,
-  authorizationStatus: PropTypes.string.isRequired,
-  onFavoriteButtonClick: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
