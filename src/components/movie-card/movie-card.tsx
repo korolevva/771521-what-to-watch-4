@@ -1,15 +1,27 @@
-import React, {PureComponent} from "react";
-import PropTypes from "prop-types";
-import Tabs from "../tabs/tabs.jsx";
-import TabOverview from "../tab-overview/tab-overview.jsx";
-import TabDetails from "../tab-details/tab-details.jsx";
-import TabReviews from "../tab-reviews/tab-reviews.jsx";
-import SimilarMovies from "../similar-movies/similar-movies.jsx";
-import {AuthorizationStatus} from "../../reducers/user/user.js";
-import Header from "../header/header.jsx";
+import * as React from "react";
+import Tabs from "../tabs/tabs";
+import TabOverview from "../tab-overview/tab-overview";
+import TabDetails from "../tab-details/tab-details";
+import TabReviews from "../tab-reviews/tab-reviews";
+import SimilarMovies from "../similar-movies/similar-movies";
+import {AuthorizationStatus} from "../../reducers/user/user";
+import Header from "../header/header";
 import {Link} from "react-router-dom";
-import {AppRoute} from "../../const.js";
-import AddMyListButton from "../add-my-list-button/add-my-list-button.jsx";
+import {AppRoute} from "../../const";
+import AddMyListButton from "../add-my-list-button/add-my-list-button";
+import {Movie, Review, User} from "../../types";
+
+interface Props {
+  activeItem: string,
+  authorizationStatus: string,
+  getMovieCardReviews: (movieCard: Movie) => void,
+  movieCard: Movie,
+  movieCardId: number,
+  moviesCards: Array<Movie>,
+  onItemClick: (item: string) => void,
+  reviews: Array<Review>,
+  user: User,
+}
 
 const MAX_MOVIES_COUNT = 4;
 
@@ -21,7 +33,9 @@ export const Tab = {
 
 const tabs = Object.values(Tab);
 
-class MovieCard extends PureComponent {
+class MovieCard extends React.PureComponent<Props> {
+  props: Props;
+
   constructor(props) {
     super(props);
     this._filteredMovies = this._filterByGenre(this.props.moviesCards, this.props.movieCard).slice(0, MAX_MOVIES_COUNT);
@@ -29,6 +43,8 @@ class MovieCard extends PureComponent {
     const {getMovieCardReviews, movieCard} = this.props;
     getMovieCardReviews(movieCard);
   }
+
+  _filteredMovies: Array<Movie>;
 
   _renderActiveTab() {
     const {reviews, activeItem, movieCard} = this.props;
@@ -45,7 +61,7 @@ class MovieCard extends PureComponent {
     }
   }
 
-  _filterByGenre(movies, currentMovie) {
+  _filterByGenre(movies: Array<Movie>, currentMovie: Movie): Array<Movie> {
     const filteredMovies = movies.filter((movie) => {
       return (movie.genre === currentMovie.genre) && (movie !== currentMovie);
     });
@@ -53,7 +69,7 @@ class MovieCard extends PureComponent {
     return filteredMovies;
   }
 
-  getMovieCardById(moviesCards, id) {
+  getMovieCardById(moviesCards: Array<Movie>, id: number): Movie {
     return moviesCards.find((movieCard) => {
       return movieCard.id === id;
     });
@@ -147,65 +163,6 @@ class MovieCard extends PureComponent {
     );
   }
 }
-
-MovieCard.propTypes = {
-  activeItem: PropTypes.string.isRequired,
-  authorizationStatus: PropTypes.string.isRequired,
-  getMovieCardReviews: PropTypes.func.isRequired,
-
-  movieCard: PropTypes.shape({
-    background: PropTypes.string,
-    date: PropTypes.number,
-    description: PropTypes.string,
-    director: PropTypes.string,
-    duration: PropTypes.number,
-    genre: PropTypes.string,
-    id: PropTypes.number,
-    imagePreview: PropTypes.string,
-    isFavorite: PropTypes.bool,
-    poster: PropTypes.string,
-    preview: PropTypes.string,
-    rating: PropTypes.number,
-    ratingCount: PropTypes.number,
-    stars: PropTypes.arrayOf(PropTypes.string),
-    title: PropTypes.string,
-  }),
-
-  movieCardId: PropTypes.number.isRequired,
-  moviesCards: PropTypes.arrayOf(PropTypes.shape({
-    background: PropTypes.string,
-    date: PropTypes.number,
-    description: PropTypes.string,
-    director: PropTypes.string,
-    duration: PropTypes.number,
-    genre: PropTypes.string,
-    id: PropTypes.number,
-    imagePreview: PropTypes.string,
-    isFavorite: PropTypes.bool,
-    poster: PropTypes.string,
-    preview: PropTypes.string,
-    rating: PropTypes.number,
-    ratingCount: PropTypes.number,
-    stars: PropTypes.arrayOf(PropTypes.string),
-    title: PropTypes.string,
-  })),
-
-  onItemClick: PropTypes.func.isRequired,
-  reviews: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-    author: PropTypes.string,
-    date: PropTypes.string,
-    rating: PropTypes.number,
-    text: PropTypes.string,
-  })).isRequired,
-
-  user: PropTypes.shape({
-    avatarUrl: PropTypes.string,
-    email: PropTypes.string,
-    id: PropTypes.number,
-    name: PropTypes.string,
-  }).isRequired,
-};
 
 export default MovieCard;
 

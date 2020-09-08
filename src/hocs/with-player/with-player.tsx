@@ -1,11 +1,35 @@
-import React, {PureComponent, createRef} from "react";
-import PropTypes from "prop-types";
-import VideoPlayer from "../../components/video-player/video-player.jsx";
-import {formatMovieDuration} from "./utils.js";
+import * as React from "react";
+import {createRef} from "react";
+import VideoPlayer from "../../components/video-player/video-player";
+import {formatMovieDuration} from "./utils";
+import {Subtract} from "utility-types";
+
+interface State {
+  isPlaying: boolean,
+  progress: number,
+  videoDuration: number,
+  isLoading: boolean,
+}
+
+interface InjectingProps {
+  isPlaying: boolean,
+  onMouseEnter: () => void,
+  onMouseLeave: () => void,
+  onPlayButtonClick: () => void,
+  onFullScreenButtonClick: () => void,
+  getRestOfTime: () => string,
+  getPlaybackProgress: () => string,
+}
 
 const withPlayer = (Component) => {
-  class WithPlayer extends PureComponent {
-    constructor(props) {
+
+  type P = React.ComponentProps<typeof Component>;
+  type T = Subtract<P, InjectingProps>;
+
+  class WithPlayer extends React.PureComponent<T, State> {
+    private videoRef: React.RefObject<HTMLVideoElement>;
+    private _timerId: any;
+    constructor(props: T) {
       super(props);
       this.videoRef = createRef();
 
@@ -111,7 +135,6 @@ const withPlayer = (Component) => {
             controls={controls}
             autoPlay={autoPlay}
             className={className}
-            isPlaying={this.state.isPlaying}
             ref={this.videoRef}
           />
         </Component>
@@ -119,34 +142,6 @@ const withPlayer = (Component) => {
       );
     }
   }
-
-  WithPlayer.propTypes = {
-    isPlaying: PropTypes.bool.isRequired,
-    card: PropTypes.shape({
-      background: PropTypes.string,
-      date: PropTypes.number,
-      description: PropTypes.string,
-      director: PropTypes.string,
-      duration: PropTypes.number,
-      genre: PropTypes.string,
-      id: PropTypes.number,
-      imagePreview: PropTypes.string,
-      poster: PropTypes.string,
-      preview: PropTypes.string,
-      rating: PropTypes.number,
-      ratingCount: PropTypes.number,
-      stars: PropTypes.array,
-      title: PropTypes.string,
-    }).isRequired,
-    width: PropTypes.string,
-    height: PropTypes.string,
-    poster: PropTypes.string.isRequired,
-    muted: PropTypes.bool.isRequired,
-    controls: PropTypes.bool.isRequired,
-    autoPlay: PropTypes.bool.isRequired,
-    className: PropTypes.string,
-    resetTimeStamp: PropTypes.bool,
-  };
 
   return WithPlayer;
 };

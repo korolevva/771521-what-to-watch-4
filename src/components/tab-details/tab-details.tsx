@@ -1,8 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
-import {formatDuration} from "./utils.js";
+import * as React from "react";
+import {formatDuration} from "./utils";
+import {Movie} from "../../types";
 
-const TabOverview = ({card}) => {
+interface Props {
+  card: Movie,
+}
+
+const TabOverview: React.FunctionComponent<Props> = ({card}:Props) => {
   const {director, stars, duration, genre, date} = card;
   return (
     <div className="movie-card__text movie-card__row">
@@ -41,16 +45,6 @@ const TabOverview = ({card}) => {
       </div>
     </div>
   );
-};
-
-TabOverview.propTypes = {
-  card: PropTypes.shape({
-    director: PropTypes.string,
-    stars: PropTypes.array,
-    duration: PropTypes.number,
-    genre: PropTypes.string,
-    date: PropTypes.number,
-  }).isRequired,
 };
 
 export default TabOverview;

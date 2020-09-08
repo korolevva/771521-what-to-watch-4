@@ -1,13 +1,19 @@
-import React, {Fragment} from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+import {Fragment} from "react";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const";
-import MovieList from "../movie-list/movie-list.jsx";
+import MovieList from "../movie-list/movie-list";
 import {connect} from "react-redux";
 import {getFavoriteMoviesCards} from "../../reducers/data/selectors";
+import {Movie, User} from "../../types";
 
-const MyList = ({user, displayedMoviesCards, favoriteMovieCards}) => {
+interface Props {
+  user: User,
+  displayedMoviesCards: number,
+  favoriteMovieCards: Array<Movie>,
+}
 
+const MyList: React.FunctionComponent<Props> = ({user, displayedMoviesCards, favoriteMovieCards}:Props) => {
   return (
     <Fragment>
       <div className="user-page">
@@ -55,34 +61,6 @@ const MyList = ({user, displayedMoviesCards, favoriteMovieCards}) => {
       </div>
     </Fragment>
   );
-};
-
-MyList.propTypes = {
-  user: PropTypes.shape({
-    avatarUrl: PropTypes.string,
-    email: PropTypes.string,
-    id: PropTypes.number,
-    name: PropTypes.string,
-  }).isRequired,
-  displayedMoviesCards: PropTypes.number.isRequired,
-  favoriteMovieCards: PropTypes.arrayOf(PropTypes.shape({
-    background: PropTypes.string,
-    date: PropTypes.number,
-    description: PropTypes.string,
-    director: PropTypes.string,
-    duration: PropTypes.number,
-    genre: PropTypes.string,
-    id: PropTypes.number,
-    imagePreview: PropTypes.string,
-    isFavorite: PropTypes.bool,
-    poster: PropTypes.string,
-    preview: PropTypes.string,
-    rating: PropTypes.number,
-    ratingCount: PropTypes.number,
-    stars: PropTypes.arrayOf(PropTypes.string),
-    title: PropTypes.string,
-  })).isRequired,
-
 };
 
 const mapStateToProps = (store) => ({

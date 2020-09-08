@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import renderer from "react-test-renderer";
 import Tabs from "./tabs.jsx";
 import {Tab} from "../movie-card/movie-card.jsx";

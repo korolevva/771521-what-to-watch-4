@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import renderer from "react-test-renderer";
 import MovieList from "./movie-list.jsx";
 import {moviesCards} from "../../mocks/testMoviesCards.js";

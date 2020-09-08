@@ -1,10 +1,15 @@
-import React from "react";
-import PropTypes from "prop-types";
-import MovieCardPreview from "../movie-card-preview/movie-card-preview.jsx";
-import withPlayer from "../../hocs/with-player/with-player.js";
+import * as React from "react";
+import MovieCardPreview from "../movie-card-preview/movie-card-preview";
+import withPlayer from "../../hocs/with-player/with-player";
+import {Movie} from "../../types";
+
 const MovieCardPreviewWithPlayer = withPlayer(MovieCardPreview);
 
-const SimilarMovies = ({moviesCards}) => {
+interface Props {
+  moviesCards: Array<Movie>,
+}
+
+const SimilarMovies: React.FunctionComponent<Props> = ({moviesCards}:Props) => {
   return (
     <section className="catalog catalog--like-this">
       <h2 className="catalog__title">More like this</h2>
@@ -27,10 +32,6 @@ const SimilarMovies = ({moviesCards}) => {
       </div>
     </section>
   );
-};
-
-SimilarMovies.propTypes = {
-  moviesCards: PropTypes.array.isRequired,
 };
 
 export default SimilarMovies;

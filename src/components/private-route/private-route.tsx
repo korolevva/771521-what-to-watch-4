@@ -1,11 +1,16 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 import {Route, Redirect} from "react-router-dom";
 import {AuthorizationStatus} from "../../reducers/user/user";
-import {AppRoute} from "../../const.js";
+import {AppRoute} from "../../const";
 
+interface Props {
+  authorizationStatus: string,
+  exact?: boolean,
+  path: string,
+  render: React.FunctionComponent,
+}
 
-const PrivateRoute = (props) => {
+const PrivateRoute: React.FunctionComponent<Props> = (props: Props) => {
   const {authorizationStatus, exact, path, render} = props;
   const isAuth = authorizationStatus === AuthorizationStatus.AUTH;
   return (
@@ -21,13 +26,6 @@ const PrivateRoute = (props) => {
       }}
     />
   );
-};
-
-PrivateRoute.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  exact: PropTypes.bool.isRequired,
-  path: PropTypes.string.isRequired,
-  render: PropTypes.func.isRequired,
 };
 
 export default PrivateRoute;

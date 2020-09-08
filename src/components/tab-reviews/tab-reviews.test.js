@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import renderer from "react-test-renderer";
 import TabReviews from "./tab-reviews.jsx";
 import reviews from "../../mocks/reviews.js";

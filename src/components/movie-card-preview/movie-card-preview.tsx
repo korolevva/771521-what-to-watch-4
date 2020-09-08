@@ -1,9 +1,16 @@
-import React from "react";
-import PropTypes from "prop-types";
-import {AppRoute} from '../../const.js';
+import * as React from "react";
+import {AppRoute} from '../../const';
 import {Link} from "react-router-dom";
+import {Movie} from "../../types";
 
-const MovieCardPreview = ({card, onMouseEnter, onMouseLeave, children}) => {
+interface Props {
+  card: Movie,
+  onMouseEnter: () => void,
+  onMouseLeave: () => void,
+  children: React.ReactNode,
+}
+
+const MovieCardPreview: React.FunctionComponent<Props> = ({card, onMouseEnter, onMouseLeave, children}:Props) => {
   return (
     <article
       onMouseEnter={onMouseEnter}
@@ -23,18 +30,6 @@ const MovieCardPreview = ({card, onMouseEnter, onMouseLeave, children}) => {
       </h3>
     </article>
   );
-};
-
-MovieCardPreview.propTypes = {
-  card: PropTypes.shape({
-    id: PropTypes.number,
-    poster: PropTypes.string,
-    title: PropTypes.string,
-    preview: PropTypes.string,
-  }).isRequired,
-  onMouseEnter: PropTypes.func.isRequired,
-  onMouseLeave: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired,
 };
 
 export default MovieCardPreview;

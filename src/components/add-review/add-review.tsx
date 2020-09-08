@@ -1,10 +1,28 @@
-import React, {PureComponent, Fragment} from "react";
-import PropTypes from "prop-types";
-import {ReviewLength, RATING_DEFAULT, RATING_COUNT} from "../../const.js";
+import * as React from "react";
+import {PureComponent, Fragment} from "react";
+import {ReviewLength, RATING_DEFAULT, RATING_COUNT} from "../../const";
 import {Link} from "react-router-dom";
-import {AppRoute} from "../../const.js";
+import {AppRoute} from "../../const";
+import {Movie, User} from "../../types";
 
-class AddReview extends PureComponent {
+interface State {
+  rating: number,
+  comment: string,
+}
+
+interface Props {
+  user: User,
+  movieCard: Movie,
+  onReviewSubmit: (id: number, review: {rating: number, comment: string}) => void,
+  isDataSending: boolean,
+  isErrorLoading: boolean,
+  movieCardId: number,
+}
+
+class AddReview extends PureComponent<Props, State> {
+  props: Props;
+  state: State;
+
   constructor(props) {
     super(props);
 
@@ -116,7 +134,7 @@ class AddReview extends PureComponent {
         </div>
         <div className="add-review">
           {errorMarkup()}
-          <form action="#" className="add-review__form" onSubmit={(evt) => this.handleSubmit(evt)} disabled={true}>
+          <form action="#" className="add-review__form" onSubmit={(evt) => this.handleSubmit(evt)}>
             <fieldset style={{border: 0}} disabled={isFormDisabled}>
               <div className="rating">
                 <div className="rating__stars">
@@ -143,34 +161,5 @@ class AddReview extends PureComponent {
     );
   }
 }
-
-AddReview.propTypes = {
-  user: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    avatarUrl: PropTypes.string.isRequired,
-  }),
-  movieCard: PropTypes.shape({
-    background: PropTypes.string,
-    date: PropTypes.number,
-    description: PropTypes.string,
-    director: PropTypes.string,
-    duration: PropTypes.number,
-    genre: PropTypes.string,
-    id: PropTypes.number,
-    imagePreview: PropTypes.string,
-    poster: PropTypes.string,
-    preview: PropTypes.string,
-    rating: PropTypes.number,
-    ratingCount: PropTypes.number,
-    stars: PropTypes.array,
-    title: PropTypes.string,
-  }).isRequired,
-  onReviewSubmit: PropTypes.func.isRequired,
-  isDataSending: PropTypes.bool.isRequired,
-  isErrorLoading: PropTypes.bool.isRequired,
-  movieCardId: PropTypes.number.isRequired,
-};
 
 export default AddReview;
